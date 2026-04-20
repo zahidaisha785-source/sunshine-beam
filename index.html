@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sunshine Beam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f8fb;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #444;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #87c4ff;
+    }
+    textarea {
+      width: 90%;
+      height: 100px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
 
+<body>
+
+  <h1>🌞 Sunshine Beam</h1>
+  <p>Take a small step. You're not alone.</p>
+
+  <div class="card">
+    <h3>How are you feeling?</h3>
+    <button onclick="showMessage('You’re doing okay. Keep going 💛')">🙂 Okay</button>
+    <button onclick="showMessage('It’s okay to feel low. Be gentle with yourself 🌿')">😔 Low</button>
+    <button onclick="showMessage('Take a breath. You’re safe right now 🌸')">😣 Stressed</button>
+  </div>
+
+  <div class="card">
+    <h3>Write your thoughts</h3>
+    <textarea placeholder="Type here..."></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Support message</h3>
+    <p id="message">Click a feeling above 💬</p>
+  </div>
+
+  <script>
+    function showMessage(text) {
+      document.getElementById("message").innerText = text;
+    }
+  </script>
+
+</body>
+</html>
