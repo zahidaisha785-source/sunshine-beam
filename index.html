@@ -3,38 +3,111 @@
 <head>
   <title>Sunshine Beam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #F3E8FF;
+      background: linear-gradient(#F3E8FF, #E6D6F2);
       text-align: center;
-      padding: 20px;
     }
+
     h1 {
-      color: #444;
+      color: #6a4c93;
+      margin-top: 20px;
+      font-size: 32px;
     }
+
+    p {
+      color: #555;
+    }
+
+    .header {
+      padding: 30px 10px;
+      background: url('https://i.imgur.com/8Km9tLL.png') no-repeat center;
+      background-size: cover;
+    }
+
     .card {
       background: white;
-      padding: 20px;
       margin: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-    button {
+
+    .moods button {
+      font-size: 20px;
       padding: 10px;
-      margin: 5px;
       border: none;
-      border-radius: 5px;
-      background: #87c4ff;
+      border-radius: 50%;
+      margin: 5px;
+      background: #E6D6F2;
     }
+
     textarea {
       width: 90%;
       height: 100px;
-      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
     }
+
+    .btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #C8A2C8;
+      color: white;
+      font-size: 16px;
+    }
+
+    #message {
+      color: #6a4c93;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 
+<body>
+
+  <div class="header">
+    <h1>🌞 Sunshine Beam</h1>
+    <p>Small steps. Brighter days. You’re not alone 💜</p>
+  </div>
+
+  <div class="card">
+    <h3>How are you feeling today?</h3>
+    <div class="moods">
+      <button onclick="showMessage('You are doing great 💛')">😊</button>
+      <button onclick="showMessage('It’s okay. Take it slow 🌿')">🙂</button>
+      <button onclick="showMessage('You are not alone 💜')">😔</button>
+      <button onclick="showMessage('Breathe. You’ll get through this 🌸')">😣</button>
+    </div>
+    <p id="message">Select your mood</p>
+  </div>
+
+  <div class="card">
+    <h3>Journal</h3>
+    <textarea placeholder="Write your thoughts..."></textarea><br>
+    <button class="btn">Save Entry</button>
+  </div>
+
+  <div class="card">
+    <h3>Daily Affirmation</h3>
+    <p>I am healing<br>I am growing<br>I am enough 💜</p>
+  </div>
+
+  <script>
+    function showMessage(text) {
+      document.getElementById("message").innerText = text;
+    }
+  </script>
+
+</body>
+</html>
 <body>
 
   <h1>🌞 Sunshine Beam</h1>
