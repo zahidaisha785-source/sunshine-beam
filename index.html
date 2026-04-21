@@ -18,29 +18,12 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      /* THIS CREATES THE IMAGE LOOK: Sunshine at top, Lilac middle, Lavender bottom */
-      background: 
-        radial-gradient(circle at 50% -10%, #FFF5CC 0%, transparent 50%), 
-        linear-gradient(to bottom, #F3E8FF 0%, #E6D6F2 100%);
+      background: radial-gradient(circle at top, #fff9e6 0%, #f3e8ff 40%, #e6d6f2 100%);
       background-attachment: fixed;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       overflow-x: hidden;
-    }
-
-    /* Framing Flowers (Simulated) */
-    body::before {
-      content: "🌸 🌼";
-      position: fixed;
-      top: 10px; left: 10px;
-      font-size: 40px; opacity: 0.5; z-index: 0;
-    }
-    body::after {
-      content: "🌺 🌷";
-      position: fixed;
-      top: 10px; right: 10px;
-      font-size: 40px; opacity: 0.5; z-index: 0;
     }
 
     .app-wrapper {
@@ -51,20 +34,25 @@
       z-index: 2;
     }
 
-    header {
-      text-align: center;
-      margin: 20px 0;
+    /* --- Language Switcher --- */
+    .lang-bar {
+      text-align: right;
+      padding: 5px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--p-dark);
     }
+    .lang-bar span { cursor: pointer; margin-left: 10px; }
 
+    /* --- Header --- */
+    header { text-align: center; margin: 10px 0; }
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 3.2rem;
+      font-size: 3rem;
       color: var(--p-dark);
       margin: 0;
-      filter: drop-shadow(0 2px 4px rgba(255,255,255,0.5));
     }
-
-    .tagline { font-size: 0.85rem; color: #666; font-weight: 500; }
+    .tagline { font-size: 0.8rem; color: #666; font-weight: 500; }
 
     /* --- Cards --- */
     .card {
@@ -78,38 +66,48 @@
       box-shadow: 0 8px 30px rgba(106, 76, 147, 0.12);
     }
 
-    h3 { font-size: 1rem; color: var(--p-dark); margin: 0 0 10px 0; }
+    h3 { font-size: 0.95rem; color: var(--p-dark); margin: 0 0 10px 0; }
 
     /* Moods */
-    .mood-box { display: flex; justify-content: space-between; gap: 8px; }
+    .mood-box { display: flex; justify-content: space-between; gap: 5px; }
     .mood-btn { text-align: center; cursor: pointer; flex: 1; }
     .mood-icon {
-      width: 44px; height: 44px;
+      width: 42px; height: 42px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin: 0 auto 5px;
-      transition: all 0.3s;
+      font-size: 1.3rem; margin: 0 auto 5px;
+      transition: 0.3s;
     }
     .mood-btn.selected .mood-icon {
-      transform: scale(1.15);
-      outline: 3px solid var(--p-dark);
+      transform: scale(1.1);
+      border: 2px solid var(--p-dark);
       background: white !important;
     }
-    .mood-label { font-size: 0.65rem; color: #777; font-weight: 600; }
+    .mood-label { font-size: 0.65rem; color: #777; }
 
-    /* Journal/Affirmation */
-    .grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    /* Community Feed */
+    #posts-container {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .post-item {
+      font-size: 0.75rem;
+      border-bottom: 1px solid rgba(106, 76, 147, 0.1);
+      padding: 5px 0;
     }
 
-    textarea {
-      width: 100%; height: 60px;
-      border: none; background: rgba(255,255,255,0.5);
+    /* Form Elements */
+    textarea, input {
+      width: 100%; border: none; 
+      background: rgba(255,255,255,0.5);
       border-radius: 12px; padding: 10px;
-      font-family: inherit; font-size: 0.8rem; resize: none;
+      font-family: inherit; font-size: 0.8rem;
     }
+    textarea { height: 60px; resize: none; }
 
     .btn {
       background: var(--p-mid); color: white;
@@ -117,41 +115,25 @@
       width: 100%; margin-top: 8px; font-size: 0.8rem;
       font-weight: 600; cursor: pointer;
     }
+    .btn-crisis { background: #ffb3ba; color: #900; }
 
-    /* THE FIX FOR THE HIDDEN BUTTONS */
-    .bottom-spacer {
-      height: 120px; /* Large gap at the end of the scroll */
-    }
-
-    /* Fixed Navigation Bar */
+    /* Navigation & Spacing */
+    .bottom-spacer { height: 110px; }
     nav {
-      position: fixed;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 92%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.95);
-      height: 70px;
-      border-radius: 40px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      z-index: 1000;
+      position: fixed; bottom: 20px; left: 50%;
+      transform: translateX(-50%); width: 90%; max-width: 400px;
+      background: rgba(255, 255, 255, 0.95); height: 70px;
+      border-radius: 40px; display: flex;
+      justify-content: space-around; align-items: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000;
     }
-
     .nav-center {
-      background: var(--p-light);
-      width: 65px; height: 65px;
-      border-radius: 50%; margin-top: -45px;
-      border: 6px solid #e6d6f2; /* Blends with body background */
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: var(--p-light); width: 60px; height: 60px;
+      border-radius: 50%; margin-top: -40px; border: 5px solid white;
+      display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
     }
 
-    /* Falling Flowers */
+    /* Flowers */
     .flower {
       position: fixed; top: -50px; pointer-events: none; z-index: 1;
       animation: fall linear forwards;
@@ -162,41 +144,48 @@
 <body>
 
   <div class="app-wrapper">
+    <div class="lang-bar">
+      <span onclick="setLanguage('en')">EN</span>
+      <span onclick="setLanguage('ko')">KR</span>
+      <span onclick="setLanguage('lt')">LT</span>
+    </div>
+
     <header>
       <div style="font-size: 40px;">🌞</div>
-      <h1>Sunshine Beam</h1>
-      <p class="tagline">Small steps. Brighter days. You're not alone. 💜</p>
+      <h1 id="app-title">Sunshine Beam</h1>
+      <p id="tagline" class="tagline">Small steps. Brighter days. 💜</p>
     </header>
 
-    <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <h3 id="greeting">Good morning! 🌸</h3>
-        <p style="font-size: 0.8rem; color: #555; margin: 0;">You matter. You are enough.</p>
-      </div>
-      <div style="font-size: 45px;">🍯</div>
+    <div id="profile-card" class="card">
+      <h3 id="profile-title">Who are you today?</h3>
+      <input type="text" id="alias-input" placeholder="Enter nickname...">
+      <button class="btn" onclick="saveProfile()">Start Journey</button>
     </div>
 
-    <div class="card">
-      <h3>How are you today?</h3>
-      <div class="mood-box">
-        <div class="mood-btn" onclick="selectMood(this, 'Happy')"><div class="mood-icon" style="background:#FFF5CC">😊</div><div class="mood-label">Happy</div></div>
-        <div class="mood-btn" onclick="selectMood(this, 'Okay')"><div class="mood-icon" style="background:#FFE8E8">🙂</div><div class="mood-label">Okay</div></div>
-        <div class="mood-btn" onclick="selectMood(this, 'Low')"><div class="mood-icon" style="background:#E8E8FF">😔</div><div class="mood-label">Low</div></div>
-        <div class="mood-btn" onclick="selectMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stress</div></div>
-        <div class="mood-btn" onclick="selectMood(this, 'Sad')"><div class="mood-icon" style="background:#E8F5FF">😢</div><div class="mood-label">Sad</div></div>
+    <div id="main-content" style="display:none;">
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h3 id="greeting">Good morning! 🌸</h3>
+          <button id="crisis-btn" class="btn btn-crisis" onclick="showHelp()">Get Help</button>
+        </div>
+        <div style="font-size: 45px;">🍯</div>
       </div>
-    </div>
 
-    <div class="grid-container">
       <div class="card">
-        <h3>Journal</h3>
-        <textarea id="journalInput" placeholder="Write..."></textarea>
-        <button class="btn" onclick="saveJournal()">Save</button>
+        <h3 id="mood-q">How are you feeling?</h3>
+        <div class="mood-box">
+          <div class="mood-btn" onclick="selectMood(this, 'Happy')"><div class="mood-icon" style="background:#FFF5CC">😊</div><div class="mood-label">Happy</div></div>
+          <div class="mood-btn" onclick="selectMood(this, 'Okay')"><div class="mood-icon" style="background:#FFE8E8">🙂</div><div class="mood-label">Okay</div></div>
+          <div class="mood-btn" onclick="selectMood(this, 'Low')"><div class="mood-icon" style="background:#E8E8FF">😔</div><div class="mood-label">Low</div></div>
+          <div class="mood-btn" onclick="selectMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stress</div></div>
+        </div>
       </div>
+
       <div class="card">
-        <h3>Affirmation</h3>
-        <p id="affirm-text" style="font-size: 0.75rem; text-align: center; font-weight: 500;">I am healing<br>and growing 💜</p>
-        <button class="btn" style="background:rgba(106,76,147,0.1); color:var(--p-dark)" onclick="newAffirm()">New</button>
+        <h3 id="comm-title">Community Sunshine 🌸</h3>
+        <div id="posts-container"></div>
+        <textarea id="share-input" placeholder="Share a positive thought..."></textarea>
+        <button class="btn" id="share-btn" onclick="postToCommunity()">Share</button>
       </div>
     </div>
 
@@ -212,20 +201,83 @@
   </nav>
 
   <script>
-    function saveJournal() {
-      localStorage.setItem('journal', document.getElementById('journalInput').value);
-      alert('Saved! 💜');
+    const langData = {
+      en: {
+        title: "Sunshine Beam", tagline: "Small steps. Brighter days. 💜", 
+        profile: "Who are you today?", alias: "Enter nickname...", 
+        greeting: "Good morning! 🌸", moodQ: "How are you feeling?", 
+        comm: "Community Sunshine 🌸", share: "Share", help: "Get Help",
+        crisisMsg: "You matter. Please call 988 (US), 1393 (KR), or 8 800 28888 (LT)."
+      },
+      ko: {
+        title: "햇살 한 줄기", tagline: "작은 발걸음. 더 밝은 나날들. 💜", 
+        profile: "당신은 누구신가요?", alias: "닉네임을 입력하세요...", 
+        greeting: "좋은 아침이에요! 🌸", moodQ: "기분이 어떠신가요?", 
+        comm: "우리들의 햇살 🌸", share: "공유하기", help: "도움 요청",
+        crisisMsg: "당신은 소중합니다. 1393으로 전화주세요."
+      },
+      lt: {
+        title: "Saulės Spindulys", tagline: "Maži žingsneliai. Šviesesnės dienos. 💜", 
+        profile: "Kas tu šiandien?", alias: "Įveskite slapyvardį...", 
+        greeting: "Labas rytas! 🌸", moodQ: "Kaip jautiesi?", 
+        comm: "Bendruomenės šviesa 🌸", share: "Dalintis", help: "Pagalba",
+        crisisMsg: "Tu esi svarbus. Skambinkite 8 800 28888."
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      const d = langData[lang];
+      document.getElementById('app-title').innerText = d.title;
+      document.getElementById('tagline').innerText = d.tagline;
+      document.getElementById('profile-title').innerText = d.profile;
+      document.getElementById('alias-input').placeholder = d.alias;
+      document.getElementById('greeting').innerText = d.greeting;
+      document.getElementById('mood-q').innerText = d.moodQ;
+      document.getElementById('comm-title').innerText = d.comm;
+      document.getElementById('share-btn').innerText = d.share;
+      document.getElementById('crisis-btn').innerText = d.help;
     }
 
-    function selectMood(el, mood) {
+    function saveProfile() {
+      const alias = document.getElementById('alias-input').value;
+      if (alias) {
+        localStorage.setItem('alias', alias);
+        checkUser();
+      }
+    }
+
+    function checkUser() {
+      const alias = localStorage.getItem('alias');
+      if (alias) {
+        document.getElementById('profile-card').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      }
+    }
+
+    function postToCommunity() {
+      const input = document.getElementById('share-input');
+      const container = document.getElementById('posts-container');
+      const alias = localStorage.getItem('alias') || "User";
+      if (input.value.trim()) {
+        const p = document.createElement('div');
+        p.className = 'post-item';
+        p.innerHTML = `<b>@${alias}:</b> ${input.value}`;
+        container.prepend(p);
+        input.value = "";
+      }
+    }
+
+    function selectMood(el) {
       document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
       el.classList.add('selected');
-      localStorage.setItem('mood', mood);
     }
 
-    function newAffirm() {
-      const list = ["I am healing 💜", "Small steps matter 🌿", "I deserve peace 🌸", "I am doing my best ✨"];
-      document.getElementById('affirm-text').innerHTML = list[Math.floor(Math.random()*list.length)];
+    function showHelp() {
+      alert(langData[currentLang].crisisMsg);
     }
 
     function spawnFlower() {
@@ -238,11 +290,12 @@
       document.body.appendChild(f);
       setTimeout(() => f.remove(), d * 1000);
     }
-    setInterval(spawnFlower, 1000);
 
     window.onload = () => {
-      document.getElementById('journalInput').value = localStorage.getItem('journal') || "";
-    }
+      setLanguage(currentLang);
+      checkUser();
+      setInterval(spawnFlower, 1000);
+    };
   </script>
 </body>
 </html>
