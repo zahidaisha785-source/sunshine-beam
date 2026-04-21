@@ -3,310 +3,298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunshine Beam - UI with Floating Flowers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  
+  <title>Sunshine Beam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ui-purple: #6a4c93; /* Main title purple */
-      --lavender-soft: #f3e8ff; /* Faint purple for highlights/borders */
-      --button-purple: #a684d0; /* Purple used for buttons */
+      --p-dark: #6a4c93;
+      --p-mid: #a684d0;
+      --p-light: #f3e8ff;
+      --glass: rgba(255, 255, 255, 0.6);
     }
+
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Poppins', sans-serif;
-      color: #555;
-      padding-bottom: 80px; /* Space for fixed navigation bar */
-      background-color: transparent; /* Essential for layering */
-      /* overflow: hidden; /* Prevent scrollbar jigging on some browsers */
+      background: radial-gradient(circle at top, #fff9e6 0%, #f3e8ff 40%, #e6d6f2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
     }
 
-    /* --- THE FIXED BACKGROUND LAYER --- */
-    #floral-background {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .app-wrapper {
       width: 100%;
-      height: 100%;
-      /* 1. APPLY YOUR GENERATED ASSET HERE */
-      /* Fallback gradient if background.jpg is missing */
-      background: url('background.jpg') no-repeat center center fixed, linear-gradient(#F3E8FF, #E6D6F2);
-      background-size: cover; /* Ensures it fills the screen */
-      z-index: -100; /* Puts it behind everything */
+      max-width: 450px;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* --- THE FLOATING PARTICLE LAYER (New) --- */
-    #floating-layer {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none; /* Critical: clicks go through this layer */
-        z-index: -50; /* Above background, below UI */
-        overflow: hidden;
-    }
-
-    .flower-particle {
-        position: absolute;
-        top: -50px;
-        font-size: 20px;
-        user-select: none;
-        will-change: transform;
-        animation: fall linear forwards;
+    /* --- Floating Flowers --- */
+    .flower {
+      position: fixed;
+      top: -50px;
+      pointer-events: none;
+      z-index: 0;
+      animation: fall linear forwards;
     }
 
     @keyframes fall {
-        to {
-            transform: translateY(110vh) rotate(360deg);
-        }
+      to { transform: translateY(110vh) rotate(360deg); }
     }
 
-    /* Use Flexbox for a clean main structure */
-    .app-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      z-index: 10; /* Ensures UI is on top */
-    }
-
-    /* HEADER SECTION (Text overlays the background art) */
-    .app-header {
+    header {
       text-align: center;
-      margin-top: 40px; /* Space from top controls */
-      margin-bottom: 20px;
+      margin: 30px 0 20px;
     }
 
-    .main-title {
-      font-family: 'Dancing Script', cursive; /* Use a script font */
-      color: var(--ui-purple);
+    h1 {
+      font-family: 'Dancing Script', cursive;
       font-size: 3.5rem;
-      margin: 10px 0;
+      color: var(--p-dark);
+      margin: 0;
     }
 
-    .tagline {
-        font-size: 14px;
-        color: #666;
-        margin-top: 5px;
-        font-style: italic;
-    }
+    .tagline { font-size: 0.9rem; color: #777; margin-top: 5px; }
 
-    /* GENERAL CARD STYLING */
+    /* --- Cards --- */
     .card {
-      /* 2. APPLY GLASSMORPHISM STYLE */
-      background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
-      border: 1.5px solid rgba(106, 76, 147, 0.2); /* Faint lavender border */
-      border-radius: 20px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 24px;
       padding: 20px;
-      width: 90%;
-      max-width: 450px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(106, 76, 147, 0.1);
+      margin-bottom: 16px;
+      box-shadow: 0 10px 30px rgba(106, 76, 147, 0.1);
     }
 
-    .card h2 {
-      font-size: 1.1rem;
-      color: var(--ui-purple);
-      margin-bottom: 5px;
-    }
+    .card-row { display: flex; justify-content: space-between; align-items: center; }
 
-    /* Mood Circles */
-    .mood-grid {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-    }
+    h3 { font-size: 1rem; color: var(--p-dark); margin: 0 0 10px 0; }
 
-    .mood-circle {
-      width: 55px;
-      height: 55px;
+    /* --- Moods --- */
+    .mood-box { display: flex; justify-content: space-between; margin-top: 15px; }
+
+    .mood-btn { text-align: center; cursor: pointer; flex: 1; }
+
+    .mood-icon {
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      cursor: pointer;
+      font-size: 1.3rem;
+      margin: 0 auto 5px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
 
-    .mood-label {
-        font-size: 11px;
-        color: #777;
-        margin-top: 3px;
+    .mood-btn.selected .mood-icon {
+      transform: scale(1.2);
+      border-color: var(--p-dark);
+      box-shadow: 0 0 10px rgba(106, 76, 147, 0.3);
     }
 
-    /* Split Row (Journal/Affirmation) */
-    .split-row {
-      display: flex;
-      gap: 15px;
-      width: 90%;
-      max-width: 450px;
-      margin-bottom: 20px;
-    }
+    .mood-label { font-size: 0.7rem; color: #888; }
 
-    .half-card {
-      flex: 1;
-      padding: 15px;
+    /* --- Grid Section --- */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     textarea {
       width: 100%;
-      height: 60px;
-      border: 1px solid rgba(106, 76, 147, 0.2);
-      border-radius: 10px;
-      padding: 8px;
+      height: 70px;
+      border: none;
+      background: rgba(255,255,255,0.5);
+      border-radius: 12px;
+      padding: 10px;
       font-family: inherit;
+      font-size: 0.8rem;
       resize: none;
-      background: white;
     }
 
-    .btn-save {
-      background-color: var(--button-purple);
+    .btn {
+      background: var(--p-mid);
       color: white;
       border: none;
       padding: 10px;
-      border-radius: 20px;
+      border-radius: 12px;
       width: 100%;
-      margin-top: 10px;
-      font-size: 14px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
     }
 
-    /* FIXED BOTTOM NAVIGATION */
-    .bottom-nav {
+    .btn:hover { background: var(--p-dark); }
+
+    /* --- Bottom Nav --- */
+    nav {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 400px;
-      background-color: white;
-      border-radius: 40px;
+      background: white;
+      height: 70px;
+      border-radius: 35px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 10px 0;
-      border: 2px solid var(--lavender-soft);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      z-index: 1000;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      z-index: 100;
     }
 
-    .nav-item {
-      text-align: center;
-      color: #aaa;
-      font-size: 12px;
-      flex: 1;
-    }
-
-    .nav-item.active {
-      color: var(--ui-purple);
-    }
+    .nav-item { font-size: 1.2rem; color: #ccc; cursor: pointer; }
+    .nav-item.active { color: var(--p-dark); }
 
     .nav-center {
-        background-color: var(--lavender-soft);
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        margin-top: -35px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 5px solid white;
-        color: var(--ui-purple);
+      background: var(--p-light);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-top: -40px;
+      border: 5px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--p-dark);
+      font-size: 1.8rem;
     }
   </style>
 </head>
 <body>
 
-    <div id="floral-background"></div>
+  <div class="app-wrapper">
+    <header>
+      <div style="font-size: 40px;">🌞</div>
+      <h1>Sunshine Beam</h1>
+      <p class="tagline">Small steps. Brighter days. You're not alone. 💜</p>
+    </header>
 
-    <div id="floating-layer"></div>
-
-    <div class="app-container">
-        
-        <div class="app-header">
-            <div style="font-size: 50px; margin-bottom: -15px;">🌞</div>
-            <div class="main-title">Sunshine Beam</div>
-            <p class="tagline">Small steps. Brighter days. You’re not alone. 💜</p>
-        </div>
-
-        <div class="card" style="display: flex; align-items: center; justify-content: space-between;">
-          <div>
-            <h2>Good morning, sunshine! 🌸</h2>
-            <p style="font-size: 13px; margin: 0;">You matter. You are enough.<br>Let's take a gentle step together today.</p>
-          </div>
-          <div style="font-size: 50px;">🌿</div>
-        </div>
-
-        <div class="card">
-            <h2><span>✿</span> How are you feeling today?</h2>
-            <p style="font-size: 12px; font-weight: bold; color: var(--ui-purple); margin: 0 0 10px;">You are not alone 💜</p>
-            <div class="mood-grid">
-              <div class="mood-item"><div class="mood-circle" style="background: #FFF5CC;">😊</div><div class="mood-label">Happy</div></div>
-              <div class="mood-item"><div class="mood-circle" style="background: #FFE8E8;">😊</div><div class="mood-label">Okay</div></div>
-              <div class="mood-item"><div class="mood-circle" style="background: #E8E8FF;">☹️</div><div class="mood-label">Low</div></div>
-              <div class="mood-item"><div class="mood-circle" style="background: #F3E8FF;">😟</div><div class="mood-label">Stressed</div></div>
-              <div class="mood-item"><div class="mood-circle" style="background: #E8F5FF;">😢</div><div class="mood-label">Overwhelmed</div></div>
-            </div>
-            <p style="text-align: center; font-size: 11px; color: #777; margin-top: 15px;">It's okay to feel any of these. You are still growing. 💜</p>
-        </div>
-
-        <div class="split-row">
-            <div class="card half-card">
-                <h2>📓 Journal</h2>
-                <textarea placeholder="What's on your mind?"></textarea>
-                <button class="btn-save">✎ Save Entry</button>
-            </div>
-            <div class="card half-card">
-                <h2>✨ Affirmation</h2>
-                <p style="font-size: 12px; text-align: center; line-height: 1.6; color: #555;">
-                  I am healing<br>I am growing<br>I am enough<br>I am loved 💜
-                </p>
-                <button class="btn-save" style="background-color: var(--button-purple);">New Affirmation</button>
-            </div>
-        </div>
-
+    <div class="card card-row">
+      <div>
+        <h3 id="greeting">Good morning, sunshine! 🌸</h3>
+        <p style="font-size: 0.8rem; margin: 0; color: #666;">You matter. You are enough.<br>Let's take a gentle step together.</p>
+      </div>
+      <div style="font-size: 40px;">🍯</div>
     </div>
 
-    <nav class="bottom-nav">
-      <div class="nav-item active">🏠<br>Home</div>
-      <div class="nav-item">📓<br>Journal</div>
-      <div class="nav-center" style="font-size: 30px;">🌞</div>
-      <div class="nav-item">🌱<br>Tools</div>
-      <div class="nav-item">👤<br>Profile</div>
-    </nav>
+    <div class="card">
+      <h3>How are you feeling today?</h3>
+      <div class="mood-box">
+        <div class="mood-btn" onclick="setMood(this, 'Happy')"><div class="mood-icon" style="background:#FFF5CC">😊</div><div class="mood-label">Happy</div></div>
+        <div class="mood-btn" onclick="setMood(this, 'Okay')"><div class="mood-icon" style="background:#FFE8E8">🙂</div><div class="mood-label">Okay</div></div>
+        <div class="mood-btn" onclick="setMood(this, 'Low')"><div class="mood-icon" style="background:#E8E8FF">😔</div><div class="mood-label">Low</div></div>
+        <div class="mood-btn" onclick="setMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stressed</div></div>
+        <div class="mood-btn" onclick="setMood(this, 'Overwhelmed')"><div class="mood-icon" style="background:#E8F5FF">😢</div><div class="mood-label">Overwhelmed</div></div>
+      </div>
+    </div>
 
-<script>
-    // Improved Floating Flower Particle System
-    function createFlower() {
-        const floatingLayer = document.getElementById("floating-layer");
-        const flower = document.createElement("div");
-        flower.className = "flower-particle";
-        
-        // Options from your design: Lavender, Pink blossoms, Small petals
-        const varieties = ["🌸", "🌼", "🌺", "🌷", "✨", "🌿"];
-        flower.innerText = varieties[Math.floor(Math.random() * varieties.length)];
+    <div class="grid-container">
+      <div class="card" style="margin-bottom:0">
+        <h3>Journal</h3>
+        <textarea id="journalInput" placeholder="Write your thoughts..."></textarea>
+        <button class="btn" onclick="saveJournal()">Save Entry</button>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <h3>Affirmation</h3>
+        <p id="affirmation-text" style="font-size: 0.75rem; text-align: center; line-height: 1.4; font-weight: 500;">I am healing<br>I am growing<br>I am enough<br>I am loved 💜</p>
+        <button class="btn" style="background: rgba(106,76,147,0.1); color: var(--p-dark);" onclick="newAffirmation()">Refresh</button>
+      </div>
+    </div>
+  </div>
 
-        // Randomize size and speed
-        const duration = (Math.random() * 5 + 6); // Slower, 6-11 seconds
-        flower.style.animationDuration = duration + "s";
-        flower.style.left = Math.random() * 100 + "vw";
-        flower.style.opacity = Math.random() * 0.4 + 0.3; // Subtler (0.3-0.7 opacity)
-        flower.style.fontSize = (Math.random() * 8 + 14) + "px"; // 14px to 22px
+  <nav>
+    <div class="nav-item active">🏠</div>
+    <div class="nav-item">📓</div>
+    <div class="nav-center">🌞</div>
+    <div class="nav-item">🌱</div>
+    <div class="nav-item">👤</div>
+  </nav>
 
-        floatingLayer.appendChild(flower);
-
-        // Clean up to prevent memory leaks
-        setTimeout(() => {
-            flower.remove();
-        }, duration * 1000);
+  <script>
+    // 1. SAVE JOURNAL
+    function saveJournal() {
+      const text = document.getElementById('journalInput').value;
+      if (text.trim() !== "") {
+        localStorage.setItem('sunshine_journal', text);
+        alert('Your thoughts are saved safely. 💜');
+      } else {
+        alert('Please write something first!');
+      }
     }
 
-    // Generate a flower every 900ms (balanced for performance/subtlety)
-    setInterval(createFlower, 900);
-</script>
+    // 2. SET AND SAVE MOOD
+    function setMood(element, mood) {
+      // Remove 'selected' class from all buttons
+      document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
+      // Add 'selected' to the clicked one
+      element.classList.add('selected');
+      // Save to localStorage
+      localStorage.setItem('sunshine_mood', mood);
+    }
+
+    // 3. REFRESH AFFIRMATIONS
+    function newAffirmation() {
+      const affirmations = [
+        "I am healing<br>I am growing<br>I am enough<br>I am loved 💜",
+        "Small steps<br>lead to<br>big changes 🌿",
+        "I deserve<br>peace and<br>happiness 🌸",
+        "My feelings<br>are valid<br>and important ✨"
+      ];
+      const random = affirmations[Math.floor(Math.random() * affirmations.length)];
+      document.getElementById('affirmation-text').innerHTML = random;
+    }
+
+    // 4. LOAD DATA ON STARTUP
+    window.onload = () => {
+      // Load Journal
+      const savedJournal = localStorage.getItem('sunshine_journal');
+      if (savedJournal) document.getElementById('journalInput').value = savedJournal;
+
+      // Load Mood
+      const savedMood = localStorage.getItem('sunshine_mood');
+      if (savedMood) {
+        const buttons = document.querySelectorAll('.mood-btn');
+        buttons.forEach(btn => {
+          if (btn.innerText.includes(savedMood)) btn.classList.add('selected');
+        });
+      }
+
+      // Update Greeting based on time
+      const hour = new Date().getHours();
+      const greeting = document.getElementById('greeting');
+      if (hour < 12) greeting.innerText = "Good morning, sunshine! 🌸";
+      else if (hour < 18) greeting.innerText = "Good afternoon, sunshine! ☀️";
+      else greeting.innerText = "Good evening, sunshine! 🌙";
+    };
+
+    // 5. FLOATING FLOWERS
+    function spawnFlower() {
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      const types = ['🌸', '🌼', '🌿', '🌷', '✨'];
+      flower.innerText = types[Math.floor(Math.random() * types.length)];
+      flower.style.left = Math.random() * 100 + 'vw';
+      const dur = Math.random() * 5 + 5;
+      flower.style.animationDuration = dur + 's';
+      flower.style.opacity = Math.random() * 0.5 + 0.3;
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), dur * 1000);
+    }
+    setInterval(spawnFlower, 900);
+  </script>
 
 </body>
 </html>
