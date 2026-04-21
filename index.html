@@ -36,18 +36,20 @@
     }
     h3 { font-size: 0.95rem; color: var(--p-dark); margin: 0 0 10px 0; }
 
-    textarea, input { width: 100%; border: none; background: rgba(255,255,255,0.5); border-radius: 12px; padding: 10px; font-family: inherit; font-size: 0.8rem; }
-    textarea { height: 60px; resize: none; }
-    .btn { background: var(--p-mid); color: white; border: none; padding: 10px; border-radius: 15px; width: 100%; margin-top: 8px; font-weight: 600; cursor: pointer; }
-    .btn-crisis { background: #ffb3ba; color: #900; margin-top: 10px; }
+    input, select, textarea { width: 100%; border: none; background: rgba(255,255,255,0.5); border-radius: 12px; padding: 12px; font-family: inherit; font-size: 0.8rem; margin-bottom: 10px; }
+    .btn { background: var(--p-mid); color: white; border: none; padding: 12px; border-radius: 15px; width: 100%; font-weight: 600; cursor: pointer; }
+    .btn-crisis { background: #ffb3ba; color: #900; margin-top: 10px; font-size: 1rem; border: 2px solid #900; }
+
+    /* Emotions Styling */
+    .emotions-grid { display: flex; justify-content: space-around; padding: 10px 0; }
+    .emotion-btn { font-size: 1.8rem; cursor: pointer; transition: 0.2s; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid #eee; }
+    .emotion-btn:active { transform: scale(0.9); background: var(--p-light); }
 
     /* Tools Styling */
     .tool-scroll { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; }
-    .story-card { min-width: 240px; background: white; padding: 15px; border-radius: 18px; font-size: 0.75rem; line-height: 1.4; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .music-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .music-btn { background: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto; display: block; }
-
-    /* Navigation Bar with Central Sun */
+    .story-card { min-width: 240px; background: white; padding: 15px; border-radius: 18px; font-size: 0.75rem; line-height: 1.4; }
+    
+    /* Nav Bar */
     .bottom-spacer { height: 110px; }
     nav {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -57,15 +59,11 @@
     }
     .nav-item { font-size: 1.5rem; cursor: pointer; opacity: 0.3; transition: 0.3s; }
     .nav-item.active { opacity: 1; color: var(--p-dark); }
-    
-    /* Central Sun Button */
     .nav-center {
       background: #FFD700; width: 65px; height: 65px; border-radius: 50%;
       margin-top: -45px; border: 5px solid white; display: flex; align-items: center;
       justify-content: center; font-size: 2rem; cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); transition: 0.3s;
     }
-    .nav-center.active { transform: scale(1.1); box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); }
 
     .flower { position: fixed; top: -50px; pointer-events: none; z-index: 1; animation: fall linear forwards; }
     @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
@@ -85,55 +83,63 @@
 
     <div id="profile-page" class="page active">
       <div class="card">
-        <h3 id="profile-title">Welcome to Your Safe Space</h3>
-        <input type="text" id="alias-input" placeholder="Your anonymous nickname...">
-        <button class="btn" onclick="saveProfile()">Start Journey</button>
+        <h3 id="profile-title">Setup Safety Profile</h3>
+        <input type="text" id="u-name" placeholder="Full Name">
+        <input type="tel" id="u-phone" placeholder="Contact Number">
+        <input type="number" id="u-age" placeholder="Age">
+        <select id="u-country">
+            <option value="Global">Select Country</option>
+            <option value="KR">South Korea (대한민국)</option>
+            <option value="LT">Lithuania (Lietuva)</option>
+        </select>
+        <button class="btn" onclick="saveProfile()">Enter Sunshine Beam</button>
       </div>
     </div>
 
     <div id="home-page" class="page">
       <div class="card">
-        <h3 id="greeting">Hello, Sun! 🌸</h3>
-        <p id="daily-quote" style="font-size: 0.75rem;">"You are a precious part of this world."</p>
+        <h3 id="mood-title">How are you feeling?</h3>
+        <div class="emotions-grid">
+          <div class="emotion-btn" onclick="logMood('😊')">😊</div>
+          <div class="emotion-btn" onclick="logMood('😔')">😔</div>
+          <div class="emotion-btn" onclick="logMood('😤')">😤</div>
+          <div class="emotion-btn" onclick="logMood('😴')">😴</div>
+          <div class="emotion-btn" onclick="logMood('🩹')">🩹</div>
+        </div>
+        <p id="mood-feedback" style="text-align: center; font-size: 0.7rem; margin-top: 5px; color: var(--p-dark); font-weight: 600;"></p>
       </div>
+
       <div class="card">
         <h3 id="jour-title">Private Journal</h3>
-        <textarea id="journalInput" placeholder="How are you really feeling?"></textarea>
+        <textarea id="journalInput" placeholder="Write your feelings..."></textarea>
         <button class="btn" onclick="saveJournal()">Save Locally</button>
       </div>
+
       <div class="card">
         <h3 id="comm-title">Community Sunshine</h3>
-        <div id="posts-container" style="max-height: 100px; overflow-y: auto; font-size: 0.7rem; margin-bottom: 10px;"></div>
+        <div id="posts-container" style="max-height: 80px; overflow-y: auto; font-size: 0.7rem; margin-bottom: 10px;"></div>
         <div style="display:flex; gap:5px;">
-          <input type="text" id="share-input" placeholder="Share a kind word...">
-          <button class="btn" style="width:70px; margin:0;" onclick="postToCommunity()">Share</button>
+          <input type="text" id="share-input" placeholder="Share kindness..." style="margin:0;">
+          <button class="btn" style="width:70px; margin:0;" onclick="postToCommunity()">Post</button>
         </div>
       </div>
-      <button id="crisis-btn" class="btn btn-crisis" onclick="showHelp()">Crisis Support</button>
+      
+      <button id="crisis-btn" class="btn btn-crisis" onclick="triggerSafetyPopup()">🚨 EMERGENCY HELP</button>
     </div>
 
     <div id="tools-page" class="page">
       <div class="card">
-        <h3 id="celeb-title">🌟 Celebrity Stories</h3>
+        <h3>🌟 Celebrity Stories</h3>
         <div class="tool-scroll">
-          <div class="story-card"><b>IU (Lee Ji-eun):</b> Faced poverty and rejection but never stopped. She is the light of K-pop survival.</div>
-          <div class="story-card"><b>Suga (BTS):</b> Overcame depression and poverty. His lyrics save lives worldwide.</div>
-          <div class="story-card"><b>Rūta Meilutytė:</b> Lithuanian champion who taught us that taking a break for mental health is a win.</div>
+          <div class="story-card"><b>IU:</b> Overcame cockroaches and poverty. She never gave up.</div>
+          <div class="story-card"><b>Suga (BTS):</b> Survived depression and shoulder injury. You can too.</div>
+          <div class="story-card"><b>Rūta Meilutytė:</b> Proved that asking for help is a superpower.</div>
         </div>
       </div>
       <div class="card">
-        <h3 id="music-title">🎵 Healing Sounds</h3>
-        <div class="music-grid">
-          <div><button class="music-btn" onclick="playMusic('Rain')">🌧️</button></div>
-          <div><button class="music-btn" onclick="playMusic('Forest')">🌲</button></div>
-          <div><button class="music-btn" onclick="playMusic('Piano')">🎹</button></div>
-        </div>
-        <p id="music-status" style="text-align: center; font-size: 0.65rem; margin-top: 10px;">Listen to the calm...</p>
-      </div>
-      <div class="card">
-        <h3 id="phrase-title">📜 Daily Wisdom</h3>
-        <div id="phrase-box" style="text-align: center; font-size: 0.85rem; padding: 10px;">"You have a 100% success rate of getting through hard days."</div>
-        <button class="btn" onclick="newPhrase()">Next Quote</button>
+        <h3>📜 Daily Phrase</h3>
+        <div id="phrase-box" style="text-align: center; font-size: 0.85rem; padding: 10px; font-weight: 500;">"Take a deep breath. You are safe here."</div>
+        <button class="btn" onclick="newPhrase()">Change Quote</button>
       </div>
     </div>
 
@@ -143,28 +149,15 @@
   <nav id="bottom-nav" style="display:none;">
     <div class="nav-item active" id="nav-home" onclick="navigateTo('home-page', 'nav-home')">🏠</div>
     <div class="nav-center" id="nav-tools" onclick="navigateTo('tools-page', 'nav-tools')">🌞</div>
-    <div class="nav-item">📓</div>
+    <div class="nav-item" id="nav-profile" onclick="navigateTo('profile-page', 'nav-profile')">👤</div>
   </nav>
 
   <script>
-    const langData = {
-      en: { tagline: "Small steps. Brighter days. 💜", profile: "Identify Yourself", jour: "Journal", comm: "Community", celeb: "Celebrity Stories", music: "Healing Sounds", phrase: "Wisdom", help: "Crisis Support" },
-      ko: { tagline: "작은 발걸음. 더 밝은 나날들. 💜", profile: "닉네임 정하기", jour: "비밀 일기", comm: "나눔의 공간", celeb: "스타들의 이야기", music: "치유의 음악", phrase: "오늘의 한마디", help: "긴급 도움" },
-      lt: { tagline: "Maži žingsneliai. Šviesesnės dienos. 💜", profile: "Pasirink vardą", jour: "Dienoraštis", comm: "Bendruomenė", celeb: "Garsenybių istorijos", music: "Garsų terapija", phrase: "Išmintis", help: "Pagalba" }
+    const crisisInfo = {
+        KR: { num: "1393", text: "KR Suicide Prevention" },
+        LT: { num: "8 800 28888", text: "LT Jaunimo linija" },
+        Global: { num: "112", text: "Emergency" }
     };
-
-    function setLanguage(lang) {
-      localStorage.setItem('lang', lang);
-      const d = langData[lang];
-      document.getElementById('tagline').innerText = d.tagline;
-      document.getElementById('profile-title').innerText = d.profile;
-      document.getElementById('jour-title').innerText = d.jour;
-      document.getElementById('comm-title').innerText = d.comm;
-      document.getElementById('celeb-title').innerText = d.celeb;
-      document.getElementById('music-title').innerText = d.music;
-      document.getElementById('phrase-title').innerText = d.phrase;
-      document.getElementById('crisis-btn').innerText = d.help;
-    }
 
     function navigateTo(pageId, navId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -174,42 +167,55 @@
     }
 
     function saveProfile() {
-      const alias = document.getElementById('alias-input').value;
-      if(alias.trim()) {
-        localStorage.setItem('alias', alias);
+      const name = document.getElementById('u-name').value;
+      const phone = document.getElementById('u-phone').value;
+      const age = document.getElementById('u-age').value;
+      const country = document.getElementById('u-country').value;
+      if(name && phone) {
+        localStorage.setItem('u_data', JSON.stringify({name, phone, age, country}));
         checkUser();
-      }
+      } else { alert("Safety requires a name and number."); }
     }
 
     function checkUser() {
-      if(localStorage.getItem('alias')) {
+      const data = localStorage.getItem('u_data');
+      if(data) {
         document.getElementById('profile-page').classList.remove('active');
         document.getElementById('home-page').classList.add('active');
         document.getElementById('bottom-nav').style.display = 'flex';
       }
     }
 
+    function logMood(emoji) {
+      const msgs = { '😊': 'Love to see you smile!', '😔': 'It is okay to be sad.', '😤': 'Release that anger, you are safe.', '😴': 'Rest is productive.', '🩹': 'You are healing.' };
+      document.getElementById('mood-feedback').innerText = msgs[emoji];
+    }
+
+    function triggerSafetyPopup() {
+        const data = JSON.parse(localStorage.getItem('u_data'));
+        const help = crisisInfo[data.country] || crisisInfo.Global;
+        const msg = `🆘 EMERGENCY 🆘\n\nCall: ${help.num}\n\nInfo for Help:\nName: ${data.name}\nAge: ${data.age}\nContact: ${data.phone}`;
+        alert(msg);
+        window.location.href = "tel:" + help.num;
+    }
+
     function postToCommunity() {
       const msg = document.getElementById('share-input').value;
       if(msg.trim()) {
         const p = document.createElement('div');
-        p.style.padding = "5px 0"; p.style.borderBottom = "1px solid #eee";
-        p.innerHTML = `<b>@${localStorage.getItem('alias')}:</b> ${msg}`;
+        p.style.padding = "5px"; p.style.borderBottom = "1px solid #eee";
+        p.innerHTML = `<b>@User:</b> ${msg}`;
         document.getElementById('posts-container').prepend(p);
         document.getElementById('share-input').value = "";
       }
     }
 
     function newPhrase() {
-      const p = ["You are important.", "Your feelings are valid.", "Take it one breath at a time.", "You are loved."];
+      const p = ["You are important.", "One step at a time.", "The world is better with you.", "You are loved."];
       document.getElementById('phrase-box').innerText = p[Math.floor(Math.random()*p.length)];
     }
 
-    function playMusic(s) { document.getElementById('music-status').innerText = "Vibrating at: " + s + "... 🎧"; }
-
-    function saveJournal() { localStorage.setItem('journal', document.getElementById('journalInput').value); alert("Stored safely."); }
-
-    function showHelp() { alert("South Korea: 1393 | Lithuania: 8 800 28888 | Global: 112"); }
+    function saveJournal() { localStorage.setItem('journal', document.getElementById('journalInput').value); alert("Stored locally."); }
 
     function spawnFlower() {
       const f = document.createElement('div'); f.className = 'flower';
@@ -220,7 +226,6 @@
     }
 
     window.onload = () => {
-      setLanguage(localStorage.getItem('lang') || 'en');
       checkUser();
       document.getElementById('journalInput').value = localStorage.getItem('journal') || "";
       setInterval(spawnFlower, 2000);
