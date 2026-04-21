@@ -7,290 +7,146 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --p-dark: #6a4c93;
-      --p-mid: #a684d0;
-      --p-light: #f3e8ff;
-      --glass: rgba(255, 255, 255, 0.7);
+      --p-dark: #6a4c93; --p-mid: #a684d0; --p-light: #f3e8ff; --glass: rgba(255, 255, 255, 0.7);
     }
-
     * { box-sizing: border-box; }
-
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
+      margin: 0; font-family: 'Poppins', sans-serif;
       background: radial-gradient(circle at top, #fff9e6 0%, #f3e8ff 40%, #e6d6f2 100%);
-      background-attachment: fixed;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      overflow-x: hidden;
+      background-attachment: fixed; min-height: 100vh; overflow-x: hidden;
     }
-
-    .app-wrapper {
-      width: 100%;
-      max-width: 450px;
-      padding: 15px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Language Switcher */
-    .lang-bar {
-      text-align: right;
-      padding: 5px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--p-dark);
-    }
-    .lang-bar span { cursor: pointer; margin-left: 10px; }
-
-    header { text-align: center; margin: 10px 0; }
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.8rem;
-      color: var(--p-dark);
-      margin: 0;
-    }
-    .tagline { font-size: 0.75rem; color: #666; font-weight: 500; }
+    .app-wrapper { width: 100%; max-width: 450px; padding: 15px; margin: 0 auto; }
+    
+    /* Pages Visibility */
+    .page { display: none; }
+    .page.active { display: block; }
 
     /* Cards */
     .card {
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.6);
-      border-radius: 24px;
-      padding: 18px;
-      margin-bottom: 15px;
-      box-shadow: 0 8px 30px rgba(106, 76, 147, 0.12);
+      background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6); border-radius: 24px;
+      padding: 18px; margin-bottom: 15px; box-shadow: 0 8px 30px rgba(106, 76, 147, 0.12);
     }
-
+    h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--p-dark); margin: 0; text-align: center; }
     h3 { font-size: 0.95rem; color: var(--p-dark); margin: 0 0 10px 0; }
 
-    /* Grid for Journal & Affirmation */
-    .grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    /* Tools Styling */
+    .tool-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; }
+    .story-card { min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem; }
+    .music-btn { background: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-    textarea, input {
-      width: 100%; border: none; 
-      background: rgba(255,255,255,0.5);
-      border-radius: 12px; padding: 10px;
-      font-family: inherit; font-size: 0.8rem;
-    }
-    textarea { height: 70px; resize: none; }
+    .btn { background: var(--p-mid); color: white; border: none; padding: 10px; border-radius: 15px; width: 100%; font-weight: 600; cursor: pointer; }
+    .bottom-spacer { height: 100px; }
 
-    .btn {
-      background: var(--p-mid); color: white;
-      border: none; padding: 10px; border-radius: 15px;
-      width: 100%; margin-top: 8px; font-size: 0.75rem;
-      font-weight: 600; cursor: pointer; transition: 0.3s;
-    }
-    .btn:active { transform: scale(0.95); }
-    .btn-crisis { background: #ffb3ba; color: #900; margin-top: 15px;}
-
-    /* Community Feed Styling */
-    #posts-container {
-      max-height: 120px;
-      overflow-y: auto;
-      margin-bottom: 10px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
-      padding: 8px;
-    }
-    .post-item {
-      font-size: 0.7rem;
-      border-bottom: 1px solid rgba(106, 76, 147, 0.05);
-      padding: 5px 0;
-      color: #444;
-    }
-
-    .bottom-spacer { height: 110px; }
-    
+    /* Bottom Nav */
     nav {
-      position: fixed; bottom: 20px; left: 50%;
-      transform: translateX(-50%); width: 90%; max-width: 400px;
-      background: rgba(255, 255, 255, 0.95); height: 65px;
-      border-radius: 40px; display: flex;
-      justify-content: space-around; align-items: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 1000;
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      width: 90%; max-width: 400px; background: rgba(255, 255, 255, 0.95);
+      height: 65px; border-radius: 40px; display: flex; justify-content: space-around;
+      align-items: center; box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 1000;
     }
-    .nav-center {
-      background: var(--p-light); width: 55px; height: 55px;
-      border-radius: 50%; margin-top: -35px; border: 4px solid white;
-      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
-    }
-
-    .flower {
-      position: fixed; top: -50px; pointer-events: none; z-index: 1;
-      animation: fall linear forwards;
-    }
-    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+    .nav-item { font-size: 1.5rem; cursor: pointer; opacity: 0.3; transition: 0.3s; }
+    .nav-item.active { opacity: 1; color: var(--p-dark); }
   </style>
 </head>
 <body>
 
   <div class="app-wrapper">
-    <div class="lang-bar">
-      <span onclick="setLanguage('en')">EN</span>
-      <span onclick="setLanguage('ko')">KR</span>
-      <span onclick="setLanguage('lt')">LT</span>
+    <header><h1>Sunshine Beam</h1></header>
+
+    <div id="home-page" class="page active">
+      <div class="card">
+        <h3 id="greeting">Hello! 🌸</h3>
+        <p style="font-size: 0.8rem;">Ready for some sunshine today?</p>
+      </div>
+      <div class="card">
+        <h3>Community Feed</h3>
+        <div id="posts-container" style="max-height: 100px; overflow-y: auto; font-size: 0.7rem; margin-bottom: 10px;"></div>
+        <input type="text" id="share-input" placeholder="Share something positive..." style="width:100%; border:none; padding:10px; border-radius:10px;">
+        <button class="btn" style="margin-top:5px;" onclick="postToCommunity()">Share</button>
+      </div>
     </div>
 
-    <header>
-      <div style="font-size: 35px;">🌞</div>
-      <h1 id="app-title">Sunshine Beam</h1>
-      <p id="tagline" class="tagline">Small steps. Brighter days. 💜</p>
-    </header>
-
-    <div id="profile-card" class="card">
-      <h3 id="profile-title">Start Your Anonymous Journey</h3>
-      <input type="text" id="alias-input" placeholder="Choose a nickname...">
-      <button class="btn" onclick="saveProfile()">Enter</button>
-    </div>
-
-    <div id="main-content" style="display:none;">
-      
-      <div class="grid-container">
-        <div class="card" style="margin-bottom:0;">
-          <h3 id="aff-title">Affirmation</h3>
-          <p id="affirm-text" style="font-size: 0.7rem; line-height: 1.3; font-weight: 500; min-height: 40px;">I am healing and growing 💜</p>
-          <button class="btn" style="background:rgba(106,76,147,0.1); color:var(--p-dark)" onclick="newAffirm()">New</button>
-        </div>
-        
-        <div class="card" style="margin-bottom:0;">
-          <h3 id="jour-title">Private Journal</h3>
-          <textarea id="journalInput" placeholder="How are you?"></textarea>
-          <button class="btn" onclick="saveJournal()">Save</button>
+    <div id="tools-page" class="page">
+      <div class="card">
+        <h3>🌟 Celebrity Hardships</h3>
+        <div class="tool-scroll">
+          <div class="story-card"><b>IU (Lee Ji-eun):</b> Grew up in poverty, slept in rooms with cockroaches, but never stopped singing. Now she heals millions.</div>
+          <div class="story-card"><b>J.K. Rowling:</b> Was a jobless single mother and suicidal before Harry Potter. "Rock bottom became the foundation."</div>
+          <div class="story-card"><b>BTS (Suga):</b> Struggled with depression and social anxiety. He wrote through it to help others heal.</div>
         </div>
       </div>
 
-      <div class="card" style="margin-top:15px;">
-        <h3 id="comm-title">Community Sunshine 🌸</h3>
-        <div id="posts-container"></div>
-        <div style="display:flex; gap:8px;">
-          <input type="text" id="share-input" placeholder="Share a positive thought..." style="font-size: 0.75rem;">
-          <button class="btn" id="share-btn" style="width:70px; margin:0;" onclick="postToCommunity()">Share</button>
+      <div class="card">
+        <h3>🎵 Motivational Music</h3>
+        <div style="display: flex; justify-content: space-around; align-items: center;">
+          <button class="music-btn" onclick="playMusic('Rain')">🌧️</button>
+          <button class="music-btn" onclick="playMusic('Zen')">🧘</button>
+          <button class="music-btn" onclick="playMusic('Happy')">✨</button>
         </div>
+        <p id="music-status" style="text-align: center; font-size: 0.7rem; margin-top: 10px;">Select a sound to focus...</p>
       </div>
 
-      <button id="crisis-btn" class="btn btn-crisis" onclick="showHelp()">Get Help Now</button>
-
+      <div class="card">
+        <h3>📜 Motivational Phrases</h3>
+        <div id="phrase-box" style="text-align: center; font-style: italic; font-size: 0.85rem; color: #444; padding: 10px;">
+          "This too shall pass. You are stronger than you think."
+        </div>
+        <button class="btn" onclick="newPhrase()">Next Quote</button>
+      </div>
     </div>
 
     <div class="bottom-spacer"></div>
   </div>
 
   <nav>
-    <div style="font-size: 1.2rem; color: var(--p-dark);">🏠</div>
-    <div style="font-size: 1.2rem; color: #ccc;">📓</div>
-    <div class="nav-center">🌞</div>
-    <div style="font-size: 1.2rem; color: #ccc;">🌱</div>
-    <div style="font-size: 1.2rem; color: #ccc;">👤</div>
+    <div class="nav-item active" onclick="showPage('home-page', this)">🏠</div>
+    <div class="nav-item" onclick="showPage('tools-page', this)">🌱</div> <div class="nav-item">📓</div>
+    <div class="nav-item">👤</div>
   </nav>
 
   <script>
-    const langData = {
-      en: {
-        title: "Sunshine Beam", tagline: "Small steps. Brighter days. 💜", 
-        profile: "Anonymous Identity", alias: "Enter nickname...", 
-        aff: "Affirmation", jour: "Journal", comm: "Community 🌸", 
-        share: "Share", help: "Crisis Support", save: "Save",
-        crisisMsg: "You are valuable. Call 1393 (KR) or 8 800 28888 (LT)."
-      },
-      ko: {
-        title: "햇살 한 줄기", tagline: "작은 발걸음. 더 밝은 나날들. 💜", 
-        profile: "익명 프로필 생성", alias: "닉네임을 입력하세요...", 
-        aff: "긍정 확언", jour: "비밀 일기", comm: "우리들의 햇살 🌸", 
-        share: "공유", help: "긴급 도움", save: "저장",
-        crisisMsg: "당신은 소중합니다. 1393(자살예방)으로 전화주세요."
-      },
-      lt: {
-        title: "Saulės Spindulys", tagline: "Maži žingsneliai. Šviesesnės dienos. 💜", 
-        profile: "Anoniminis profilis", alias: "Įveskite slapyvardį...", 
-        aff: "Afirmacija", jour: "Dienoraštis", comm: "Bendruomenė 🌸", 
-        share: "Dalintis", help: "Skubi pagalba", save: "Išsaugoti",
-        crisisMsg: "Tu esi svarbus. Skambinkite 8 800 28888 (Jaunimo linija)."
-      }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'en';
-
-    function setLanguage(lang) {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-      const d = langData[lang];
-      document.getElementById('app-title').innerText = d.title;
-      document.getElementById('tagline').innerText = d.tagline;
-      document.getElementById('profile-title').innerText = d.profile;
-      document.getElementById('alias-input').placeholder = d.alias;
-      document.getElementById('aff-title').innerText = d.aff;
-      document.getElementById('jour-title').innerText = d.jour;
-      document.getElementById('comm-title').innerText = d.comm;
-      document.getElementById('share-btn').innerText = d.share;
-      document.getElementById('crisis-btn').innerText = d.help;
+    // PAGE NAVIGATION LOGIC
+    function showPage(pageId, navEl) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+      // Update nav icons
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      navEl.classList.add('active');
     }
 
-    function saveProfile() {
-      const alias = document.getElementById('alias-input').value;
-      if (alias.trim()) {
-        localStorage.setItem('alias', alias);
-        checkUser();
-      }
+    // MOTIVATIONAL PHRASES
+    const phrases = [
+      "You don't have to see the whole staircase, just take the first step. 🐾",
+      "Even the darkest night will end and the sun will rise. 🌅",
+      "You are enough just as you are. 💜",
+      "Lithuania and Korea believe in you! Stay strong. 🌏",
+      "Your story isn't over yet. ;"
+    ];
+    function newPhrase() {
+      const p = phrases[Math.floor(Math.random() * phrases.length)];
+      document.getElementById('phrase-box').innerText = p;
     }
 
-    function checkUser() {
-      if (localStorage.getItem('alias')) {
-        document.getElementById('profile-card').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-      }
+    // MUSIC LOGIC (Placeholders)
+    function playMusic(type) {
+      document.getElementById('music-status').innerText = "Now playing: " + type + " sounds... 🎧";
+      // In a real app, you would link to MP3 files here.
     }
 
-    function saveJournal() {
-      localStorage.setItem('journal', document.getElementById('journalInput').value);
-      alert("Journal saved locally. 💜");
-    }
-
-    function newAffirm() {
-      const list = ["I am healing 💜", "Small steps matter 🌿", "I deserve peace 🌸", "I am doing my best ✨"];
-      document.getElementById('affirm-text').innerHTML = list[Math.floor(Math.random()*list.length)];
-    }
-
+    // COMMUNITY SHARE
     function postToCommunity() {
-      const input = document.getElementById('share-input');
-      const alias = localStorage.getItem('alias') || "User";
-      if (input.value.trim()) {
-        const p = document.createElement('div');
-        p.className = 'post-item';
-        p.innerHTML = `<b>@${alias}:</b> ${input.value}`;
-        document.getElementById('posts-container').prepend(p);
-        input.value = "";
+      const val = document.getElementById('share-input').value;
+      if(val) {
+        const div = document.createElement('div');
+        div.innerHTML = "<b>@User:</b> " + val;
+        div.style.padding = "5px 0";
+        document.getElementById('posts-container').prepend(div);
+        document.getElementById('share-input').value = "";
       }
     }
-
-    function showHelp() {
-      alert(langData[currentLang].crisisMsg);
-    }
-
-    function spawnFlower() {
-      const f = document.createElement('div');
-      f.className = 'flower';
-      f.innerText = ['🌸', '🌼', '🌿', '✨'][Math.floor(Math.random()*4)];
-      f.style.left = Math.random() * 100 + 'vw';
-      const d = Math.random() * 5 + 5;
-      f.style.animationDuration = d + 's';
-      document.body.appendChild(f);
-      setTimeout(() => f.remove(), d * 1000);
-    }
-
-    window.onload = () => {
-      setLanguage(currentLang);
-      checkUser();
-      document.getElementById('journalInput').value = localStorage.getItem('journal') || "";
-      setInterval(spawnFlower, 1000);
-    };
   </script>
 </body>
 </html>
