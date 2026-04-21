@@ -126,30 +126,30 @@
     </p>
   </div>
 
-  <script>
-    function showMessage(text) {
-      document.getElementById("message").innerText = text;
-    }
+<script>
+  function showMessage(text) {
+    document.getElementById("message").innerText = text;
+  }
 
-    function createFlower() {
-      const flower = document.createElement("div");
-      flower.classList.add("flower");
+  function createFlower() {
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
 
-      const flowers = ["🌸", "🌼", "💜", "🌺"];
-      flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+    const flowers = ["🌸", "🌼", "🌺", "🌷"];
+    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
 
-      flower.style.left = Math.random() * 100 + "vw";
-      flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (4 + Math.random() * 4) + "s";
 
-      document.body.appendChild(flower);
+    document.body.appendChild(flower);
 
-      setTimeout(() => {
-        flower.remove();
-      }, 8000);
-    }
+    setTimeout(() => {
+      flower.remove();
+    }, 8000);
+  }
 
-    setInterval(createFlower, 300);
-  </script>
+  setInterval(createFlower, 300);
+</script>
 
 </body>
 </html>
