@@ -3,132 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunshine Beam App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Sunshine Beam - UI with Floating Flowers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --purple-main: #6a4c93;
-      --lavender-soft: #f3e8ff;
-      --glass-bg: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.5);
+      --ui-purple: #6a4c93; /* Main title purple */
+      --lavender-soft: #f3e8ff; /* Faint purple for highlights/borders */
+      --button-purple: #a684d0; /* Purple used for buttons */
     }
 
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
-      /* Replace 'background.jpg' with your lavender image path */
-      background: url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #444;
-      display: flex;
-      justify-content: center;
+      color: #555;
+      padding-bottom: 80px; /* Space for fixed navigation bar */
+      background-color: transparent; /* Essential for layering */
+      /* overflow: hidden; /* Prevent scrollbar jigging on some browsers */
     }
 
-    .app-container {
+    /* --- THE FIXED BACKGROUND LAYER --- */
+    #floral-background {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 480px; /* Mobile View Width */
+      height: 100%;
+      /* 1. APPLY YOUR GENERATED ASSET HERE */
+      /* Fallback gradient if background.jpg is missing */
+      background: url('background.jpg') no-repeat center center fixed, linear-gradient(#F3E8FF, #E6D6F2);
+      background-size: cover; /* Ensures it fills the screen */
+      z-index: -100; /* Puts it behind everything */
+    }
+
+    /* --- THE FLOATING PARTICLE LAYER (New) --- */
+    #floating-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /* Critical: clicks go through this layer */
+        z-index: -50; /* Above background, below UI */
+        overflow: hidden;
+    }
+
+    .flower-particle {
+        position: absolute;
+        top: -50px;
+        font-size: 20px;
+        user-select: none;
+        will-change: transform;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+
+    /* Use Flexbox for a clean main structure */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 20px;
-      padding-bottom: 100px; /* Space for bottom nav */
+      z-index: 10; /* Ensures UI is on top */
     }
 
-    /* --- Header Section --- */
-    header {
+    /* HEADER SECTION (Text overlays the background art) */
+    .app-header {
       text-align: center;
-      margin-top: 20px;
-    }
-
-    .sun-icon { font-size: 50px; margin-bottom: -10px; }
-    
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 48px;
-      color: var(--purple-main);
-      margin: 0;
-    }
-
-    .tagline {
-      font-size: 14px;
-      color: #666;
+      margin-top: 40px; /* Space from top controls */
       margin-bottom: 20px;
     }
 
-    /* --- Card Styling (Glassmorphism) --- */
+    .main-title {
+      font-family: 'Dancing Script', cursive; /* Use a script font */
+      color: var(--ui-purple);
+      font-size: 3.5rem;
+      margin: 10px 0;
+    }
+
+    .tagline {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+        font-style: italic;
+    }
+
+    /* GENERAL CARD STYLING */
     .card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      border-radius: 25px;
+      /* 2. APPLY GLASSMORPHISM STYLE */
+      background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+      border: 1.5px solid rgba(106, 76, 147, 0.2); /* Faint lavender border */
+      border-radius: 20px;
       padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 8px 32px 0 rgba(106, 76, 147, 0.1);
+      width: 90%;
+      max-width: 450px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(106, 76, 147, 0.1);
     }
 
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--purple-main);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+    .card h2 {
+      font-size: 1.1rem;
+      color: var(--ui-purple);
+      margin-bottom: 5px;
     }
 
-    /* --- Mood Section --- */
-    .mood-container {
+    /* Mood Circles */
+    .mood-grid {
       display: flex;
-      justify-content: space-between;
-      text-align: center;
+      justify-content: center;
+      gap: 15px;
       margin-top: 15px;
     }
 
-    .mood-item { cursor: pointer; transition: transform 0.2s; }
-    .mood-item:active { transform: scale(0.9); }
-
     .mood-circle {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      margin-bottom: 5px;
+      cursor: pointer;
     }
 
-    .mood-label { font-size: 11px; color: #777; }
+    .mood-label {
+        font-size: 11px;
+        color: #777;
+        margin-top: 3px;
+    }
 
-    /* --- Journal & Affirmation Row --- */
-    .grid-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* Split Row (Journal/Affirmation) */
+    .split-row {
+      display: flex;
       gap: 15px;
+      width: 90%;
+      max-width: 450px;
+      margin-bottom: 20px;
+    }
+
+    .half-card {
+      flex: 1;
+      padding: 15px;
     }
 
     textarea {
       width: 100%;
       height: 60px;
-      border: none;
-      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(106, 76, 147, 0.2);
       border-radius: 10px;
       padding: 8px;
       font-family: inherit;
       resize: none;
+      background: white;
     }
 
     .btn-save {
-      background: #a684d0;
+      background-color: var(--button-purple);
       color: white;
       border: none;
-      padding: 8px;
-      border-radius: 15px;
+      padding: 10px;
+      border-radius: 20px;
       width: 100%;
       margin-top: 10px;
-      font-size: 12px;
+      font-size: 14px;
     }
 
-    /* --- Bottom Navigation --- */
+    /* FIXED BOTTOM NAVIGATION */
     .bottom-nav {
       position: fixed;
       bottom: 20px;
@@ -136,80 +182,131 @@
       transform: translateX(-50%);
       width: 90%;
       max-width: 400px;
-      background: white;
+      background-color: white;
       border-radius: 40px;
       display: flex;
       justify-content: space-around;
-      padding: 10px;
+      align-items: center;
+      padding: 10px 0;
+      border: 2px solid var(--lavender-soft);
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      z-index: 1000;
     }
 
-    .nav-item { text-align: center; color: #aaa; font-size: 12px; flex: 1;}
-    .nav-item.active { color: var(--purple-main); }
+    .nav-item {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      flex: 1;
+    }
+
+    .nav-item.active {
+      color: var(--ui-purple);
+    }
+
     .nav-center {
-        background: var(--lavender-soft);
-        width: 60px;
-        height: 60px;
+        background-color: var(--lavender-soft);
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
-        margin-top: -30px;
+        margin-top: -35px;
         display: flex;
         align-items: center;
         justify-content: center;
         border: 5px solid white;
+        color: var(--ui-purple);
     }
-
   </style>
 </head>
 <body>
 
-<div class="app-container">
-  
-  <header>
-    <div class="sun-icon">🌞</div>
-    <h1>Sunshine Beam</h1>
-    <p class="tagline">Small steps. Brighter days. You’re not alone. 💜</p>
-  </header>
+    <div id="floral-background"></div>
 
-  <div class="card" style="display: flex; align-items: center; justify-content: space-between;">
-    <div>
-      <div class="card-title">Good morning, sunshine! 🌸</div>
-      <p style="font-size: 13px; margin: 0;">You matter. You are enough.<br>Let's take a gentle step today.</p>
+    <div id="floating-layer"></div>
+
+    <div class="app-container">
+        
+        <div class="app-header">
+            <div style="font-size: 50px; margin-bottom: -15px;">🌞</div>
+            <div class="main-title">Sunshine Beam</div>
+            <p class="tagline">Small steps. Brighter days. You’re not alone. 💜</p>
+        </div>
+
+        <div class="card" style="display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <h2>Good morning, sunshine! 🌸</h2>
+            <p style="font-size: 13px; margin: 0;">You matter. You are enough.<br>Let's take a gentle step together today.</p>
+          </div>
+          <div style="font-size: 50px;">🌿</div>
+        </div>
+
+        <div class="card">
+            <h2><span>✿</span> How are you feeling today?</h2>
+            <p style="font-size: 12px; font-weight: bold; color: var(--ui-purple); margin: 0 0 10px;">You are not alone 💜</p>
+            <div class="mood-grid">
+              <div class="mood-item"><div class="mood-circle" style="background: #FFF5CC;">😊</div><div class="mood-label">Happy</div></div>
+              <div class="mood-item"><div class="mood-circle" style="background: #FFE8E8;">😊</div><div class="mood-label">Okay</div></div>
+              <div class="mood-item"><div class="mood-circle" style="background: #E8E8FF;">☹️</div><div class="mood-label">Low</div></div>
+              <div class="mood-item"><div class="mood-circle" style="background: #F3E8FF;">😟</div><div class="mood-label">Stressed</div></div>
+              <div class="mood-item"><div class="mood-circle" style="background: #E8F5FF;">😢</div><div class="mood-label">Overwhelmed</div></div>
+            </div>
+            <p style="text-align: center; font-size: 11px; color: #777; margin-top: 15px;">It's okay to feel any of these. You are still growing. 💜</p>
+        </div>
+
+        <div class="split-row">
+            <div class="card half-card">
+                <h2>📓 Journal</h2>
+                <textarea placeholder="What's on your mind?"></textarea>
+                <button class="btn-save">✎ Save Entry</button>
+            </div>
+            <div class="card half-card">
+                <h2>✨ Affirmation</h2>
+                <p style="font-size: 12px; text-align: center; line-height: 1.6; color: #555;">
+                  I am healing<br>I am growing<br>I am enough<br>I am loved 💜
+                </p>
+                <button class="btn-save" style="background-color: var(--button-purple);">New Affirmation</button>
+            </div>
+        </div>
+
     </div>
-    <div style="font-size: 40px;">🍯</div> </div>
 
-  <div class="card">
-    <div class="card-title"><span>✿</span> How are you feeling today?</div>
-    <div class="mood-container">
-      <div class="mood-item" onclick="alert('Happy!')"><div class="mood-circle" style="background: #FFF5CC;">😊</div><div class="mood-label">Happy</div></div>
-      <div class="mood-item" onclick="alert('Okay')"><div class="mood-circle" style="background: #FFE8E8;">😊</div><div class="mood-label">Okay</div></div>
-      <div class="mood-item" onclick="alert('Low')"><div class="mood-circle" style="background: #E8E8FF;">☹️</div><div class="mood-label">Low</div></div>
-      <div class="mood-item" onclick="alert('Stressed')"><div class="mood-circle" style="background: #F3E8FF;">😟</div><div class="mood-label">Stressed</div></div>
-    </div>
-  </div>
+    <nav class="bottom-nav">
+      <div class="nav-item active">🏠<br>Home</div>
+      <div class="nav-item">📓<br>Journal</div>
+      <div class="nav-center" style="font-size: 30px;">🌞</div>
+      <div class="nav-item">🌱<br>Tools</div>
+      <div class="nav-item">👤<br>Profile</div>
+    </nav>
 
-  <div class="grid-row">
-    <div class="card">
-      <div class="card-title">📓 Journal</div>
-      <textarea placeholder="What's on your mind?"></textarea>
-      <button class="btn-save">✎ Save Entry</button>
-    </div>
-    <div class="card">
-      <div class="card-title">✨ Affirmation</div>
-      <p style="font-size: 12px; text-align: center; line-height: 1.5;">
-        I am healing<br>I am growing<br>I am enough
-      </p>
-    </div>
-  </div>
+<script>
+    // Improved Floating Flower Particle System
+    function createFlower() {
+        const floatingLayer = document.getElementById("floating-layer");
+        const flower = document.createElement("div");
+        flower.className = "flower-particle";
+        
+        // Options from your design: Lavender, Pink blossoms, Small petals
+        const varieties = ["🌸", "🌼", "🌺", "🌷", "✨", "🌿"];
+        flower.innerText = varieties[Math.floor(Math.random() * varieties.length)];
 
-</div>
+        // Randomize size and speed
+        const duration = (Math.random() * 5 + 6); // Slower, 6-11 seconds
+        flower.style.animationDuration = duration + "s";
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.opacity = Math.random() * 0.4 + 0.3; // Subtler (0.3-0.7 opacity)
+        flower.style.fontSize = (Math.random() * 8 + 14) + "px"; // 14px to 22px
 
-<nav class="bottom-nav">
-  <div class="nav-item active">🏠<br>Home</div>
-  <div class="nav-item">📓<br>Journal</div>
-  <div class="nav-center">🌞</div>
-  <div class="nav-item">🌱<br>Tools</div>
-  <div class="nav-item">👤<br>Profile</div>
-</nav>
+        floatingLayer.appendChild(flower);
+
+        // Clean up to prevent memory leaks
+        setTimeout(() => {
+            flower.remove();
+        }, duration * 1000);
+    }
+
+    // Generate a flower every 900ms (balanced for performance/subtlety)
+    setInterval(createFlower, 900);
+</script>
 
 </body>
 </html>
