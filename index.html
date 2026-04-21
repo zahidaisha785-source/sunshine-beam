@@ -1,225 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunshine Beam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunshine Beam - UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ui-purple: #6a4c93; /* Main title purple */
+            --card-purple: #f3e8ff; /* Card border/background faint purple */
+            --button-purple: #a684d0; /* Purple used for buttons */
+        }
 
-  <style>
-    :root {
-      --lilac-light: #F3E8FF;
-      --lilac-dark: #E6D6F2;
-      --purple-text: #6a4c93;
-      --accent: #C8A2C8;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            /* 1. APPLY MAIN BACKGROUND ASSET HERE */
+            background-image: url('main_background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Ensures flowers stay as cards scroll */
+            min-height: 100vh;
+            color: #555;
+            padding-bottom: 80px; /* Space for fixed navigation bar */
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(var(--lilac-light), var(--lilac-dark));
-      min-height: 100vh;
-      text-align: center;
-      overflow-x: hidden;
-    }
+        /* Use Flexbox for a clean main structure */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
 
-    /* 🌼 Header with sunshine glow */
-    .header {
-      padding: 50px 20px;
-      background: radial-gradient(circle at top, #FFF5CC, transparent 70%),
-                  linear-gradient(var(--lilac-light), var(--lilac-dark));
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;
-    }
+        /* HEADER SECTION */
+        .app-header {
+            text-align: center;
+            margin-top: 40px; /* Space from top controls */
+            margin-bottom: 20px;
+        }
 
-    h1 {
-      color: var(--purple-text);
-      margin: 0;
-      font-size: 36px;
-    }
+        .main-title {
+            font-family: 'Dancing Script', cursive; /* Use a script font */
+            color: var(--ui-purple);
+            font-size: 3.5rem;
+            margin: 10px 0;
+        }
 
-    .subtitle {
-      color: #666;
-      font-style: italic;
-      margin-top: 5px;
-    }
+        /* 2. ADD SUN ICON & FLOWERS Swashes ASSESTS HERE */
+        /* Placeholder for sun: <img src="sun_icon.png" width="60"> */
 
-    .card {
-      background: white;
-      margin: 20px auto;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      max-width: 400px;
-      width: 85%;
-    }
+        /* GENERAL CARD STYLING */
+        .card {
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+            border: 1.5px solid var(--card-purple);
+            border-radius: 20px;
+            padding: 20px;
+            width: 90%;
+            max-width: 450px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(106, 76, 147, 0.1);
+        }
 
-    /* Mood Buttons */
-    .moods {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
+        .card h2 {
+            font-size: 1.1rem;
+            color: var(--ui-purple);
+            margin-bottom: 5px;
+        }
 
-    .moods button {
-      font-size: 24px;
-      padding: 15px;
-      border: none;
-      border-radius: 50%;
-      background: var(--lilac-light);
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
+        /* 3. ASSEMBLE "GOOD MORNING" CARD WITH JAR ASSET */
+        /* Use CSS Grid/Flex for layout: 
+           Text (Left) | Jar Asset (Right) */
 
-    .moods button:hover {
-      transform: scale(1.1);
-      background: #dfc8f0;
-    }
+        /* 4. ASSEMBLE "HOW ARE YOU" MOOD STRIP */
+        /* Use CSS Flexbox: `display: flex; justify-content: center; gap: 10px;` 
+           Ensure each icon image is clickable. */
 
-    #message {
-      margin-top: 15px;
-      color: var(--purple-text);
-      font-weight: bold;
-      min-height: 24px;
-    }
+        /* 5. SPLIT THE JOURNAL AND AFFIRMATION INTO SIDE-BY-SIDE CARDS */
+        /* Place these within a wrapper div: `display: flex; gap: 15px;` */
 
-    /* Journal Area */
-    textarea {
-      width: 100%;
-      height: 120px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      padding: 12px;
-      box-sizing: border-box;
-      font-family: inherit;
-      resize: none;
-      margin-top: 10px;
-    }
+        /* 6. FIXED BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            border-top: 2px solid var(--card-purple);
+            z-index: 1000;
+        }
 
-    .btn {
-      margin-top: 15px;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 25px;
-      background: var(--accent);
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
+        .nav-item {
+            text-align: center;
+            cursor: pointer;
+            width: 20%;
+            color: var(--ui-purple);
+        }
 
-    .btn:active {
-      opacity: 0.8;
-    }
-
-    /* 🌸 Performance-optimized floating flowers */
-    .flower {
-      position: fixed;
-      top: -50px;
-      font-size: 22px;
-      user-select: none;
-      pointer-events: none;
-      will-change: transform;
-      animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
-  </style>
+        /* Generate the special center 'Sunshine Beam' style in CSS */
+        .nav-center {
+            /* style this to be raised and highlighted */
+        }
+    </style>
 </head>
-
 <body>
 
-  <div class="header">
-    <h1>🌞 Sunshine Beam</h1>
-    <p class="subtitle">Small steps. Brighter days. You’re not alone 💜</p>
-  </div>
+    <div class="app-container">
+        
+        <div class="app-header">
+            <div class="main-title">Sunshine Beam</div>
+            <p>Small steps. Brighter days. You’re not alone. 💜</p>
+        </div>
 
-  <div class="card">
-    <h3>How are you feeling?</h3>
-    <div class="moods">
-      <button onclick="showMessage('You are doing great 💛')" aria-label="Happy">😊</button>
-      <button onclick="showMessage('It’s okay. Take it slow 🌿')" aria-label="Okay">🙂</button>
-      <button onclick="showMessage('You are not alone 💜')" aria-label="Sad">😔</button>
-      <button onclick="showMessage('Breathe. You’ll get through this 🌸')" aria-label="Stressed">😣</button>
-    </div>
-    <p id="message">Select your mood</p>
-  </div>
+        <div style="display: flex; gap: 15px;">
+            </div>
 
-  <div class="card">
-    <h3>Journal</h3>
-    <textarea id="journalInput" placeholder="What's on your mind?"></textarea>
-    <button class="btn" onclick="saveEntry()">Save My Thoughts</button>
-    <p id="saveStatus" style="font-size: 12px; color: green; margin-top: 5px;"></p>
-  </div>
+        </div>
 
-  <div class="card">
-    <h3>Daily Affirmation</h3>
-    <p style="line-height: 1.6; color: #555;">
-      <strong>I am healing</strong><br>
-      <strong>I am growing</strong><br>
-      <strong>I am enough 💜</strong>
-    </p>
-  </div>
-
-<script>
-  // Show mood message
-  function showMessage(text) {
-    document.getElementById("message").innerText = text;
-  }
-
-  // Save Journal to LocalStorage
-  function saveEntry() {
-    const text = document.getElementById("journalInput").value;
-    const status = document.getElementById("saveStatus");
-    
-    if (text.trim() !== "") {
-      localStorage.setItem("sunshine_journal", text);
-      status.innerText = "Saved successfully! ✨";
-      setTimeout(() => status.innerText = "", 3000);
-    } else {
-      alert("Please write something first.");
-    }
-  }
-
-  // Load Journal on startup
-  window.onload = () => {
-    const savedText = localStorage.getItem("sunshine_journal");
-    if (savedText) {
-      document.getElementById("journalInput").value = savedText;
-    }
-  };
-
-  // Improved Flower Particle System
-  function createFlower() {
-    const flower = document.createElement("div");
-    flower.className = "flower";
-    
-    const varieties = ["🌸", "🌼", "🌺", "🌷", "✨"];
-    flower.innerText = varieties[Math.floor(Math.random() * varieties.length)];
-
-    flower.style.left = Math.random() * 100 + "vw";
-    // Randomize size and speed
-    const duration = (Math.random() * 5 + 5); 
-    flower.style.animationDuration = duration + "s";
-    flower.style.opacity = Math.random() * 0.5 + 0.5;
-    flower.style.fontSize = (Math.random() * 10 + 15) + "px";
-
-    document.body.appendChild(flower);
-
-    // Clean up to prevent memory leaks
-    setTimeout(() => {
-      flower.remove();
-    }, duration * 1000);
-  }
-
-  // Generate a flower every 800ms (balanced for performance)
-  setInterval(createFlower, 800);
-</script>
+    <div class="bottom-nav">
+        </div>
 
 </body>
 </html>
