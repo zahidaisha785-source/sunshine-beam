@@ -40,15 +40,11 @@
     .btn { background: var(--p-mid); color: white; border: none; padding: 12px; border-radius: 15px; width: 100%; font-weight: 600; cursor: pointer; }
     .btn-crisis { background: #ffb3ba; color: #900; margin-top: 10px; font-size: 1rem; border: 2px solid #900; }
 
-    /* Emotions Styling */
-    .emotions-grid { display: flex; justify-content: space-around; padding: 10px 0; }
-    .emotion-btn { font-size: 1.8rem; cursor: pointer; transition: 0.2s; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid #eee; }
+    /* Emotions Grid */
+    .emotions-grid { display: flex; justify-content: space-around; padding: 5px 0 15px 0; }
+    .emotion-btn { font-size: 1.6rem; cursor: pointer; transition: 0.2s; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .emotion-btn:active { transform: scale(0.9); background: var(--p-light); }
 
-    /* Tools Styling */
-    .tool-scroll { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; }
-    .story-card { min-width: 240px; background: white; padding: 15px; border-radius: 18px; font-size: 0.75rem; line-height: 1.4; }
-    
     /* Nav Bar */
     .bottom-spacer { height: 110px; }
     nav {
@@ -62,7 +58,7 @@
     .nav-center {
       background: #FFD700; width: 65px; height: 65px; border-radius: 50%;
       margin-top: -45px; border: 5px solid white; display: flex; align-items: center;
-      justify-content: center; font-size: 2rem; cursor: pointer;
+      justify-content: center; font-size: 2rem; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
     }
 
     .flower { position: fixed; top: -50px; pointer-events: none; z-index: 1; animation: fall linear forwards; }
@@ -81,24 +77,24 @@
       <p id="tagline" class="tagline">Small steps. Brighter days. 💜</p>
     </header>
 
-    <div id="profile-page" class="page active">
+    <div id="profile-setup-page" class="page active">
       <div class="card">
-        <h3 id="profile-title">Setup Safety Profile</h3>
+        <h3 id="profile-title">Create Safety Profile</h3>
         <input type="text" id="u-name" placeholder="Full Name">
-        <input type="tel" id="u-phone" placeholder="Contact Number">
+        <input type="tel" id="u-phone" placeholder="Emergency Contact Number">
         <input type="number" id="u-age" placeholder="Age">
         <select id="u-country">
             <option value="Global">Select Country</option>
             <option value="KR">South Korea (대한민국)</option>
             <option value="LT">Lithuania (Lietuva)</option>
         </select>
-        <button class="btn" onclick="saveProfile()">Enter Sunshine Beam</button>
+        <button class="btn" onclick="saveProfile()">Open Sunshine Beam</button>
       </div>
     </div>
 
     <div id="home-page" class="page">
       <div class="card">
-        <h3 id="mood-title">How are you feeling?</h3>
+        <h3 id="mood-title">Morning Check-in</h3>
         <div class="emotions-grid">
           <div class="emotion-btn" onclick="logMood('😊')">😊</div>
           <div class="emotion-btn" onclick="logMood('😔')">😔</div>
@@ -106,20 +102,20 @@
           <div class="emotion-btn" onclick="logMood('😴')">😴</div>
           <div class="emotion-btn" onclick="logMood('🩹')">🩹</div>
         </div>
-        <p id="mood-feedback" style="text-align: center; font-size: 0.7rem; margin-top: 5px; color: var(--p-dark); font-weight: 600;"></p>
+        <p id="daily-affirmation" style="text-align: center; font-size: 0.75rem; font-style: italic; color: var(--p-dark); font-weight: 600;">"You are a precious part of the world."</p>
       </div>
 
       <div class="card">
-        <h3 id="jour-title">Private Journal</h3>
-        <textarea id="journalInput" placeholder="Write your feelings..."></textarea>
-        <button class="btn" onclick="saveJournal()">Save Locally</button>
+        <h3 id="thoughts-title">My Thoughts</h3>
+        <textarea id="journalInput" placeholder="What is on your mind right now?"></textarea>
+        <button class="btn" onclick="saveJournal()">Keep Private</button>
       </div>
 
       <div class="card">
-        <h3 id="comm-title">Community Sunshine</h3>
+        <h3 id="comm-title">Global Community</h3>
         <div id="posts-container" style="max-height: 80px; overflow-y: auto; font-size: 0.7rem; margin-bottom: 10px;"></div>
         <div style="display:flex; gap:5px;">
-          <input type="text" id="share-input" placeholder="Share kindness..." style="margin:0;">
+          <input type="text" id="share-input" placeholder="Share a kind thought..." style="margin:0;">
           <button class="btn" style="width:70px; margin:0;" onclick="postToCommunity()">Post</button>
         </div>
       </div>
@@ -129,18 +125,25 @@
 
     <div id="tools-page" class="page">
       <div class="card">
-        <h3>🌟 Celebrity Stories</h3>
-        <div class="tool-scroll">
-          <div class="story-card"><b>IU:</b> Overcame cockroaches and poverty. She never gave up.</div>
-          <div class="story-card"><b>Suga (BTS):</b> Survived depression and shoulder injury. You can too.</div>
-          <div class="story-card"><b>Rūta Meilutytė:</b> Proved that asking for help is a superpower.</div>
+        <h3>🌟 Overcoming Hardships</h3>
+        <div style="display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px;">
+          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>IU:</b> Used music to survive poverty.</div>
+          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>Suga:</b> Turned pain into healing for fans.</div>
+          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>Rūta:</b> Gold medalist for resilience.</div>
         </div>
       </div>
       <div class="card">
-        <h3>📜 Daily Phrase</h3>
-        <div id="phrase-box" style="text-align: center; font-size: 0.85rem; padding: 10px; font-weight: 500;">"Take a deep breath. You are safe here."</div>
-        <button class="btn" onclick="newPhrase()">Change Quote</button>
+        <h3>🎵 Calming Vibe</h3>
+        <button class="btn" onclick="alert('Playing rain sounds... 🌧️')">Play Rain Music</button>
       </div>
+    </div>
+
+    <div id="profile-view-page" class="page">
+        <div class="card">
+            <h3 id="view-profile-title">My Safety Details</h3>
+            <div id="display-user-info" style="font-size: 0.8rem; line-height: 1.8;"></div>
+            <button class="btn" style="background:#ccc; margin-top: 20px;" onclick="resetProfile()">Edit My Info</button>
+        </div>
     </div>
 
     <div class="bottom-spacer"></div>
@@ -149,13 +152,13 @@
   <nav id="bottom-nav" style="display:none;">
     <div class="nav-item active" id="nav-home" onclick="navigateTo('home-page', 'nav-home')">🏠</div>
     <div class="nav-center" id="nav-tools" onclick="navigateTo('tools-page', 'nav-tools')">🌞</div>
-    <div class="nav-item" id="nav-profile" onclick="navigateTo('profile-page', 'nav-profile')">👤</div>
+    <div class="nav-item" id="nav-profile" onclick="showProfileView()">👤</div>
   </nav>
 
   <script>
     const crisisInfo = {
-        KR: { num: "1393", text: "KR Suicide Prevention" },
-        LT: { num: "8 800 28888", text: "LT Jaunimo linija" },
+        KR: { num: "1393", text: "South Korea Help" },
+        LT: { num: "8 800 28888", text: "Lithuania Help" },
         Global: { num: "112", text: "Emergency" }
     };
 
@@ -163,7 +166,7 @@
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
       document.querySelectorAll('.nav-item, .nav-center').forEach(n => n.classList.remove('active'));
-      document.getElementById(navId).classList.add('active');
+      if(navId) document.getElementById(navId).classList.add('active');
     }
 
     function saveProfile() {
@@ -174,27 +177,45 @@
       if(name && phone) {
         localStorage.setItem('u_data', JSON.stringify({name, phone, age, country}));
         checkUser();
-      } else { alert("Safety requires a name and number."); }
+      } else { alert("Please enter your name and phone for emergency safety."); }
     }
 
     function checkUser() {
       const data = localStorage.getItem('u_data');
       if(data) {
-        document.getElementById('profile-page').classList.remove('active');
+        document.getElementById('profile-setup-page').classList.remove('active');
         document.getElementById('home-page').classList.add('active');
         document.getElementById('bottom-nav').style.display = 'flex';
       }
     }
 
+    function showProfileView() {
+        const data = JSON.parse(localStorage.getItem('u_data'));
+        document.getElementById('display-user-info').innerHTML = `
+            <b>Name:</b> ${data.name}<br>
+            <b>Contact:</b> ${data.phone}<br>
+            <b>Age:</b> ${data.age}<br>
+            <b>Region:</b> ${data.country}
+        `;
+        navigateTo('profile-view-page', 'nav-profile');
+    }
+
+    function resetProfile() {
+        if(confirm("Edit your safety info?")) {
+            localStorage.removeItem('u_data');
+            location.reload();
+        }
+    }
+
     function logMood(emoji) {
-      const msgs = { '😊': 'Love to see you smile!', '😔': 'It is okay to be sad.', '😤': 'Release that anger, you are safe.', '😴': 'Rest is productive.', '🩹': 'You are healing.' };
-      document.getElementById('mood-feedback').innerText = msgs[emoji];
+        const affirmation = { '😊': 'You are glowing!', '😔': 'You are allowed to feel sad.', '😤': 'Breathe out the tension.', '😴': 'Rest is essential.', '🩹': 'Healing takes time.' };
+        document.getElementById('daily-affirmation').innerText = affirmation[emoji];
     }
 
     function triggerSafetyPopup() {
         const data = JSON.parse(localStorage.getItem('u_data'));
         const help = crisisInfo[data.country] || crisisInfo.Global;
-        const msg = `🆘 EMERGENCY 🆘\n\nCall: ${help.num}\n\nInfo for Help:\nName: ${data.name}\nAge: ${data.age}\nContact: ${data.phone}`;
+        const msg = `🆘 EMERGENCY HELP 🆘\n\nCall: ${help.num}\n\nInfo to Read:\nName: ${data.name}\nAge: ${data.age}\nPhone: ${data.phone}`;
         alert(msg);
         window.location.href = "tel:" + help.num;
     }
@@ -203,19 +224,14 @@
       const msg = document.getElementById('share-input').value;
       if(msg.trim()) {
         const p = document.createElement('div');
-        p.style.padding = "5px"; p.style.borderBottom = "1px solid #eee";
+        p.style.padding = "8px"; p.style.background = "white"; p.style.borderRadius = "10px"; p.style.marginBottom = "5px";
         p.innerHTML = `<b>@User:</b> ${msg}`;
         document.getElementById('posts-container').prepend(p);
         document.getElementById('share-input').value = "";
       }
     }
 
-    function newPhrase() {
-      const p = ["You are important.", "One step at a time.", "The world is better with you.", "You are loved."];
-      document.getElementById('phrase-box').innerText = p[Math.floor(Math.random()*p.length)];
-    }
-
-    function saveJournal() { localStorage.setItem('journal', document.getElementById('journalInput').value); alert("Stored locally."); }
+    function saveJournal() { localStorage.setItem('journal', document.getElementById('journalInput').value); alert("Thoughts saved privately."); }
 
     function spawnFlower() {
       const f = document.createElement('div'); f.className = 'flower';
