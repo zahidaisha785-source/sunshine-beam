@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Sunshine Beam</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
@@ -25,10 +25,12 @@
       overflow-x: hidden;
     }
 
+    /* This wrapper allows scrolling while keeping the nav fixed */
     .app-wrapper {
       width: 100%;
       max-width: 450px;
       padding: 20px;
+      padding-bottom: 120px; /* EXTRA SPACE so buttons aren't hidden by nav */
       position: relative;
       z-index: 1;
     }
@@ -48,17 +50,17 @@
 
     header {
       text-align: center;
-      margin: 30px 0 20px;
+      margin: 20px 0 15px;
     }
 
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 3.5rem;
+      font-size: 3rem;
       color: var(--p-dark);
       margin: 0;
     }
 
-    .tagline { font-size: 0.9rem; color: #777; margin-top: 5px; }
+    .tagline { font-size: 0.85rem; color: #777; margin-top: 2px; }
 
     /* --- Cards --- */
     .card {
@@ -66,58 +68,58 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.5);
-      border-radius: 24px;
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 10px 30px rgba(106, 76, 147, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 25px rgba(106, 76, 147, 0.08);
     }
 
     .card-row { display: flex; justify-content: space-between; align-items: center; }
 
-    h3 { font-size: 1rem; color: var(--p-dark); margin: 0 0 10px 0; }
+    h3 { font-size: 0.95rem; color: var(--p-dark); margin: 0 0 8px 0; }
 
     /* --- Moods --- */
-    .mood-box { display: flex; justify-content: space-between; margin-top: 15px; }
+    .mood-box { display: flex; justify-content: space-between; gap: 5px; margin-top: 10px; }
 
     .mood-btn { text-align: center; cursor: pointer; flex: 1; }
 
     .mood-icon {
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin: 0 auto 5px;
       transition: all 0.3s ease;
       border: 2px solid transparent;
     }
 
     .mood-btn.selected .mood-icon {
-      transform: scale(1.2);
+      transform: scale(1.15);
       border-color: var(--p-dark);
-      box-shadow: 0 0 10px rgba(106, 76, 147, 0.3);
+      background: white !important;
     }
 
-    .mood-label { font-size: 0.7rem; color: #888; }
+    .mood-label { font-size: 0.65rem; color: #888; }
 
     /* --- Grid Section --- */
     .grid-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     textarea {
       width: 100%;
-      height: 70px;
+      height: 60px;
       border: none;
       background: rgba(255,255,255,0.5);
-      border-radius: 12px;
-      padding: 10px;
+      border-radius: 10px;
+      padding: 8px;
       font-family: inherit;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       resize: none;
     }
 
@@ -125,51 +127,49 @@
       background: var(--p-mid);
       color: white;
       border: none;
-      padding: 10px;
-      border-radius: 12px;
+      padding: 8px;
+      border-radius: 10px;
       width: 100%;
-      margin-top: 8px;
-      font-size: 0.8rem;
+      margin-top: 6px;
+      font-size: 0.75rem;
       cursor: pointer;
       font-weight: 600;
-      transition: background 0.3s;
     }
 
-    .btn:hover { background: var(--p-dark); }
-
-    /* --- Bottom Nav --- */
+    /* --- Fixed Bottom Nav --- */
     nav {
       position: fixed;
-      bottom: 20px;
+      bottom: 15px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90%;
+      width: 92%;
       max-width: 400px;
       background: white;
-      height: 70px;
+      height: 65px;
       border-radius: 35px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 1000;
     }
 
-    .nav-item { font-size: 1.2rem; color: #ccc; cursor: pointer; }
+    .nav-item { font-size: 1.1rem; color: #ccc; text-align: center; }
     .nav-item.active { color: var(--p-dark); }
 
     .nav-center {
       background: var(--p-light);
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
-      margin-top: -40px;
-      border: 5px solid white;
+      margin-top: -35px;
+      border: 4px solid white;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--p-dark);
-      font-size: 1.8rem;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -177,40 +177,40 @@
 
   <div class="app-wrapper">
     <header>
-      <div style="font-size: 40px;">🌞</div>
+      <div style="font-size: 35px;">🌞</div>
       <h1>Sunshine Beam</h1>
-      <p class="tagline">Small steps. Brighter days. You're not alone. 💜</p>
+      <p class="tagline">Small steps. Brighter days. 💜</p>
     </header>
 
     <div class="card card-row">
       <div>
-        <h3 id="greeting">Good morning, sunshine! 🌸</h3>
-        <p style="font-size: 0.8rem; margin: 0; color: #666;">You matter. You are enough.<br>Let's take a gentle step together.</p>
+        <h3 id="greeting">Good morning! 🌸</h3>
+        <p style="font-size: 0.75rem; margin: 0; color: #666;">You are enough.<br>Take a gentle step today.</p>
       </div>
-      <div style="font-size: 40px;">🍯</div>
+      <div style="font-size: 35px;">🍯</div>
     </div>
 
     <div class="card">
-      <h3>How are you feeling today?</h3>
+      <h3>How are you today?</h3>
       <div class="mood-box">
         <div class="mood-btn" onclick="setMood(this, 'Happy')"><div class="mood-icon" style="background:#FFF5CC">😊</div><div class="mood-label">Happy</div></div>
         <div class="mood-btn" onclick="setMood(this, 'Okay')"><div class="mood-icon" style="background:#FFE8E8">🙂</div><div class="mood-label">Okay</div></div>
         <div class="mood-btn" onclick="setMood(this, 'Low')"><div class="mood-icon" style="background:#E8E8FF">😔</div><div class="mood-label">Low</div></div>
-        <div class="mood-btn" onclick="setMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stressed</div></div>
-        <div class="mood-btn" onclick="setMood(this, 'Overwhelmed')"><div class="mood-icon" style="background:#E8F5FF">😢</div><div class="mood-label">Overwhelmed</div></div>
+        <div class="mood-btn" onclick="setMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stress</div></div>
+        <div class="mood-btn" onclick="setMood(this, 'Overwhelmed')"><div class="mood-icon" style="background:#E8F5FF">😢</div><div class="mood-label">Sad</div></div>
       </div>
     </div>
 
     <div class="grid-container">
-      <div class="card" style="margin-bottom:0">
+      <div class="card">
         <h3>Journal</h3>
-        <textarea id="journalInput" placeholder="Write your thoughts..."></textarea>
-        <button class="btn" onclick="saveJournal()">Save Entry</button>
+        <textarea id="journalInput" placeholder="Thoughts..."></textarea>
+        <button class="btn" onclick="saveJournal()">Save</button>
       </div>
-      <div class="card" style="margin-bottom:0">
+      <div class="card">
         <h3>Affirmation</h3>
-        <p id="affirmation-text" style="font-size: 0.75rem; text-align: center; line-height: 1.4; font-weight: 500;">I am healing<br>I am growing<br>I am enough<br>I am loved 💜</p>
-        <button class="btn" style="background: rgba(106,76,147,0.1); color: var(--p-dark);" onclick="newAffirmation()">Refresh</button>
+        <p id="affirmation-text" style="font-size: 0.7rem; text-align: center; line-height: 1.3;">I am healing<br>I am growing<br>I am loved 💜</p>
+        <button class="btn" style="background: rgba(106,76,147,0.1); color: var(--p-dark);" onclick="newAffirmation()">New</button>
       </div>
     </div>
   </div>
@@ -224,76 +224,55 @@
   </nav>
 
   <script>
-    // 1. SAVE JOURNAL
     function saveJournal() {
       const text = document.getElementById('journalInput').value;
       if (text.trim() !== "") {
         localStorage.setItem('sunshine_journal', text);
-        alert('Your thoughts are saved safely. 💜');
-      } else {
-        alert('Please write something first!');
+        alert('Saved! 💜');
       }
     }
 
-    // 2. SET AND SAVE MOOD
     function setMood(element, mood) {
-      // Remove 'selected' class from all buttons
       document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
-      // Add 'selected' to the clicked one
       element.classList.add('selected');
-      // Save to localStorage
       localStorage.setItem('sunshine_mood', mood);
     }
 
-    // 3. REFRESH AFFIRMATIONS
     function newAffirmation() {
       const affirmations = [
-        "I am healing<br>I am growing<br>I am enough<br>I am loved 💜",
-        "Small steps<br>lead to<br>big changes 🌿",
-        "I deserve<br>peace and<br>happiness 🌸",
-        "My feelings<br>are valid<br>and important ✨"
+        "I am healing<br>and growing 💜",
+        "Small steps<br>matter 🌿",
+        "I deserve<br>peace 🌸",
+        "I am doing<br>my best ✨"
       ];
-      const random = affirmations[Math.floor(Math.random() * affirmations.length)];
-      document.getElementById('affirmation-text').innerHTML = random;
+      document.getElementById('affirmation-text').innerHTML = affirmations[Math.floor(Math.random() * affirmations.length)];
     }
 
-    // 4. LOAD DATA ON STARTUP
     window.onload = () => {
-      // Load Journal
       const savedJournal = localStorage.getItem('sunshine_journal');
       if (savedJournal) document.getElementById('journalInput').value = savedJournal;
 
-      // Load Mood
       const savedMood = localStorage.getItem('sunshine_mood');
       if (savedMood) {
-        const buttons = document.querySelectorAll('.mood-btn');
-        buttons.forEach(btn => {
+        document.querySelectorAll('.mood-btn').forEach(btn => {
           if (btn.innerText.includes(savedMood)) btn.classList.add('selected');
         });
       }
-
-      // Update Greeting based on time
-      const hour = new Date().getHours();
-      const greeting = document.getElementById('greeting');
-      if (hour < 12) greeting.innerText = "Good morning, sunshine! 🌸";
-      else if (hour < 18) greeting.innerText = "Good afternoon, sunshine! ☀️";
-      else greeting.innerText = "Good evening, sunshine! 🌙";
     };
 
-    // 5. FLOATING FLOWERS
     function spawnFlower() {
       const flower = document.createElement('div');
       flower.className = 'flower';
-      const types = ['🌸', '🌼', '🌿', '🌷', '✨'];
+      const types = ['🌸', '🌼', '🌿', '✨'];
       flower.innerText = types[Math.floor(Math.random() * types.length)];
       flower.style.left = Math.random() * 100 + 'vw';
       const dur = Math.random() * 5 + 5;
       flower.style.animationDuration = dur + 's';
-      flower.style.opacity = Math.random() * 0.5 + 0.3;
+      flower.style.opacity = Math.random() * 0.4 + 0.2;
       document.body.appendChild(flower);
       setTimeout(() => flower.remove(), dur * 1000);
     }
-    setInterval(spawnFlower, 900);
+    setInterval(spawnFlower, 1000);
   </script>
 
 </body>
