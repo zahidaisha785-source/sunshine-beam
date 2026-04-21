@@ -10,7 +10,7 @@
       --p-dark: #6a4c93;
       --p-mid: #a684d0;
       --p-light: #f3e8ff;
-      --glass: rgba(255, 255, 255, 0.6);
+      --glass: rgba(255, 255, 255, 0.7);
     }
 
     * { box-sizing: border-box; }
@@ -18,11 +18,29 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #fff9e6 0%, #f3e8ff 40%, #e6d6f2 100%);
+      /* THIS CREATES THE IMAGE LOOK: Sunshine at top, Lilac middle, Lavender bottom */
+      background: 
+        radial-gradient(circle at 50% -10%, #FFF5CC 0%, transparent 50%), 
+        linear-gradient(to bottom, #F3E8FF 0%, #E6D6F2 100%);
+      background-attachment: fixed;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       overflow-x: hidden;
+    }
+
+    /* Framing Flowers (Simulated) */
+    body::before {
+      content: "🌸 🌼";
+      position: fixed;
+      top: 10px; left: 10px;
+      font-size: 40px; opacity: 0.5; z-index: 0;
+    }
+    body::after {
+      content: "🌺 🌷";
+      position: fixed;
+      top: 10px; right: 10px;
+      font-size: 40px; opacity: 0.5; z-index: 0;
     }
 
     .app-wrapper {
@@ -30,114 +48,112 @@
       max-width: 450px;
       padding: 15px;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
-    /* --- Header --- */
     header {
       text-align: center;
-      margin: 15px 0 10px;
+      margin: 20px 0;
     }
 
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 2.8rem; /* Slightly smaller to save space */
+      font-size: 3.2rem;
       color: var(--p-dark);
       margin: 0;
+      filter: drop-shadow(0 2px 4px rgba(255,255,255,0.5));
     }
 
-    .tagline { font-size: 0.8rem; color: #777; }
+    .tagline { font-size: 0.85rem; color: #666; font-weight: 500; }
 
     /* --- Cards --- */
     .card {
       background: var(--glass);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.5);
-      border-radius: 20px;
-      padding: 15px;
-      margin-bottom: 12px;
-      box-shadow: 0 8px 25px rgba(106, 76, 147, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 30px rgba(106, 76, 147, 0.12);
     }
 
-    .card-row { display: flex; justify-content: space-between; align-items: center; }
+    h3 { font-size: 1rem; color: var(--p-dark); margin: 0 0 10px 0; }
 
-    h3 { font-size: 0.9rem; color: var(--p-dark); margin: 0 0 8px 0; }
-
-    /* --- Moods --- */
-    .mood-box { display: flex; justify-content: space-between; gap: 5px; }
+    /* Moods */
+    .mood-box { display: flex; justify-content: space-between; gap: 8px; }
     .mood-btn { text-align: center; cursor: pointer; flex: 1; }
     .mood-icon {
-      width: 40px; height: 40px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; margin: 0 auto 5px;
-      transition: all 0.3s ease;
+      font-size: 1.4rem; margin: 0 auto 5px;
+      transition: all 0.3s;
     }
     .mood-btn.selected .mood-icon {
-      transform: scale(1.1);
-      border: 2px solid var(--p-dark);
+      transform: scale(1.15);
+      outline: 3px solid var(--p-dark);
       background: white !important;
     }
-    .mood-label { font-size: 0.6rem; color: #888; }
+    .mood-label { font-size: 0.65rem; color: #777; font-weight: 600; }
 
-    /* --- Grid Section --- */
+    /* Journal/Affirmation */
     .grid-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
     }
 
     textarea {
-      width: 100%; height: 50px;
+      width: 100%; height: 60px;
       border: none; background: rgba(255,255,255,0.5);
-      border-radius: 10px; padding: 8px;
-      font-family: inherit; font-size: 0.7rem; resize: none;
+      border-radius: 12px; padding: 10px;
+      font-family: inherit; font-size: 0.8rem; resize: none;
     }
 
     .btn {
       background: var(--p-mid); color: white;
-      border: none; padding: 8px; border-radius: 10px;
-      width: 100%; margin-top: 5px; font-size: 0.7rem;
-      cursor: pointer; font-weight: 600;
+      border: none; padding: 10px; border-radius: 15px;
+      width: 100%; margin-top: 8px; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer;
     }
 
-    /* --- THE IMPORTANT FIX --- */
+    /* THE FIX FOR THE HIDDEN BUTTONS */
     .bottom-spacer {
-      height: 100px; /* This creates invisible space so the nav bar doesn't cover content */
-      width: 100%;
+      height: 120px; /* Large gap at the end of the scroll */
     }
 
-    /* --- Fixed Bottom Nav --- */
+    /* Fixed Navigation Bar */
     nav {
       position: fixed;
-      bottom: 20px;
+      bottom: 25px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90%;
+      width: 92%;
       max-width: 400px;
-      background: white;
-      height: 65px;
-      border-radius: 35px;
+      background: rgba(255, 255, 255, 0.95);
+      height: 70px;
+      border-radius: 40px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
       z-index: 1000;
     }
 
     .nav-center {
       background: var(--p-light);
-      width: 55px; height: 55px;
-      border-radius: 50%; margin-top: -35px;
-      border: 4px solid white;
+      width: 65px; height: 65px;
+      border-radius: 50%; margin-top: -45px;
+      border: 6px solid #e6d6f2; /* Blends with body background */
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
-    /* --- Flowers --- */
+    /* Falling Flowers */
     .flower {
-      position: fixed; top: -50px; pointer-events: none; z-index: 0;
+      position: fixed; top: -50px; pointer-events: none; z-index: 1;
       animation: fall linear forwards;
     }
     @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
@@ -147,40 +163,40 @@
 
   <div class="app-wrapper">
     <header>
-      <div style="font-size: 30px;">🌞</div>
+      <div style="font-size: 40px;">🌞</div>
       <h1>Sunshine Beam</h1>
-      <p class="tagline">Small steps. Brighter days. 💜</p>
+      <p class="tagline">Small steps. Brighter days. You're not alone. 💜</p>
     </header>
 
-    <div class="card card-row">
+    <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
       <div>
         <h3 id="greeting">Good morning! 🌸</h3>
-        <p style="font-size: 0.7rem; margin: 0; color: #666;">You are enough.</p>
+        <p style="font-size: 0.8rem; color: #555; margin: 0;">You matter. You are enough.</p>
       </div>
-      <div style="font-size: 30px;">🍯</div>
+      <div style="font-size: 45px;">🍯</div>
     </div>
 
     <div class="card">
       <h3>How are you today?</h3>
       <div class="mood-box">
-        <div class="mood-btn" onclick="setMood(this, 'Happy')"><div class="mood-icon" style="background:#FFF5CC">😊</div><div class="mood-label">Happy</div></div>
-        <div class="mood-btn" onclick="setMood(this, 'Okay')"><div class="mood-icon" style="background:#FFE8E8">🙂</div><div class="mood-label">Okay</div></div>
-        <div class="mood-btn" onclick="setMood(this, 'Low')"><div class="mood-icon" style="background:#E8E8FF">😔</div><div class="mood-label">Low</div></div>
-        <div class="mood-btn" onclick="setMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stress</div></div>
-        <div class="mood-btn" onclick="setMood(this, 'Overwhelmed')"><div class="mood-icon" style="background:#E8F5FF">😢</div><div class="mood-label">Sad</div></div>
+        <div class="mood-btn" onclick="selectMood(this, 'Happy')"><div class="mood-icon" style="background:#FFF5CC">😊</div><div class="mood-label">Happy</div></div>
+        <div class="mood-btn" onclick="selectMood(this, 'Okay')"><div class="mood-icon" style="background:#FFE8E8">🙂</div><div class="mood-label">Okay</div></div>
+        <div class="mood-btn" onclick="selectMood(this, 'Low')"><div class="mood-icon" style="background:#E8E8FF">😔</div><div class="mood-label">Low</div></div>
+        <div class="mood-btn" onclick="selectMood(this, 'Stressed')"><div class="mood-icon" style="background:#F3E8FF">😫</div><div class="mood-label">Stress</div></div>
+        <div class="mood-btn" onclick="selectMood(this, 'Sad')"><div class="mood-icon" style="background:#E8F5FF">😢</div><div class="mood-label">Sad</div></div>
       </div>
     </div>
 
     <div class="grid-container">
       <div class="card">
         <h3>Journal</h3>
-        <textarea id="journalInput" placeholder="Thoughts..."></textarea>
+        <textarea id="journalInput" placeholder="Write..."></textarea>
         <button class="btn" onclick="saveJournal()">Save</button>
       </div>
       <div class="card">
         <h3>Affirmation</h3>
-        <p id="affirmation-text" style="font-size: 0.65rem; text-align: center;">I am healing<br>and growing 💜</p>
-        <button class="btn" style="background: rgba(106,76,147,0.1); color: var(--p-dark);" onclick="newAffirmation()">New</button>
+        <p id="affirm-text" style="font-size: 0.75rem; text-align: center; font-weight: 500;">I am healing<br>and growing 💜</p>
+        <button class="btn" style="background:rgba(106,76,147,0.1); color:var(--p-dark)" onclick="newAffirm()">New</button>
       </div>
     </div>
 
@@ -188,47 +204,45 @@
   </div>
 
   <nav>
-    <div style="font-size: 1.1rem; color: var(--p-dark);">🏠</div>
-    <div style="font-size: 1.1rem; color: #ccc;">📓</div>
+    <div style="font-size: 1.3rem; color: var(--p-dark);">🏠</div>
+    <div style="font-size: 1.3rem; color: #ccc;">📓</div>
     <div class="nav-center">🌞</div>
-    <div style="font-size: 1.1rem; color: #ccc;">🌱</div>
-    <div style="font-size: 1.1rem; color: #ccc;">👤</div>
+    <div style="font-size: 1.3rem; color: #ccc;">🌱</div>
+    <div style="font-size: 1.3rem; color: #ccc;">👤</div>
   </nav>
 
   <script>
     function saveJournal() {
-      const text = document.getElementById('journalInput').value;
-      if (text.trim() !== "") {
-        localStorage.setItem('sunshine_journal', text);
-        alert('Saved! 💜');
-      }
+      localStorage.setItem('journal', document.getElementById('journalInput').value);
+      alert('Saved! 💜');
     }
 
-    function setMood(element, mood) {
-      document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
-      element.classList.add('selected');
-      localStorage.setItem('sunshine_mood', mood);
+    function selectMood(el, mood) {
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      localStorage.setItem('mood', mood);
     }
 
-    function newAffirmation() {
-      const affirmations = ["I am healing 💜", "Small steps matter 🌿", "I deserve peace 🌸", "I am doing my best ✨"];
-      document.getElementById('affirmation-text').innerHTML = affirmations[Math.floor(Math.random() * affirmations.length)];
+    function newAffirm() {
+      const list = ["I am healing 💜", "Small steps matter 🌿", "I deserve peace 🌸", "I am doing my best ✨"];
+      document.getElementById('affirm-text').innerHTML = list[Math.floor(Math.random()*list.length)];
     }
 
     function spawnFlower() {
-      const flower = document.createElement('div');
-      flower.className = 'flower';
-      const types = ['🌸', '🌼', '🌿', '✨'];
-      flower.innerText = types[Math.floor(Math.random() * types.length)];
-      flower.style.left = Math.random() * 100 + 'vw';
-      const dur = Math.random() * 5 + 5;
-      flower.style.animationDuration = dur + 's';
-      flower.style.opacity = Math.random() * 0.4 + 0.2;
-      document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), dur * 1000);
+      const f = document.createElement('div');
+      f.className = 'flower';
+      f.innerText = ['🌸', '🌼', '🌿', '✨'][Math.floor(Math.random()*4)];
+      f.style.left = Math.random() * 100 + 'vw';
+      const d = Math.random() * 5 + 5;
+      f.style.animationDuration = d + 's';
+      document.body.appendChild(f);
+      setTimeout(() => f.remove(), d * 1000);
     }
     setInterval(spawnFlower, 1000);
-  </script>
 
+    window.onload = () => {
+      document.getElementById('journalInput').value = localStorage.getItem('journal') || "";
+    }
+  </script>
 </body>
 </html>
