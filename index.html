@@ -1,129 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - UI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --ui-purple: #6a4c93; /* Main title purple */
-            --card-purple: #f3e8ff; /* Card border/background faint purple */
-            --button-purple: #a684d0; /* Purple used for buttons */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunshine Beam App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --purple-main: #6a4c93;
+      --lavender-soft: #f3e8ff;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.5);
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            /* 1. APPLY MAIN BACKGROUND ASSET HERE */
-            background-image: url('main_background.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Ensures flowers stay as cards scroll */
-            min-height: 100vh;
-            color: #555;
-            padding-bottom: 80px; /* Space for fixed navigation bar */
-        }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      /* Replace 'background.jpg' with your lavender image path */
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #444;
+      display: flex;
+      justify-content: center;
+    }
 
-        /* Use Flexbox for a clean main structure */
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
+    .app-container {
+      width: 100%;
+      max-width: 480px; /* Mobile View Width */
+      padding: 20px;
+      padding-bottom: 100px; /* Space for bottom nav */
+    }
 
-        /* HEADER SECTION */
-        .app-header {
-            text-align: center;
-            margin-top: 40px; /* Space from top controls */
-            margin-bottom: 20px;
-        }
+    /* --- Header Section --- */
+    header {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-        .main-title {
-            font-family: 'Dancing Script', cursive; /* Use a script font */
-            color: var(--ui-purple);
-            font-size: 3.5rem;
-            margin: 10px 0;
-        }
+    .sun-icon { font-size: 50px; margin-bottom: -10px; }
+    
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      color: var(--purple-main);
+      margin: 0;
+    }
 
-        /* 2. ADD SUN ICON & FLOWERS Swashes ASSESTS HERE */
-        /* Placeholder for sun: <img src="sun_icon.png" width="60"> */
+    .tagline {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
 
-        /* GENERAL CARD STYLING */
-        .card {
-            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
-            border: 1.5px solid var(--card-purple);
-            border-radius: 20px;
-            padding: 20px;
-            width: 90%;
-            max-width: 450px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(106, 76, 147, 0.1);
-        }
+    /* --- Card Styling (Glassmorphism) --- */
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 32px 0 rgba(106, 76, 147, 0.1);
+    }
 
-        .card h2 {
-            font-size: 1.1rem;
-            color: var(--ui-purple);
-            margin-bottom: 5px;
-        }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--purple-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-        /* 3. ASSEMBLE "GOOD MORNING" CARD WITH JAR ASSET */
-        /* Use CSS Grid/Flex for layout: 
-           Text (Left) | Jar Asset (Right) */
+    /* --- Mood Section --- */
+    .mood-container {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      margin-top: 15px;
+    }
 
-        /* 4. ASSEMBLE "HOW ARE YOU" MOOD STRIP */
-        /* Use CSS Flexbox: `display: flex; justify-content: center; gap: 10px;` 
-           Ensure each icon image is clickable. */
+    .mood-item { cursor: pointer; transition: transform 0.2s; }
+    .mood-item:active { transform: scale(0.9); }
 
-        /* 5. SPLIT THE JOURNAL AND AFFIRMATION INTO SIDE-BY-SIDE CARDS */
-        /* Place these within a wrapper div: `display: flex; gap: 15px;` */
+    .mood-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
 
-        /* 6. FIXED BOTTOM NAVIGATION */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            border-top: 2px solid var(--card-purple);
-            z-index: 1000;
-        }
+    .mood-label { font-size: 11px; color: #777; }
 
-        .nav-item {
-            text-align: center;
-            cursor: pointer;
-            width: 20%;
-            color: var(--ui-purple);
-        }
+    /* --- Journal & Affirmation Row --- */
+    .grid-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
 
-        /* Generate the special center 'Sunshine Beam' style in CSS */
-        .nav-center {
-            /* style this to be raised and highlighted */
-        }
-    </style>
+    textarea {
+      width: 100%;
+      height: 60px;
+      border: none;
+      background: rgba(255,255,255,0.4);
+      border-radius: 10px;
+      padding: 8px;
+      font-family: inherit;
+      resize: none;
+    }
+
+    .btn-save {
+      background: #a684d0;
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 15px;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    /* --- Bottom Navigation --- */
+    .bottom-nav {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      background: white;
+      border-radius: 40px;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .nav-item { text-align: center; color: #aaa; font-size: 12px; flex: 1;}
+    .nav-item.active { color: var(--purple-main); }
+    .nav-center {
+        background: var(--lavender-soft);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-top: -30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 5px solid white;
+    }
+
+  </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <div class="app-header">
-            <div class="main-title">Sunshine Beam</div>
-            <p>Small steps. Brighter days. You’re not alone. 💜</p>
-        </div>
+<div class="app-container">
+  
+  <header>
+    <div class="sun-icon">🌞</div>
+    <h1>Sunshine Beam</h1>
+    <p class="tagline">Small steps. Brighter days. You’re not alone. 💜</p>
+  </header>
 
-        <div style="display: flex; gap: 15px;">
-            </div>
+  <div class="card" style="display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <div class="card-title">Good morning, sunshine! 🌸</div>
+      <p style="font-size: 13px; margin: 0;">You matter. You are enough.<br>Let's take a gentle step today.</p>
+    </div>
+    <div style="font-size: 40px;">🍯</div> </div>
 
-        </div>
+  <div class="card">
+    <div class="card-title"><span>✿</span> How are you feeling today?</div>
+    <div class="mood-container">
+      <div class="mood-item" onclick="alert('Happy!')"><div class="mood-circle" style="background: #FFF5CC;">😊</div><div class="mood-label">Happy</div></div>
+      <div class="mood-item" onclick="alert('Okay')"><div class="mood-circle" style="background: #FFE8E8;">😊</div><div class="mood-label">Okay</div></div>
+      <div class="mood-item" onclick="alert('Low')"><div class="mood-circle" style="background: #E8E8FF;">☹️</div><div class="mood-label">Low</div></div>
+      <div class="mood-item" onclick="alert('Stressed')"><div class="mood-circle" style="background: #F3E8FF;">😟</div><div class="mood-label">Stressed</div></div>
+    </div>
+  </div>
 
-    <div class="bottom-nav">
-        </div>
+  <div class="grid-row">
+    <div class="card">
+      <div class="card-title">📓 Journal</div>
+      <textarea placeholder="What's on your mind?"></textarea>
+      <button class="btn-save">✎ Save Entry</button>
+    </div>
+    <div class="card">
+      <div class="card-title">✨ Affirmation</div>
+      <p style="font-size: 12px; text-align: center; line-height: 1.5;">
+        I am healing<br>I am growing<br>I am enough
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <div class="nav-item active">🏠<br>Home</div>
+  <div class="nav-item">📓<br>Journal</div>
+  <div class="nav-center">🌞</div>
+  <div class="nav-item">🌱<br>Tools</div>
+  <div class="nav-item">👤<br>Profile</div>
+</nav>
 
 </body>
 </html>
