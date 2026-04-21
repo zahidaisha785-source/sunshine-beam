@@ -3,96 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Sunshine Beam</title>
+  <title>Sunshine Beam Global</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --p-dark: #6a4c93; --p-mid: #a684d0; --p-light: #f3e8ff; --glass: rgba(255, 255, 255, 0.7);
+      --p-dark: #6a4c93;
+      --p-mid: #a684d0;
+      --p-light: #f3e8ff;
+      --glass: rgba(255, 255, 255, 0.7);
     }
+
     * { box-sizing: border-box; }
+
     body {
-      margin: 0; font-family: 'Poppins', sans-serif;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      /* Background matches your design */
       background: radial-gradient(circle at top, #fff9e6 0%, #f3e8ff 40%, #e6d6f2 100%);
-      background-attachment: fixed; min-height: 100vh; overflow-x: hidden;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
     }
-    .app-wrapper { width: 100%; max-width: 450px; padding: 15px; margin: 0 auto; }
-    
-    /* Pages Visibility */
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 450px;
+      padding: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Language Bar */
+    .lang-bar {
+      text-align: right;
+      padding-bottom: 10px;
+    }
+    .lang-bar span {
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 10px;
+      color: var(--p-dark);
+    }
+
+    /* Pages Navigation */
     .page { display: none; }
     .page.active { display: block; }
 
+    /* Header */
+    header { text-align: center; margin-bottom: 15px; }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      color: var(--p-dark);
+      margin: 0;
+    }
+    .tagline { font-size: 0.75rem; color: #666; font-weight: 500; }
+
     /* Cards */
     .card {
-      background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.6); border-radius: 24px;
-      padding: 18px; margin-bottom: 15px; box-shadow: 0 8px 30px rgba(106, 76, 147, 0.12);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 30px rgba(106, 76, 147, 0.12);
     }
-    h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--p-dark); margin: 0; text-align: center; }
+
     h3 { font-size: 0.95rem; color: var(--p-dark); margin: 0 0 10px 0; }
 
-    /* Tools Styling */
-    .tool-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; }
-    .story-card { min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem; }
-    .music-btn { background: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    /* Inputs & Buttons */
+    textarea, input {
+      width: 100%; border: none; background: rgba(255,255,255,0.5);
+      border-radius: 12px; padding: 10px; font-family: inherit; font-size: 0.8rem;
+    }
+    textarea { height: 60px; resize: none; }
+    .btn {
+      background: var(--p-mid); color: white; border: none; padding: 10px;
+      border-radius: 15px; width: 100%; margin-top: 8px; font-weight: 600;
+      cursor: pointer; font-size: 0.8rem;
+    }
+    .btn-crisis { background: #ffb3ba; color: #900; }
 
-    .btn { background: var(--p-mid); color: white; border: none; padding: 10px; border-radius: 15px; width: 100%; font-weight: 600; cursor: pointer; }
-    .bottom-spacer { height: 100px; }
+    /* Tools Specific Styling */
+    .tool-scroll { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; }
+    .story-card {
+      min-width: 240px; background: white; padding: 15px;
+      border-radius: 18px; font-size: 0.75rem; line-height: 1.4;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .music-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+    .music-btn {
+      background: white; border: none; border-radius: 50%;
+      width: 55px; height: 55px; font-size: 1.5rem; cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 0 auto;
+    }
 
     /* Bottom Nav */
+    .bottom-spacer { height: 100px; }
     nav {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
       width: 90%; max-width: 400px; background: rgba(255, 255, 255, 0.95);
-      height: 65px; border-radius: 40px; display: flex; justify-content: space-around;
-      align-items: center; box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 1000;
+      height: 65px; border-radius: 40px; display: flex;
+      justify-content: space-around; align-items: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 1000;
     }
-    .nav-item { font-size: 1.5rem; cursor: pointer; opacity: 0.3; transition: 0.3s; }
+    .nav-item { font-size: 1.4rem; cursor: pointer; opacity: 0.3; transition: 0.3s; }
     .nav-item.active { opacity: 1; color: var(--p-dark); }
+
+    /* Floating Flowers */
+    .flower { position: fixed; top: -50px; pointer-events: none; z-index: 1; animation: fall linear forwards; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
   </style>
 </head>
 <body>
 
   <div class="app-wrapper">
-    <header><h1>Sunshine Beam</h1></header>
+    <div class="lang-bar">
+      <span onclick="setLanguage('en')">EN</span>
+      <span onclick="setLanguage('ko')">KR</span>
+      <span onclick="setLanguage('lt')">LT</span>
+    </div>
 
-    <div id="home-page" class="page active">
+    <header>
+      <div style="font-size: 35px;">🌞</div>
+      <h1 id="app-title">Sunshine Beam</h1>
+      <p id="tagline" class="tagline">Small steps. Brighter days. 💜</p>
+    </header>
+
+    <div id="profile-card" class="card">
+      <h3 id="profile-title">Start Your Journey</h3>
+      <input type="text" id="alias-input" placeholder="Choose an anonymous nickname...">
+      <button class="btn" onclick="saveProfile()">Enter</button>
+    </div>
+
+    <div id="home-page" class="page">
       <div class="card">
-        <h3 id="greeting">Hello! 🌸</h3>
-        <p style="font-size: 0.8rem;">Ready for some sunshine today?</p>
+        <h3 id="greeting">Good morning! 🌸</h3>
+        <p id="affirm-text" style="font-size: 0.75rem; font-style: italic;">"You are doing your best, and that is enough."</p>
       </div>
+
       <div class="card">
-        <h3>Community Feed</h3>
+        <h3 id="jour-title">Private Journal</h3>
+        <textarea id="journalInput" placeholder="Write your thoughts here..."></textarea>
+        <button class="btn" onclick="saveJournal()">Save Locally</button>
+      </div>
+
+      <div class="card">
+        <h3 id="comm-title">Community Sunshine 🌸</h3>
         <div id="posts-container" style="max-height: 100px; overflow-y: auto; font-size: 0.7rem; margin-bottom: 10px;"></div>
-        <input type="text" id="share-input" placeholder="Share something positive..." style="width:100%; border:none; padding:10px; border-radius:10px;">
-        <button class="btn" style="margin-top:5px;" onclick="postToCommunity()">Share</button>
+        <div style="display:flex; gap:5px;">
+          <input type="text" id="share-input" placeholder="Share a positive thought...">
+          <button class="btn" id="share-btn" style="width:70px; margin:0;" onclick="postToCommunity()">Post</button>
+        </div>
       </div>
+      
+      <button id="crisis-btn" class="btn btn-crisis" onclick="showHelp()">Crisis Support</button>
     </div>
 
     <div id="tools-page" class="page">
       <div class="card">
-        <h3>🌟 Celebrity Hardships</h3>
-        <div class="tool-scroll">
-          <div class="story-card"><b>IU (Lee Ji-eun):</b> Grew up in poverty, slept in rooms with cockroaches, but never stopped singing. Now she heals millions.</div>
-          <div class="story-card"><b>J.K. Rowling:</b> Was a jobless single mother and suicidal before Harry Potter. "Rock bottom became the foundation."</div>
-          <div class="story-card"><b>BTS (Suga):</b> Struggled with depression and social anxiety. He wrote through it to help others heal.</div>
+        <h3 id="celeb-title">🌟 Hardships of Celebrities</h3>
+        <div class="tool-scroll" id="celeb-list">
+          <div class="story-card"><b>IU (Lee Ji-eun):</b> Overcame extreme poverty and family debt. She was rejected by 20 auditions but kept going. Now a South Korean icon.</div>
+          <div class="story-card"><b>J.K. Rowling:</b> Was a jobless single mother struggling with depression. Her first book was rejected 12 times.</div>
+          <div class="story-card"><b>Rūta Meilutytė:</b> Lithuanian Olympic gold medalist who spoke openly about depression to show that it is okay to not be okay.</div>
+          <div class="story-card"><b>Suga (BTS):</b> Battled social anxiety and depression during his trainee days. He used music to heal himself and the world.</div>
         </div>
       </div>
 
       <div class="card">
-        <h3>🎵 Motivational Music</h3>
-        <div style="display: flex; justify-content: space-around; align-items: center;">
-          <button class="music-btn" onclick="playMusic('Rain')">🌧️</button>
-          <button class="music-btn" onclick="playMusic('Zen')">🧘</button>
-          <button class="music-btn" onclick="playMusic('Happy')">✨</button>
+        <h3 id="music-title">🎵 Motivational Music</h3>
+        <div class="music-grid">
+          <div><button class="music-btn" onclick="playMusic('Nature')">🌿</button><p style="font-size:0.6rem;">Nature</p></div>
+          <div><button class="music-btn" onclick="playMusic('Focus')">🧘</button><p style="font-size:0.6rem;">Focus</p></div>
+          <div><button class="music-btn" onclick="playMusic('Uplift')">✨</button><p style="font-size:0.6rem;">Uplift</p></div>
         </div>
-        <p id="music-status" style="text-align: center; font-size: 0.7rem; margin-top: 10px;">Select a sound to focus...</p>
+        <p id="music-status" style="text-align: center; font-size: 0.65rem; color: #666; margin-top: 10px;">Select a vibe...</p>
       </div>
 
       <div class="card">
-        <h3>📜 Motivational Phrases</h3>
-        <div id="phrase-box" style="text-align: center; font-style: italic; font-size: 0.85rem; color: #444; padding: 10px;">
-          "This too shall pass. You are stronger than you think."
+        <h3 id="phrase-title">📜 Motivational Phrases</h3>
+        <div id="phrase-box" style="text-align: center; font-size: 0.85rem; color: #444; padding: 10px; font-weight: 500;">
+          "This too shall pass. You have survived 100% of your hardest days."
         </div>
-        <button class="btn" onclick="newPhrase()">Next Quote</button>
+        <button class="btn" onclick="newPhrase()">New Quote</button>
       </div>
     </div>
 
@@ -100,53 +199,126 @@
   </div>
 
   <nav>
-    <div class="nav-item active" onclick="showPage('home-page', this)">🏠</div>
-    <div class="nav-item" onclick="showPage('tools-page', this)">🌱</div> <div class="nav-item">📓</div>
+    <div class="nav-item" id="nav-home" onclick="showPage('home-page', 'nav-home')">🏠</div>
+    <div class="nav-item" id="nav-tools" onclick="showPage('tools-page', 'nav-tools')">🌱</div>
+    <div class="nav-item">📓</div>
     <div class="nav-item">👤</div>
   </nav>
 
   <script>
-    // PAGE NAVIGATION LOGIC
-    function showPage(pageId, navEl) {
-      // Hide all pages
+    const langData = {
+      en: {
+        title: "Sunshine Beam", tagline: "Small steps. Brighter days. 💜",
+        profile: "Anonymous Identity", jour: "Private Journal", comm: "Community",
+        celeb: "Celebrity Hardships", music: "Motivational Music", phrase: "Daily Phrases",
+        help: "Crisis Support", helpMsg: "You matter. Call 1393 (KR), 8 800 28888 (LT), or 988 (US)."
+      },
+      ko: {
+        title: "햇살 한 줄기", tagline: "작은 발걸음. 더 밝은 나날들. 💜",
+        profile: "익명 프로필", jour: "비밀 일기", comm: "우리들의 햇살",
+        celeb: "스타들의 역경 극복기", music: "동기부여 음악", phrase: "오늘의 명언",
+        help: "긴급 도움", helpMsg: "당신은 소중합니다. 자살예방 상담전화 1393으로 연락주세요."
+      },
+      lt: {
+        title: "Saulės Spindulys", tagline: "Maži žingsneliai. Šviesesnės dienos. 💜",
+        profile: "Anoniminis profilis", jour: "Dienoraštis", comm: "Bendruomenė",
+        celeb: "Garsenybių iššūkiai", music: "Motyvuojanti muzika", phrase: "Dienos frazės",
+        help: "Pagalba", helpMsg: "Tu esi svarbus. Skambinkite Jaunimo linijai: 8 800 28888."
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      const d = langData[lang];
+      document.getElementById('app-title').innerText = d.title;
+      document.getElementById('tagline').innerText = d.tagline;
+      document.getElementById('jour-title').innerText = d.jour;
+      document.getElementById('comm-title').innerText = d.comm;
+      document.getElementById('celeb-title').innerText = d.celeb;
+      document.getElementById('music-title').innerText = d.music;
+      document.getElementById('phrase-title').innerText = d.phrase;
+      document.getElementById('crisis-btn').innerText = d.help;
+    }
+
+    function showPage(pageId, navId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      // Show selected page
       document.getElementById(pageId).classList.add('active');
-      // Update nav icons
-      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-      navEl.classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById(navId).classList.add('active');
     }
 
-    // MOTIVATIONAL PHRASES
-    const phrases = [
-      "You don't have to see the whole staircase, just take the first step. 🐾",
-      "Even the darkest night will end and the sun will rise. 🌅",
-      "You are enough just as you are. 💜",
-      "Lithuania and Korea believe in you! Stay strong. 🌏",
-      "Your story isn't over yet. ;"
-    ];
-    function newPhrase() {
-      const p = phrases[Math.floor(Math.random() * phrases.length)];
-      document.getElementById('phrase-box').innerText = p;
-    }
-
-    // MUSIC LOGIC (Placeholders)
-    function playMusic(type) {
-      document.getElementById('music-status').innerText = "Now playing: " + type + " sounds... 🎧";
-      // In a real app, you would link to MP3 files here.
-    }
-
-    // COMMUNITY SHARE
-    function postToCommunity() {
-      const val = document.getElementById('share-input').value;
-      if(val) {
-        const div = document.createElement('div');
-        div.innerHTML = "<b>@User:</b> " + val;
-        div.style.padding = "5px 0";
-        document.getElementById('posts-container').prepend(div);
-        document.getElementById('share-input').value = "";
+    function saveProfile() {
+      const alias = document.getElementById('alias-input').value;
+      if (alias.trim()) {
+        localStorage.setItem('alias', alias);
+        checkUser();
       }
     }
+
+    function checkUser() {
+      if (localStorage.getItem('alias')) {
+        document.getElementById('profile-card').style.display = 'none';
+        showPage('home-page', 'nav-home');
+      }
+    }
+
+    function postToCommunity() {
+      const input = document.getElementById('share-input');
+      const alias = localStorage.getItem('alias') || "User";
+      if (input.value.trim()) {
+        const p = document.createElement('div');
+        p.className = 'post-item';
+        p.style.padding = "5px 0"; p.style.borderBottom = "1px solid rgba(0,0,0,0.05)";
+        p.innerHTML = `<b>@${alias}:</b> ${input.value}`;
+        document.getElementById('posts-container').prepend(p);
+        input.value = "";
+      }
+    }
+
+    function newPhrase() {
+      const phrases = [
+        "Even the longest winter yields to spring. 🌸",
+        "Your pain is real, but so is your strength. 💪",
+        "It is okay to rest. Just don't give up. 🌿",
+        "Lithuania and Korea stand with you. 🌏",
+        "You are the sun of your own life. ✨"
+      ];
+      document.getElementById('phrase-box').innerText = phrases[Math.floor(Math.random()*phrases.length)];
+    }
+
+    function playMusic(type) {
+      document.getElementById('music-status').innerText = "Vibe selected: " + type + " (Audio connecting...)";
+    }
+
+    function saveJournal() {
+      localStorage.setItem('journal', document.getElementById('journalInput').value);
+      alert("Journal saved to your device. 💜");
+    }
+
+    function showHelp() {
+      alert(langData[currentLang].helpMsg);
+    }
+
+    function spawnFlower() {
+      const f = document.createElement('div');
+      f.className = 'flower';
+      f.innerText = ['🌸', '🌼', '🌿', '✨'][Math.floor(Math.random()*4)];
+      f.style.left = Math.random() * 100 + 'vw';
+      const d = Math.random() * 5 + 5;
+      f.style.animationDuration = d + 's';
+      document.body.appendChild(f);
+      setTimeout(() => f.remove(), d * 1000);
+    }
+
+    window.onload = () => {
+      setLanguage(currentLang);
+      checkUser();
+      document.getElementById('journalInput').value = localStorage.getItem('journal') || "";
+      setInterval(spawnFlower, 1000);
+    };
   </script>
 </body>
 </html>
