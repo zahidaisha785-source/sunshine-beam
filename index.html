@@ -1,93 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Sunshine Beam</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunshine Beam</title>
 
   <style>
+    :root {
+      --lilac-light: #F3E8FF;
+      --lilac-dark: #E6D6F2;
+      --purple-text: #6a4c93;
+      --accent: #C8A2C8;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#F3E8FF, #E6D6F2);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(var(--lilac-light), var(--lilac-dark));
+      min-height: 100vh;
       text-align: center;
       overflow-x: hidden;
     }
 
-    h1 {
-      color: #6a4c93;
-      margin-top: 20px;
-      font-size: 32px;
-    }
-
-    p {
-      color: #555;
-    }
-
-    /* 🌼 Sunshine + lilac glow */
+    /* 🌼 Header with sunshine glow */
     .header {
-      padding: 40px 10px;
-      background: radial-gradient(circle at top, #FFF5CC, transparent 50%),
-                  linear-gradient(#F3E8FF, #E6D6F2);
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      padding: 50px 20px;
+      background: radial-gradient(circle at top, #FFF5CC, transparent 70%),
+                  linear-gradient(var(--lilac-light), var(--lilac-dark));
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    h1 {
+      color: var(--purple-text);
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-style: italic;
+      margin-top: 5px;
     }
 
     .card {
       background: white;
-      margin: 15px;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      max-width: 400px;
+      width: 85%;
+    }
+
+    /* Mood Buttons */
+    .moods {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
     }
 
     .moods button {
-      font-size: 20px;
-      padding: 12px;
+      font-size: 24px;
+      padding: 15px;
       border: none;
       border-radius: 50%;
-      margin: 5px;
-      background: #E6D6F2;
+      background: var(--lilac-light);
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
     }
 
-    textarea {
-      width: 90%;
-      height: 100px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-
-    .btn {
-      margin-top: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      background: #C8A2C8;
-      color: white;
-      font-size: 16px;
+    .moods button:hover {
+      transform: scale(1.1);
+      background: #dfc8f0;
     }
 
     #message {
-      color: #6a4c93;
+      margin-top: 15px;
+      color: var(--purple-text);
       font-weight: bold;
+      min-height: 24px;
     }
 
-    /* 🌸 Floating flowers */
+    /* Journal Area */
+    textarea {
+      width: 100%;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 12px;
+      box-sizing: border-box;
+      font-family: inherit;
+      resize: none;
+      margin-top: 10px;
+    }
+
+    .btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: var(--accent);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+    }
+
+    /* 🌸 Performance-optimized floating flowers */
     .flower {
       position: fixed;
       top: -50px;
-      font-size: 20px;
-      animation: fall linear infinite;
-      opacity: 0.8;
+      font-size: 22px;
+      user-select: none;
       pointer-events: none;
+      will-change: transform;
+      animation: fall linear forwards;
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-50px) translateX(0);
-      }
-      100% {
-        transform: translateY(100vh) translateX(50px);
+      to {
+        transform: translateY(110vh) rotate(360deg);
       }
     }
   </style>
@@ -97,58 +136,89 @@
 
   <div class="header">
     <h1>🌞 Sunshine Beam</h1>
-    <p>Small steps. Brighter days. You’re not alone 💜</p>
+    <p class="subtitle">Small steps. Brighter days. You’re not alone 💜</p>
   </div>
 
   <div class="card">
-    <h3>How are you feeling today?</h3>
+    <h3>How are you feeling?</h3>
     <div class="moods">
-      <button onclick="showMessage('You are doing great 💛')">😊</button>
-      <button onclick="showMessage('It’s okay. Take it slow 🌿')">🙂</button>
-      <button onclick="showMessage('You are not alone 💜')">😔</button>
-      <button onclick="showMessage('Breathe. You’ll get through this 🌸')">😣</button>
+      <button onclick="showMessage('You are doing great 💛')" aria-label="Happy">😊</button>
+      <button onclick="showMessage('It’s okay. Take it slow 🌿')" aria-label="Okay">🙂</button>
+      <button onclick="showMessage('You are not alone 💜')" aria-label="Sad">😔</button>
+      <button onclick="showMessage('Breathe. You’ll get through this 🌸')" aria-label="Stressed">😣</button>
     </div>
     <p id="message">Select your mood</p>
   </div>
 
   <div class="card">
     <h3>Journal</h3>
-    <textarea placeholder="Write your thoughts..."></textarea><br>
-    <button class="btn">Save Entry</button>
+    <textarea id="journalInput" placeholder="What's on your mind?"></textarea>
+    <button class="btn" onclick="saveEntry()">Save My Thoughts</button>
+    <p id="saveStatus" style="font-size: 12px; color: green; margin-top: 5px;"></p>
   </div>
 
   <div class="card">
     <h3>Daily Affirmation</h3>
-    <p>
-      I am healing<br>
-      I am growing<br>
-      I am enough 💜
+    <p style="line-height: 1.6; color: #555;">
+      <strong>I am healing</strong><br>
+      <strong>I am growing</strong><br>
+      <strong>I am enough 💜</strong>
     </p>
   </div>
 
 <script>
+  // Show mood message
   function showMessage(text) {
     document.getElementById("message").innerText = text;
   }
 
+  // Save Journal to LocalStorage
+  function saveEntry() {
+    const text = document.getElementById("journalInput").value;
+    const status = document.getElementById("saveStatus");
+    
+    if (text.trim() !== "") {
+      localStorage.setItem("sunshine_journal", text);
+      status.innerText = "Saved successfully! ✨";
+      setTimeout(() => status.innerText = "", 3000);
+    } else {
+      alert("Please write something first.");
+    }
+  }
+
+  // Load Journal on startup
+  window.onload = () => {
+    const savedText = localStorage.getItem("sunshine_journal");
+    if (savedText) {
+      document.getElementById("journalInput").value = savedText;
+    }
+  };
+
+  // Improved Flower Particle System
   function createFlower() {
     const flower = document.createElement("div");
-    flower.classList.add("flower");
-
-    const flowers = ["🌸", "🌼", "🌺", "🌷"];
-    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.className = "flower";
+    
+    const varieties = ["🌸", "🌼", "🌺", "🌷", "✨"];
+    flower.innerText = varieties[Math.floor(Math.random() * varieties.length)];
 
     flower.style.left = Math.random() * 100 + "vw";
-    flower.style.animationDuration = (4 + Math.random() * 4) + "s";
+    // Randomize size and speed
+    const duration = (Math.random() * 5 + 5); 
+    flower.style.animationDuration = duration + "s";
+    flower.style.opacity = Math.random() * 0.5 + 0.5;
+    flower.style.fontSize = (Math.random() * 10 + 15) + "px";
 
     document.body.appendChild(flower);
 
+    // Clean up to prevent memory leaks
     setTimeout(() => {
       flower.remove();
-    }, 8000);
+    }, duration * 1000);
   }
 
-  setInterval(createFlower, 300);
+  // Generate a flower every 800ms (balanced for performance)
+  setInterval(createFlower, 800);
 </script>
 
 </body>
