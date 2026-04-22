@@ -43,7 +43,6 @@
     /* Emotions Grid */
     .emotions-grid { display: flex; justify-content: space-around; padding: 5px 0 15px 0; }
     .emotion-btn { font-size: 1.6rem; cursor: pointer; transition: 0.2s; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .emotion-btn:active { transform: scale(0.9); background: var(--p-light); }
 
     /* Nav Bar */
     .bottom-spacer { height: 110px; }
@@ -77,24 +76,9 @@
       <p id="tagline" class="tagline">Small steps. Brighter days. 💜</p>
     </header>
 
-    <div id="profile-setup-page" class="page active">
+    <div id="home-page" class="page active">
       <div class="card">
-        <h3 id="profile-title">Create Safety Profile</h3>
-        <input type="text" id="u-name" placeholder="Full Name">
-        <input type="tel" id="u-phone" placeholder="Emergency Contact Number">
-        <input type="number" id="u-age" placeholder="Age">
-        <select id="u-country">
-            <option value="Global">Select Country</option>
-            <option value="KR">South Korea (대한민국)</option>
-            <option value="LT">Lithuania (Lietuva)</option>
-        </select>
-        <button class="btn" onclick="saveProfile()">Open Sunshine Beam</button>
-      </div>
-    </div>
-
-    <div id="home-page" class="page">
-      <div class="card">
-        <h3 id="mood-title">Morning Check-in</h3>
+        <h3 id="mood-title">How are you feeling today?</h3>
         <div class="emotions-grid">
           <div class="emotion-btn" onclick="logMood('😊')">😊</div>
           <div class="emotion-btn" onclick="logMood('😔')">😔</div>
@@ -102,20 +86,20 @@
           <div class="emotion-btn" onclick="logMood('😴')">😴</div>
           <div class="emotion-btn" onclick="logMood('🩹')">🩹</div>
         </div>
-        <p id="daily-affirmation" style="text-align: center; font-size: 0.75rem; font-style: italic; color: var(--p-dark); font-weight: 600;">"You are a precious part of the world."</p>
+        <p id="daily-affirmation" style="text-align: center; font-size: 0.75rem; font-style: italic; color: var(--p-dark); font-weight: 600;">"Breathe. You are safe here."</p>
       </div>
 
       <div class="card">
-        <h3 id="thoughts-title">My Thoughts</h3>
-        <textarea id="journalInput" placeholder="What is on your mind right now?"></textarea>
-        <button class="btn" onclick="saveJournal()">Keep Private</button>
+        <h3 id="thoughts-title">Thoughts</h3>
+        <textarea id="journalInput" placeholder="Write anything... it stays private on your phone."></textarea>
+        <button class="btn" onclick="saveJournal()">Save Locally</button>
       </div>
 
       <div class="card">
-        <h3 id="comm-title">Global Community</h3>
+        <h3 id="comm-title">Community Sunshine</h3>
         <div id="posts-container" style="max-height: 80px; overflow-y: auto; font-size: 0.7rem; margin-bottom: 10px;"></div>
         <div style="display:flex; gap:5px;">
-          <input type="text" id="share-input" placeholder="Share a kind thought..." style="margin:0;">
+          <input type="text" id="share-input" placeholder="Say something positive..." style="margin:0;">
           <button class="btn" style="width:70px; margin:0;" onclick="postToCommunity()">Post</button>
         </div>
       </div>
@@ -125,40 +109,56 @@
 
     <div id="tools-page" class="page">
       <div class="card">
-        <h3>🌟 Overcoming Hardships</h3>
+        <h3>🌟 Resilience Stories</h3>
         <div style="display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px;">
-          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>IU:</b> Used music to survive poverty.</div>
-          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>Suga:</b> Turned pain into healing for fans.</div>
-          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>Rūta:</b> Gold medalist for resilience.</div>
+          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>IU:</b> Overcame poverty through persistent singing.</div>
+          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>Suga:</b> Champion of mental health awareness.</div>
+          <div style="min-width: 200px; background: white; padding: 10px; border-radius: 15px; font-size: 0.75rem;"><b>Rūta Meilutytė:</b> Lithuanian pride & strength.</div>
         </div>
       </div>
       <div class="card">
-        <h3>🎵 Calming Vibe</h3>
-        <button class="btn" onclick="alert('Playing rain sounds... 🌧️')">Play Rain Music</button>
+        <h3>🎵 Healing Sounds</h3>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button class="btn" style="width: auto; padding: 10px 20px;" onclick="alert('Playing Rain... 🌧️')">Rain</button>
+            <button class="btn" style="width: auto; padding: 10px 20px;" onclick="alert('Playing Zen... 🧘')">Zen</button>
+        </div>
       </div>
     </div>
 
-    <div id="profile-view-page" class="page">
-        <div class="card">
-            <h3 id="view-profile-title">My Safety Details</h3>
+    <div id="profile-page" class="page">
+        <div id="profile-setup" class="card">
+            <h3>Safety Profile</h3>
+            <p style="font-size: 0.65rem; color: #666; margin-bottom: 10px;">Fill this out only if you want emergency services to have your info ready.</p>
+            <input type="text" id="u-name" placeholder="Full Name">
+            <input type="tel" id="u-phone" placeholder="Emergency Contact">
+            <input type="number" id="u-age" placeholder="Age">
+            <select id="u-country">
+                <option value="Global">Country</option>
+                <option value="KR">South Korea</option>
+                <option value="LT">Lithuania</option>
+            </select>
+            <button class="btn" onclick="saveProfile()">Save Safety Info</button>
+        </div>
+        <div id="profile-view" class="card" style="display:none;">
+            <h3>Your Safety Details</h3>
             <div id="display-user-info" style="font-size: 0.8rem; line-height: 1.8;"></div>
-            <button class="btn" style="background:#ccc; margin-top: 20px;" onclick="resetProfile()">Edit My Info</button>
+            <button class="btn" style="background:#ccc; margin-top: 20px;" onclick="resetProfile()">Edit Info</button>
         </div>
     </div>
 
     <div class="bottom-spacer"></div>
   </div>
 
-  <nav id="bottom-nav" style="display:none;">
+  <nav id="bottom-nav">
     <div class="nav-item active" id="nav-home" onclick="navigateTo('home-page', 'nav-home')">🏠</div>
     <div class="nav-center" id="nav-tools" onclick="navigateTo('tools-page', 'nav-tools')">🌞</div>
-    <div class="nav-item" id="nav-profile" onclick="showProfileView()">👤</div>
+    <div class="nav-item" id="nav-profile" onclick="navigateTo('profile-page', 'nav-profile')">👤</div>
   </nav>
 
   <script>
     const crisisInfo = {
-        KR: { num: "1393", text: "South Korea Help" },
-        LT: { num: "8 800 28888", text: "Lithuania Help" },
+        KR: { num: "1393", text: "KR Help" },
+        LT: { num: "8 800 28888", text: "LT Help" },
         Global: { num: "112", text: "Emergency" }
     };
 
@@ -167,6 +167,8 @@
       document.getElementById(pageId).classList.add('active');
       document.querySelectorAll('.nav-item, .nav-center').forEach(n => n.classList.remove('active'));
       if(navId) document.getElementById(navId).classList.add('active');
+      
+      if(pageId === 'profile-page') updateProfileView();
     }
 
     function saveProfile() {
@@ -176,47 +178,52 @@
       const country = document.getElementById('u-country').value;
       if(name && phone) {
         localStorage.setItem('u_data', JSON.stringify({name, phone, age, country}));
-        checkUser();
-      } else { alert("Please enter your name and phone for emergency safety."); }
+        updateProfileView();
+      } else { alert("Please provide at least a name and phone."); }
     }
 
-    function checkUser() {
-      const data = localStorage.getItem('u_data');
-      if(data) {
-        document.getElementById('profile-setup-page').classList.remove('active');
-        document.getElementById('home-page').classList.add('active');
-        document.getElementById('bottom-nav').style.display = 'flex';
-      }
-    }
-
-    function showProfileView() {
-        const data = JSON.parse(localStorage.getItem('u_data'));
-        document.getElementById('display-user-info').innerHTML = `
-            <b>Name:</b> ${data.name}<br>
-            <b>Contact:</b> ${data.phone}<br>
-            <b>Age:</b> ${data.age}<br>
-            <b>Region:</b> ${data.country}
-        `;
-        navigateTo('profile-view-page', 'nav-profile');
+    function updateProfileView() {
+        const data = localStorage.getItem('u_data');
+        if(data) {
+            const parsed = JSON.parse(data);
+            document.getElementById('profile-setup').style.display = 'none';
+            document.getElementById('profile-view').style.display = 'block';
+            document.getElementById('display-user-info').innerHTML = `
+                <b>Name:</b> ${parsed.name}<br>
+                <b>Phone:</b> ${parsed.phone}<br>
+                <b>Age:</b> ${parsed.age}<br>
+                <b>Country:</b> ${parsed.country}
+            `;
+        } else {
+            document.getElementById('profile-setup').style.display = 'block';
+            document.getElementById('profile-view').style.display = 'none';
+        }
     }
 
     function resetProfile() {
-        if(confirm("Edit your safety info?")) {
+        if(confirm("Change your safety info?")) {
             localStorage.removeItem('u_data');
-            location.reload();
+            updateProfileView();
         }
     }
 
     function logMood(emoji) {
-        const affirmation = { '😊': 'You are glowing!', '😔': 'You are allowed to feel sad.', '😤': 'Breathe out the tension.', '😴': 'Rest is essential.', '🩹': 'Healing takes time.' };
+        const affirmation = { '😊': 'Radiating light!', '😔': 'You are brave for being here.', '😤': 'Release the pressure.', '😴': 'Rest your soul.', '🩹': 'Healing is happening.' };
         document.getElementById('daily-affirmation').innerText = affirmation[emoji];
     }
 
     function triggerSafetyPopup() {
-        const data = JSON.parse(localStorage.getItem('u_data'));
-        const help = crisisInfo[data.country] || crisisInfo.Global;
-        const msg = `🆘 EMERGENCY HELP 🆘\n\nCall: ${help.num}\n\nInfo to Read:\nName: ${data.name}\nAge: ${data.age}\nPhone: ${data.phone}`;
-        alert(msg);
+        const data = localStorage.getItem('u_data');
+        let help = crisisInfo.Global;
+        let userInfo = "No local profile info saved.";
+
+        if(data) {
+            const parsed = JSON.parse(data);
+            help = crisisInfo[parsed.country] || crisisInfo.Global;
+            userInfo = `Name: ${parsed.name}\nAge: ${parsed.age}\nPhone: ${parsed.phone}`;
+        }
+        
+        alert(`🆘 EMERGENCY HELP 🆘\n\nCall: ${help.num}\n\n${userInfo}`);
         window.location.href = "tel:" + help.num;
     }
 
@@ -231,7 +238,7 @@
       }
     }
 
-    function saveJournal() { localStorage.setItem('journal', document.getElementById('journalInput').value); alert("Thoughts saved privately."); }
+    function saveJournal() { localStorage.setItem('journal', document.getElementById('journalInput').value); alert("Saved locally."); }
 
     function spawnFlower() {
       const f = document.createElement('div'); f.className = 'flower';
@@ -242,7 +249,6 @@
     }
 
     window.onload = () => {
-      checkUser();
       document.getElementById('journalInput').value = localStorage.getItem('journal') || "";
       setInterval(spawnFlower, 2000);
     };
