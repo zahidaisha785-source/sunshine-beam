@@ -2,35 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healing Hub</title>
     <link rel="stylesheet" href="style.css">
+    <title>Healing Hub</title>
 </head>
 <body>
     <div class="app-wrapper">
         <header><h1>Healing Hub</h1></header>
-        
         <div class="card">
             <h2>🌟 100 Positive Anchors</h2>
-            <div id="list" style="height: 300px; overflow-y: auto;"></div>
+            <div id="wisdom" style="height:300px; overflow-y:auto; text-align:left; background:#fff; padding:10px; border-radius:15px;">
+                </div>
         </div>
-
-        <div class="card">
-            <h2>🎵 2000+ Songs</h2>
-            <a href="https://www.youtube.com" class="btn" target="_blank">Open Playlist</a>
-        </div>
-
         <nav>
-            <a href="index.html" class="nav-item">🏠</a>
-            <a href="journal.html" class="nav-item">📝</a>
-            <a href="tools.html" class="nav-center active">🌞</a>
-            <a href="profile.html" class="nav-item">👤</a>
+            <a href="index.html">🏠</a>
+            <a href="journal.html">📝</a>
+            <a href="tools.html" style="color:gold;">🌞</a>
+            <a href="profile.html">👤</a>
         </nav>
     </div>
     <script>
-        const container = document.getElementById('list');
+        const w = document.getElementById('wisdom');
         for(let i=1; i<=100; i++) {
-            container.innerHTML += `<p style="border-bottom:1px solid #eee; padding:5px;">${i}. You are enough.</p>`;
+            w.innerHTML += `<p style="margin:5px 0; border-bottom:1px solid #eee;">${i}. You are enough.</p>`;
         }
     </script>
 </body>
