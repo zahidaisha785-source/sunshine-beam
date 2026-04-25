@@ -1,1 +1,26 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sunshine - Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <header><h1>Healing Hub</h1></header>
+        <div class="card">
+            <h2>🌟 100 Statements</h2>
+            <div id="list" style="height: 300px; overflow-y: auto; font-size: 0.8rem;"></div>
+        </div>
+    </div>
+    <nav>
+        <a href="index.html" class="nav-item">🏠</a>
+        <a href="journal.html" class="nav-item">📝</a>
+        <a href="tools.html" class="nav-center active">🌞</a>
+        <a href="profile.html" class="nav-item">👤</a>
+    </nav>
+    <script>
+        const list = document.getElementById('list');
+        for(let i=1; i<=100; i++) { list.innerHTML += `<p>${i}. You are enough.</p>`; }
+    </script>
+</body>
+</html>
