@@ -4,76 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunshine Beam - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div class="app-wrapper">
         <header>
             <h1>Sunshine Beam</h1>
-            <p class="tagline">Your safe space for positive change. 💜</p>
         </header>
 
         <div class="card">
-            <h2>How are you feeling?</h2>
+            <h2>How are you?</h2>
             <div class="mood-row">
-                <span class="mood-btn" title="Happy" onclick="updateMood('😊')">😊</span>
-                <span class="mood-btn" title="Sad" onclick="updateMood('😔')">😔</span>
-                <span class="mood-btn" title="Stressed" onclick="updateMood('😤')">😤</span>
-                <span class="mood-btn" title="Tired" onclick="updateMood('😴')">😴</span>
-                <span class="mood-btn" title="Healing" onclick="updateMood('🩹')">🩹</span>
+                <span onclick="alert('Stay glowing! ✨')">😊</span>
+                <span onclick="alert('Be gentle with yourself. 💜')">😔</span>
+                <span onclick="alert('Breathe deep. 🌬️')">😤</span>
             </div>
-            <p id="mood-text" style="text-align: center; font-size: 0.85rem; color: var(--p-dark); font-weight: 600; min-height: 20px;"></p>
         </div>
 
         <div class="card">
-            <h2>Community Sunshine</h2>
-            <div id="posts-feed" style="height: 100px; overflow-y: auto; font-size: 0.8rem; margin-bottom: 10px; background: rgba(255,255,255,0.3); border-radius: 10px; padding: 10px;">
-                <p><b>@Hopeful:</b> Just checking in to say you've got this! ✨</p>
-            </div>
-            <div style="display:flex; gap:8px;">
-                <input type="text" id="comm-post" placeholder="Share a spark..." style="flex:1; border:none; padding:12px; border-radius:12px; background:white;">
-                <button class="btn" style="width:70px; margin:0;" onclick="sendPost()">Post</button>
-            </div>
+            <h2>Community</h2>
+            <p>@Hopeful: You are doing great today!</p>
         </div>
-
-        <button class="btn-emergency" onclick="triggerCrisis()">🚨 EMERGENCY HELP</button>
 
         <nav>
             <a href="index.html" class="nav-item active">🏠</a>
-            
             <a href="journal.html" class="nav-item">📝</a>
-            
             <a href="tools.html" class="nav-center">🌞</a>
-            
             <a href="profile.html" class="nav-item">👤</a>
         </nav>
     </div>
-
-    <script>
-        function updateMood(emoji) {
-            const msgs = { '😊': 'Keep that light shining!', '😔': 'Be gentle with yourself today.', '😤': 'Exhale the tension.', '😴': 'Rest is also progress.', '🩹': 'You are healing beautifully.' };
-            document.getElementById('mood-text').innerText = msgs[emoji];
-        }
-
-        function sendPost() {
-            const input = document.getElementById('comm-post');
-            if(input.value.trim()) {
-                const feed = document.getElementById('posts-feed');
-                const p = document.createElement('p');
-                p.innerHTML = `<b>@You:</b> ${input.value}`;
-                feed.prepend(p);
-                input.value = "";
-            }
-        }
-
-        function triggerCrisis() {
-            // Pulls name/phone if stored in localStorage by profile.html
-            const data = JSON.parse(localStorage.getItem('u_data')) || {name: "Guest", phone: "N/A"};
-            alert(`🆘 EMERGENCY HELP\nName: ${data.name}\nContact: ${data.phone}\nCalling 112...`);
-            window.location.href = "tel:112";
-        }
-    </script>
 </body>
 </html>
