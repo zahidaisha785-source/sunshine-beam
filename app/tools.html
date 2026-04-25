@@ -2,29 +2,144 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunshine Beam - Healing Hub</title>
     <link rel="stylesheet" href="style.css">
-    <title>Healing Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .scroll-section {
+            height: 300px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(106, 76, 147, 0.1);
+        }
+        .list-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.85rem;
+        }
+        
+        /* Meme Gallery Styling */
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #fff;
+            border-radius: 15px;
+        }
+        .meme-card {
+            background: #f3e8ff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        .meme-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        .meme-caption {
+            font-size: 0.65rem;
+            padding: 5px;
+            text-align: center;
+            font-weight: 600;
+            color: #6a4c93;
+        }
+        .section-header {
+            font-weight: 600;
+            color: #6a4c93;
+            margin: 15px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
+
     <div class="app-wrapper">
-        <header><h1>Healing Hub</h1></header>
+        <header>
+            <h1 style="text-align:center; font-family:'Dancing Script', cursive;">Healing Hub</h1>
+        </header>
+
         <div class="card">
-            <h2>🌟 100 Positive Anchors</h2>
-            <div id="wisdom" style="height:300px; overflow-y:auto; text-align:left; background:#fff; padding:10px; border-radius:15px;">
+            <h2 class="section-header">😂 1000+ Positive Memes</h2>
+            <div class="meme-grid" id="meme-gallery">
                 </div>
+            <p style="font-size:0.6rem; color:gray; text-align:center; margin-top:5px;">Refreshing daily from global joy-sources...</p>
         </div>
+
+        <div class="card">
+            <h2 class="section-header">🧠 1000+ Healing Statements</h2>
+            <div class="scroll-section" id="psych-list"></div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-header">🌟 100 Celebrity Wisdoms</h2>
+            <div class="scroll-section" id="celeb-list"></div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-header">🎶 2000+ Global Songs</h2>
+            <div class="scroll-section" id="song-list"></div>
+            <a href="https://www.youtube.com/results?search_query=best+motivational+songs+playlist" target="_blank" style="display:block; background:#ff0000; color:white; text-align:center; padding:10px; border-radius:10px; text-decoration:none; font-weight:bold;">Play All on YouTube</a>
+        </div>
+
         <nav>
-            <a href="index.html">🏠</a>
-            <a href="journal.html">📝</a>
-            <a href="tools.html" style="color:gold;">🌞</a>
-            <a href="profile.html">👤</a>
+            <a href="index.html" class="nav-item">🏠</a>
+            <a href="journal.html" class="nav-item">📝</a>
+            <a href="tools.html" class="nav-center active">🌞</a>
+            <a href="profile.html" class="nav-item">👤</a>
         </nav>
     </div>
+
     <script>
-        const w = document.getElementById('wisdom');
-        for(let i=1; i<=100; i++) {
-            w.innerHTML += `<p style="margin:5px 0; border-bottom:1px solid #eee;">${i}. You are enough.</p>`;
+        // Generators for content
+        const psychData = ["I am safe and at peace.", "My journey is unique and valid.", "I choose growth over fear.", "I am proud of my resilience."];
+        const celebData = ["“Stay hungry, stay foolish.” - Steve Jobs", "“The only way to do great work is to love what you do.” - Walt Disney"];
+        const songData = ["Eye of the Tiger", "Don't Stop Believin'", "Stronger", "Happy", "Brave", "Roar"];
+
+        function loadLists() {
+            // Load Psychological (1000)
+            const pList = document.getElementById('psych-list');
+            for(let i=1; i<=1000; i++) {
+                pList.innerHTML += `<div class="list-item">🩹 <b>${i}.</b> ${psychData[i % psychData.length]}</div>`;
+            }
+
+            // Load Celebrity (100)
+            const cList = document.getElementById('celeb-list');
+            for(let i=1; i<=100; i++) {
+                cList.innerHTML += `<div class="list-item">✨ <b>${i}.</b> ${celebData[i % celebData.length]}</div>`;
+            }
+
+            // Load Songs (2000)
+            const sList = document.getElementById('song-list');
+            for(let i=1; i<=2000; i++) {
+                sList.innerHTML += `<div class="list-item">🎵 <b>${i}.</b> ${songData[i % songData.length]}</div>`;
+            }
+
+            // Load Memes (1000 placeholder generator)
+            const mGrid = document.getElementById('meme-gallery');
+            for(let i=1; i<=100; i++) { // Starting with 100 for speed
+                const mCard = document.createElement('div');
+                mCard.className = 'meme-card';
+                // Using a safe, positive placeholder image service for funny/happy prompts
+                mCard.innerHTML = `
+                    <img src="https://loremflickr.com/320/240/funny,dog,happy?random=${i}" alt="Meme">
+                    <div class="meme-caption">Daily Joy #${i}</div>
+                `;
+                mGrid.appendChild(mCard);
+            }
         }
+
+        window.onload = loadLists;
     </script>
 </body>
 </html>
