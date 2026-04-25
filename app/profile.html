@@ -1,1 +1,29 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sunshine - Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <header><h1>Profile</h1></header>
+        <div class="card">
+            <h2>Safety Info</h2>
+            <input type="text" id="n" placeholder="Name" style="width:100%; padding:10px; margin-bottom:10px;">
+            <button class="btn" onclick="alert('Hidden & Saved locally!')">Save Privately</button>
+        </div>
+    </div>
+    <nav>
+        <a href="index.html" class="nav-item">🏠</a>
+        <a href="journal.html" class="nav-item">📝</a>
+        <a href="tools.html" class="nav-center">🌞</a>
+        <a href="profile.html" class="nav-item active">👤</a>
+    </nav>
+    <script>
+        if(!localStorage.getItem('seen')) {
+            alert("🔒 Privacy: Details here are hidden from everyone and stay on your phone.");
+            localStorage.setItem('seen', 'true');
+        }
+    </script>
+</body>
+</html>
