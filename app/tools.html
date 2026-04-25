@@ -1,26 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sunshine - Tools</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-wrapper">
         <header><h1>Healing Hub</h1></header>
+        
         <div class="card">
-            <h2>🌟 100 Statements</h2>
-            <div id="list" style="height: 300px; overflow-y: auto; font-size: 0.8rem;"></div>
+            <h2>🌟 100 Positive Anchors</h2>
+            <div id="list" style="height: 300px; overflow-y: auto;"></div>
         </div>
+
+        <div class="card">
+            <h2>🎵 2000+ Songs</h2>
+            <a href="https://www.youtube.com" class="btn" target="_blank">Open Playlist</a>
+        </div>
+
+        <nav>
+            <a href="index.html" class="nav-item">🏠</a>
+            <a href="journal.html" class="nav-item">📝</a>
+            <a href="tools.html" class="nav-center active">🌞</a>
+            <a href="profile.html" class="nav-item">👤</a>
+        </nav>
     </div>
-    <nav>
-        <a href="index.html" class="nav-item">🏠</a>
-        <a href="journal.html" class="nav-item">📝</a>
-        <a href="tools.html" class="nav-center active">🌞</a>
-        <a href="profile.html" class="nav-item">👤</a>
-    </nav>
     <script>
-        const list = document.getElementById('list');
-        for(let i=1; i<=100; i++) { list.innerHTML += `<p>${i}. You are enough.</p>`; }
+        const container = document.getElementById('list');
+        for(let i=1; i<=100; i++) {
+            container.innerHTML += `<p style="border-bottom:1px solid #eee; padding:5px;">${i}. You are enough.</p>`;
+        }
     </script>
 </body>
 </html>
