@@ -3,35 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healing Hub - Sunshine Beam</title>
+    <title>Healing Hub</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
         .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
         .card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 6px solid var(--p); }
-        h1 { text-align: center; color: var(--p); font-size: 2.2rem; margin-bottom: 10px; font-family: serif; }
+        h1 { text-align: center; color: var(--p); font-size: 2.2rem; margin-bottom: 20px; font-family: serif; }
         h2 { font-size: 1.1rem; color: var(--p); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; }
-        
-        /* The Scroll Containers */
-        .scroll-box { height: 350px; overflow-y: auto; background: #fafafa; border-radius: 12px; padding: 5px; border: 1px solid #eee; }
-        
-        /* Row Layout */
-        .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #f1f1f1; }
-        .info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.4; color: #555; }
-        .info b { color: var(--p); font-weight: 600; }
-        
-        /* Action Buttons */
+        .scroll-box { height: 380px; overflow-y: auto; background: #fafafa; border-radius: 12px; padding: 5px; border: 1px solid #eee; }
+        .row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f1f1f1; }
+        .info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.5; color: #444; }
+        .info b { color: var(--p); font-weight: 700; display: block; margin-bottom: 2px; }
         .btn { 
             background: var(--p); color: white; text-decoration: none; 
-            padding: 8px 16px; border-radius: 20px; font-size: 0.7rem; 
-            font-weight: bold; white-space: nowrap; transition: 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 18px; border-radius: 25px; font-size: 0.75rem; 
+            font-weight: bold; white-space: nowrap; transition: 0.3s;
         }
-        .btn:hover { background: var(--gold); color: var(--p); transform: translateY(-1px); }
-        .btn-laughter { background: #ff5e5e; }
+        .btn:hover { background: var(--gold); color: var(--p); }
+        .btn-vid { background: #ff0000; } /* YouTube Red */
         .btn-yoga { background: #4caf50; }
-
-        /* Navigation */
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; }
         nav a { text-decoration: none; font-size: 1.6rem; color: #ccc; }
         .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; color: white !important; }
@@ -77,56 +68,68 @@
     </div>
 
     <script>
-        const musicKeywords = ["Deep Healing Piano", "Zen Nature Sounds", "Solfeggio Frequencies", "Positive Energy Beats", "Anxiety Relief Audio"];
-        const memeKeywords = ["Wholesome Animal Joy", "Funny Clean Humor", "Positive Life Vibes", "Daily Happy Smile"];
-        const yogaKeywords = ["Full Body Yoga Flow", "Neck Tension Relief", "Gentle Morning Stretch", "Restorative Yoga", "Sun Salutation A"];
-        const celebQuotes = ["“Stay authentic.”", "“Keep moving forward.”", "“Believe in the light.”", "“You are worthy.”"];
-        
-        const anchorStarts = ["I am full of", "I choose to embrace", "Today I welcome", "I release all except", "I hold onto"];
-        const anchorEnds = ["inner peace.", "true clarity.", "hidden strength.", "pure joy.", "vibrant energy."];
+        // Data Sources
+        const music = [
+            {n: "BTS (Jin)", s: "Epiphany (Self-Love Anthem)"},
+            {n: "Seventeen", s: "Healing (Positive Vibes)"},
+            {n: "IU", s: "Love Poem (Healing Melody)"},
+            {n: "Stray Kids", s: "Grow Up (Supportive)"},
+            {n: "Coldplay", s: "Fix You (Emotional Healing)"},
+            {n: "Taylor Swift", s: "Shake It Off (Motivational)"}
+        ];
+
+        const quotes = [
+            {c: "RM (BTS)", q: "“No matter who you are, speak yourself.”"},
+            {c: "Oprah Winfrey", q: "“Turn your wounds into wisdom.”"},
+            {c: "Lee Min-ho", q: "“Work hard, stay humble.”"},
+            {c: "Selena Gomez", q: "“I am enough.”"},
+            {c: "Keanu Reeves", q: "“Every struggle makes you stronger.”"}
+        ];
+
+        const memes = ["Funny Animal Shorts", "Try Not To Laugh Challenge", "Wholesome Video Memes", "Daily Dose of Internet Laughter"];
+        const yoga = ["10 Min Full Body Yoga", "Gentle Neck/Shoulder Stretch", "Morning Sun Salutation", "Deep Sleep Yoga"];
 
         function buildHub() {
-            // 1. Healing Melody (2000 Links)
+            // 1. Melody (2000 Links)
             const mList = document.getElementById('melody-list');
             for(let i=1; i<=2000; i++) {
-                let k = musicKeywords[i % musicKeywords.length];
-                let url = `https://www.youtube.com/results?search_query=${k.replace(/ /g, '+')}+meditation+${i}`;
-                mList.innerHTML += `<div class="row"><div class="info">✨ <b>${k}</b></div><a href="${url}" target="_blank" class="btn">LISTEN</a></div>`;
+                let item = music[i % music.length];
+                let url = `https://www.youtube.com/results?search_query=${item.n.replace(/ /g, '+')}+${item.s.replace(/ /g, '+')}+${i}`;
+                mList.innerHTML += `<div class="row"><div class="info">✨ <b>${item.n}</b>${item.s}</div><a href="${url}" target="_blank" class="btn">LISTEN</a></div>`;
             }
 
-            // 2. Celebrity Wisdom (100 Links)
+            // 2. Wisdom (100 Entries)
             const cList = document.getElementById('celeb-list');
             for(let i=1; i<=100; i++) {
-                let quote = celebQuotes[i % celebQuotes.length];
-                let url = `https://www.google.com/search?q=${quote.replace(/ /g, '+')}+inspiration`;
-                cList.innerHTML += `<div class="row"><div class="info">🌟 <b>Wisdom</b><br>${quote}</div><a href="${url}" target="_blank" class="btn">READ</a></div>`;
+                let item = quotes[i % quotes.length];
+                let url = `https://www.google.com/search?q=${item.c.replace(/ /g, '+')}+quotes+life`;
+                cList.innerHTML += `<div class="row"><div class="info">🌟 <b>${item.c}</b>${item.q}</div><a href="${url}" target="_blank" class="btn">READ</a></div>`;
             }
 
-            // 3. Precious Laughter (1000 Links)
+            // 3. Laughter (1000 Video Links)
             const lList = document.getElementById('laughter-list');
             for(let i=1; i<=1000; i++) {
-                let k = memeKeywords[i % memeKeywords.length];
-                let url = `https://www.google.com/search?tbm=isch&q=${k.replace(/ /g, '+')}+funny+${i}`;
-                lList.innerHTML += `<div class="row"><div class="info">🎈 <b>${k}</b></div><a href="${url}" target="_blank" class="btn btn-laughter">LAUGH</a></div>`;
+                let m = memes[i % memes.length];
+                let url = `https://www.youtube.com/results?search_query=${m.replace(/ /g, '+')}+shorts+${i}`;
+                lList.innerHTML += `<div class="row"><div class="info">🎈 <b>Video Meme</b>${m}</div><a href="${url}" target="_blank" class="btn btn-vid">WATCH</a></div>`;
             }
 
-            // 4. Unique Anchors (1000 Entries)
+            // 4. Anchors (1000 Entries)
             const aList = document.getElementById('anchor-list');
+            const starts = ["I choose", "I am", "Today I", "I welcome"];
+            const ends = ["unlimited peace.", "pure happiness.", "divine strength.", "mental clarity."];
             for(let i=1; i<=1000; i++) {
-                let s = anchorStarts[i % anchorStarts.length];
-                let e = anchorEnds[(i + 3) % anchorEnds.length];
-                aList.innerHTML += `<div class="row"><div class="info">🛡️ ${s} ${e}</div></div>`;
+                aList.innerHTML += `<div class="row"><div class="info">🛡️ ${starts[i % 4]} ${ends[(i+2)%4]}</div></div>`;
             }
 
-            // 5. Yoga Exercises (500 Links)
+            // 5. Yoga (500 Links)
             const yList = document.getElementById('yoga-list');
             for(let i=1; i<=500; i++) {
-                let k = yogaKeywords[i % yogaKeywords.length];
-                let url = `https://www.youtube.com/results?search_query=${k.replace(/ /g, '+')}+yoga+tutorial+${i}`;
-                yList.innerHTML += `<div class="row"><div class="info">🌿 <b>${k}</b></div><a href="${url}" target="_blank" class="btn btn-yoga">PRACTICE</a></div>`;
+                let y = yoga[i % yoga.length];
+                let url = `https://www.youtube.com/results?search_query=${y.replace(/ /g, '+')}+yoga+session+${i}`;
+                yList.innerHTML += `<div class="row"><div class="info">🌿 <b>Yoga Practice</b>${y}</div><a href="${url}" target="_blank" class="btn btn-yoga">PRACTICE</a></div>`;
             }
         }
-
         window.onload = buildHub;
     </script>
 </body>
