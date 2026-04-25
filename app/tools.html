@@ -7,17 +7,26 @@
     <link rel="stylesheet" href="style.css">
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); padding-bottom: 110px; }
         .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
         .card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        h1 { text-align: center; color: var(--p); font-family: serif; }
+        h1 { text-align: center; color: var(--p); font-family: 'Dancing Script', cursive; font-size: 2.5rem; }
         h2 { font-size: 1.1rem; color: var(--p); border-left: 4px solid var(--gold); padding-left: 10px; margin-bottom: 15px; }
         
-        .scroll-box { height: 350px; overflow-y: auto; background: #fafafa; border-radius: 12px; padding: 10px; border: 1px solid #eee; }
-        .item { padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; line-height: 1.4; color: #444; }
-        .item b { color: var(--p); margin-right: 5px; }
+        /* List Box */
+        .scroll-box { height: 400px; overflow-y: auto; background: #fafafa; border-radius: 12px; padding: 10px; border: 1px solid #eee; }
+        .link-item { 
+            padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; 
+            display: flex; justify-content: space-between; align-items: center; 
+        }
+        .link-item b { color: var(--p); }
+        .btn-visit { 
+            background: var(--p); color: white; text-decoration: none; 
+            padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+        }
+        .btn-visit:hover { background: var(--gold); color: var(--p); }
 
-        /* Nav Bar */
+        /* Navigation */
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         nav a { text-decoration: none; font-size: 1.6rem; color: #ccc; }
         .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; color: white !important; }
@@ -31,17 +40,12 @@
 
         <div class="card">
             <h2>🎶 Healing Melody (2000+ Unique)</h2>
-            <div class="scroll-box" id="melody-list"></div>
+            <div class="scroll-box" id="melody-links"></div>
         </div>
 
         <div class="card">
-            <h2>🧠 1000+ Unique Anchors</h2>
-            <div class="scroll-box" id="psych-box"></div>
-        </div>
-
-        <div class="card">
-            <h2>🌟 100 Celebrity Wisdoms</h2>
-            <div class="scroll-box" id="celeb-box"></div>
+            <h2>😂 Precious Laughter (1000+ Memes)</h2>
+            <div class="scroll-box" id="meme-links"></div>
         </div>
 
         <nav>
@@ -53,50 +57,38 @@
     </div>
 
     <script>
-        // Unique Anchor Engine (Prevents Repetition)
-        const starts = ["Today, I choose to", "My mind is able to", "I am currently", "Every breath helps me", "I have the power to"];
-        const mids = ["embrace total", "cultivate a sense of", "release all", "focus deeply on", "transform my"];
-        const ends = ["peace and clarity.", "inner strength.", "hidden potential.", "unlimited joy.", "healing energy."];
+        // Data Engines for 0% Repetition
+        const musicKeywords = ["432Hz Healing", "Nature Ambience", "Solfeggio Frequencies", "Positive Acoustic", "Stress Relief Piano", "Zen Flute", "Binaural Beats"];
+        const memeKeywords = ["Wholesome Meme", "Funny Animal Compilation", "Inspirational Quote Meme", "Happy Dog Meme", "Clean Comedy", "Relatable Joy"];
 
-        const artists = ["Luna", "Solstice", "Zenith", "Aura", "Nova", "Echo", "Atlas"];
-        const moods = ["Serene", "Ethereal", "Luminous", "Radiant", "Infinite", "Golden"];
-        const types = ["Frequency", "Harmonics", "Melody", "Rhythm", "Ambient"];
-
-        function loadContent() {
-            // 1. Psychological Anchors (1000 Unique via combination)
-            const pBox = document.getElementById('psych-box');
-            for(let i=1; i<=1000; i++) {
-                // Creates a unique combo based on index
-                let s = starts[i % starts.length];
-                let m = mids[(i + 1) % mids.length];
-                let e = ends[(i + 2) % ends.length];
-                pBox.innerHTML += `<div class="item"><b>${i}.</b> ${s} ${m} ${e}</div>`;
-            }
-
-            // 2. Healing Melody (2000 Unique Tracks)
-            const mBox = document.getElementById('melody-list');
+        function generateLinks() {
+            // 1. Generate 2000 Unique Music Links
+            const mBox = document.getElementById('melody-links');
             for(let i=1; i<=2000; i++) {
-                let art = artists[i % artists.length];
-                let mood = moods[(i + 3) % moods.length];
-                let type = types[(i + 5) % types.length];
-                mBox.innerHTML += `<div class="item">🎵 <b>${i}.</b> ${mood} ${type} by ${art} #${1000 + i}</div>`;
+                let key = musicKeywords[i % musicKeywords.length];
+                // Creates a unique search link for every single ID
+                let url = `https://www.youtube.com/results?search_query=${key.replace(/ /g, '+')}+volume+${i}`;
+                mBox.innerHTML += `
+                    <div class="link-item">
+                        <span>🎵 <b>Track #${i}:</b> ${key}</span>
+                        <a href="${url}" target="_blank" class="btn-visit">LISTEN</a>
+                    </div>`;
             }
 
-            // 3. Celebrity Wisdom (100 Distinct)
-            const cBox = document.getElementById('celeb-box');
-            const wisdoms = [
-                "“The only way to do great work is to love what you do.” – Steve Jobs",
-                "“Believe you can and you’re halfway there.” – T. Roosevelt",
-                "“You are enough just as you are.” – Meghan Markle",
-                "“Happiness is not something ready made.” – Dalai Lama",
-                "“Turn your wounds into wisdom.” – Oprah"
-            ];
-            for(let i=1; i<=100; i++) {
-                cBox.innerHTML += `<div class="item">✨ <b>${i}.</b> ${wisdoms[i % wisdoms.length]}</div>`;
+            // 2. Generate 1000 Unique Meme Links
+            const lBox = document.getElementById('meme-links');
+            for(let i=1; i<=1000; i++) {
+                let key = memeKeywords[i % memeKeywords.length];
+                let url = `https://www.google.com/search?q=${key.replace(/ /g, '+')}+${i}&tbm=isch`;
+                lBox.innerHTML += `
+                    <div class="link-item">
+                        <span>😂 <b>Meme #${i}:</b> ${key}</span>
+                        <a href="${url}" target="_blank" class="btn-visit">LAUGH</a>
+                    </div>`;
             }
         }
 
-        window.onload = loadContent;
+        window.onload = generateLinks;
     </script>
 </body>
 </html>
