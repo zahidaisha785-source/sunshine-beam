@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Proper Global Hub</title>
+    <title>Sunshine Beam - Global Sanctuary</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; --yoga: #4caf50; --meme: #ff5e5e; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 100px; color: #333; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
-        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.2rem; margin-bottom: 5px; }
-        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 5px solid var(--p); }
+        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.2rem; }
+        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid var(--p); }
         h2 { font-size: 1rem; color: var(--p); border-bottom: 2px solid var(--gold); padding-bottom: 5px; margin-bottom: 12px; }
-        .scroll-area { height: 400px; overflow-y: auto; background: #fafafa; border-radius: 12px; }
-        .row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
+        .scroll-area { height: 350px; overflow-y: auto; }
+        .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; }
         .info { flex: 1; padding-right: 10px; }
-        .info b { color: var(--p); display: block; font-size: 0.9rem; }
-        .info p { margin: 4px 0 0; font-size: 0.8rem; font-style: italic; color: #555; }
-        .btn { text-decoration: none; padding: 10px 14px; border-radius: 18px; font-size: 0.7rem; font-weight: bold; color: white; }
+        .info b { color: var(--p); display: block; font-size: 0.85rem; }
+        .info p { margin: 4px 0 0; font-size: 0.75rem; font-style: italic; color: #555; }
+        .btn { text-decoration: none; padding: 8px 12px; border-radius: 15px; font-size: 0.65rem; font-weight: bold; color: white; white-space: nowrap; }
         .btn-p { background: var(--p); } .btn-y { background: var(--yoga); } .btn-m { background: var(--meme); }
-        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 400px; background: white; height: 65px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; }
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; background: white; height: 60px; border-radius: 30px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
@@ -27,72 +27,55 @@
     <h1>Sunshine Beam</h1>
 
     <div class="card">
-        <h2>🎶 Unique Healing Songs (153 Tracks)</h2>
-        <div class="scroll-area" id="song-list"></div>
+        <h2>🎶 Healing Songs (Global Mix)</h2>
+        <div class="scroll-area">
+            <div class="row"><div class="info"><b>RM (BTS)</b><p>Wild Flower (Healing)</p></div><a href="https://www.youtube.com/results?search_query=RM+Wild+Flower+official" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>BTS</b><p>Love Myself: Answer</p></div><a href="https://www.youtube.com/results?search_query=BTS+Love+Myself+Answer" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>BTS</b><p>Blue & Grey (Mental Peace)</p></div><a href="https://www.youtube.com/results?search_query=BTS+Blue+and+Grey" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Jin (BTS)</b><p>Epiphany (Self Love)</p></div><a href="https://www.youtube.com/results?search_query=Jin+Epiphany+live" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Monika Liu</b><p>Sentimentai</p></div><a href="https://www.youtube.com/results?search_query=Monika+Liu+Sentimentai" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>The Roop</b><p>On Fire</p></div><a href="https://www.youtube.com/results?search_query=The+Roop+On+Fire" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Atif Aslam (PK)</b><p>Tajdar-e-Haram (Soul)</p></div><a href="https://www.youtube.com/results?search_query=Atif+Aslam+Tajdar+e+Haram" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Fairuz (Lebanon)</b><p>Li Beirut</p></div><a href="https://www.youtube.com/results?search_query=Fairuz+Li+Beirut" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Shajarian (Iran)</b><p>Night Silence Desert</p></div><a href="https://www.youtube.com/results?search_query=Shajarian+Night+Silence+Desert" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Gyakie (Ghana)</b><p>Forever (Remix)</p></div><a href="https://www.youtube.com/results?search_query=Gyakie+Forever" target="_blank" class="btn btn-p">PLAY</a></div>
+            <div class="row"><div class="info"><b>Burna Boy (NG)</b><p>Alone</p></div><a href="https://www.youtube.com/results?search_query=Burna+Boy+Alone" target="_blank" class="btn btn-p">PLAY</a></div>
+        </div>
     </div>
 
     <div class="card">
-        <h2>🌟 Unique Global Wisdom</h2>
-        <div class="scroll-area" id="wisdom-list"></div>
+        <h2>🌟 Global Wisdom Sayings</h2>
+        <div class="scroll-area">
+            <div class="row"><div class="info"><b>RM (BTS)</b><p>"I have come to love myself for who I am."</p></div><a href="#" class="btn btn-p">READ</a></div>
+            <div class="row"><div class="info"><b>Vydūnas (LT)</b><p>"Soul light is our guide."</p></div><a href="#" class="btn btn-p">READ</a></div>
+            <div class="row"><div class="info"><b>Rumi (Persia)</b><p>"The wound is where the light enters."</p></div><a href="#" class="btn btn-p">READ</a></div>
+            <div class="row"><div class="info"><b>Nelson Mandela</b><p>"It seems impossible until it's done."</p></div><a href="#" class="btn btn-p">READ</a></div>
+            <div class="row"><div class="info"><b>Shah Rukh Khan</b><p>"Failure makes you humble."</p></div><a href="#" class="btn btn-p">READ</a></div>
+        </div>
     </div>
 
     <div class="card" style="border-color: var(--yoga);">
-        <h2>🧘 Yoga for Stability</h2>
-        <div class="scroll-area" id="yoga-list"></div>
+        <h2>🧘 Yoga (Mental Stability)</h2>
+        <div class="scroll-area">
+            <div class="row"><div class="info"><b>Morning Peace</b><p>Stretch #1</p></div><a href="https://www.youtube.com/results?search_query=yoga+for+stability+1" target="_blank" class="btn btn-y">START</a></div>
+            <div class="row"><div class="info"><b>Deep Breathing</b><p>Stability #2</p></div><a href="https://www.youtube.com/results?search_query=yoga+for+stability+2" target="_blank" class="btn btn-y">START</a></div>
+        </div>
     </div>
 
     <div class="card" style="border-color: var(--meme);">
-        <h2>😂 Direct Memes (200+)</h2>
-        <div class="scroll-area" id="meme-list"></div>
+        <h2>😂 Direct Memes (Laughter)</h2>
+        <div class="scroll-area">
+            <div class="row"><div class="info"><b>Wholesome Animals</b><p>Meme #1</p></div><a href="https://www.youtube.com/watch?v=-mP_m469vyo" target="_blank" class="btn btn-m">WATCH</a></div>
+            <div class="row"><div class="info"><b>Funny Moments</b><p>Meme #2</p></div><a href="https://www.youtube.com/watch?v=3_X9V6D8pZg" target="_blank" class="btn btn-m">WATCH</a></div>
+        </div>
     </div>
 </div>
 
 <nav>
     <a href="index.html" style="text-decoration:none;">🏠</a>
-    <a href="tools.html" style="font-size:1.8rem; text-decoration:none;">🌞</a>
+    <a href="tools.html" style="text-decoration:none;">🌞</a>
     <a href="profile.html" style="text-decoration:none;">👤</a>
 </nav>
 
-<script>
-    const artists = ["RM (BTS)", "Jin", "Monika Liu", "Atif Aslam", "Fairuz", "Gyakie", "Stray Kids", "IU", "The Roop", "Suga", "Ali Sethi", "Ebi", "King Promise", "Jimin", "V", "J-Hope"];
-    const songTypes = ["Wild Flower Melody", "Love Yourself Mix", "Blue Healing", "Grey Peace", "Soul Rhythm", "Morning Light", "Deep Calm", "Sanctuary Echo"];
-    const quotes = [
-        "Love yourself first.", "The wound is where light enters.", "Take your time.", "You are enough.", "Soul is light.", "Keep walking.", "Breathe through it.", "Peace is within."
-    ];
-
-    window.onload = function() {
-        // 1. Generate 153 UNIQUE SONGS
-        let sHtml = "";
-        for(let i=1; i<=153; i++) {
-            let art = artists[i % artists.length];
-            let song = songTypes[i % songTypes.length];
-            sHtml += `<div class="row"><div class="info"><b>${art}</b><p>Track: ${song} Vol.${i}</p></div><a href="https://www.youtube.com/results?search_query=${art}+${song}" target="_blank" class="btn btn-p">PLAY</a></div>`;
-        }
-        document.getElementById('song-list').innerHTML = sHtml;
-
-        // 2. Generate UNIQUE WISDOM
-        let wHtml = "";
-        for(let i=1; i<=100; i++) {
-            let art = artists[i % artists.length];
-            let q = quotes[i % quotes.length];
-            wHtml += `<div class="row"><div class="info"><b>${art}</b><p>"${q} (Saying #${i})"</p></div><a href="https://www.google.com/search?q=${art}+quotes" target="_blank" class="btn btn-p">READ</a></div>`;
-        }
-        document.getElementById('wisdom-list').innerHTML = wHtml;
-
-        // 3. Generate YOGA
-        let yHtml = "";
-        for(let i=1; i<=30; i++) {
-            yHtml += `<div class="row"><div class="info"><b>Mental Stability</b><p>Session #${i}</p></div><a href="https://www.youtube.com/results?search_query=yoga+stability+session+${i}" target="_blank" class="btn btn-y">START</a></div>`;
-        }
-        document.getElementById('yoga-list').innerHTML = yHtml;
-
-        // 4. Generate 200+ MEMES (Using search variability to prevent repetition)
-        let mHtml = "";
-        for(let i=1; i<=210; i++) {
-            mHtml += `<div class="row"><div class="info"><b>Joy Mix</b><p>Unique Meme #${i}</p></div><a href="https://www.youtube.com/results?search_query=wholesome+memes+episode+${i}" target="_blank" class="btn btn-m">WATCH</a></div>`;
-        }
-        document.getElementById('meme-list').innerHTML = mHtml;
-    };
-</script>
 </body>
 </html>
