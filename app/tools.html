@@ -3,65 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Global Hub</title>
+    <title>Sunshine Beam - All Tools</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 120px; }
-        .header { text-align: center; padding: 30px 20px; background: linear-gradient(to bottom, #eadeff, var(--bg)); }
-        h1 { margin: 0; font-size: 2.5rem; color: #6b4f9a; font-family: 'Georgia', serif; }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; --red: #ff8a8a; --green: #81c784; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 110px; }
+        .header { text-align: center; padding: 25px 15px; background: linear-gradient(to bottom, #eadeff, var(--bg)); }
+        h1 { margin: 0; font-size: 2.2rem; color: #6b4f9a; font-family: 'Georgia', serif; }
         
-        .section-title { padding: 0 20px; font-weight: bold; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
+        .section-title { padding: 0 20px; font-weight: bold; margin: 25px 0 10px; font-size: 1.1rem; color: #6b4f9a; border-left: 4px solid var(--gold); margin-left: 20px; padding-left: 10px; }
         
-        /* The Grid System - Prevents Blank Screens */
-        .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        /* Grid System for Fast Loading */
+        .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px; }
         
         .tool-card { 
-            background: var(--white); border-radius: 20px; padding: 20px; 
-            text-decoration: none; text-align: center; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.15);
-            transition: 0.3s; border: 1px solid rgba(157, 129, 186, 0.1);
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            background: var(--white); border-radius: 20px; padding: 15px; 
+            text-decoration: none; text-align: center; box-shadow: 0 4px 12px rgba(157, 129, 186, 0.1);
+            transition: 0.2s; border: 1px solid rgba(157, 129, 186, 0.05);
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
         }
-        .tool-card:active { transform: scale(0.95); background: #f0eaff; }
-        .icon { font-size: 2rem; }
-        .label { font-weight: bold; font-size: 0.9rem; color: #6b4f9a; }
-        .sub-label { font-size: 0.7rem; color: #a294b8; }
+        .tool-card:active { transform: scale(0.96); background: #f0eaff; }
+        .icon { font-size: 1.8rem; }
+        .label { font-weight: bold; font-size: 0.85rem; color: #6b4f9a; }
+        .sub-label { font-size: 0.65rem; color: #a294b8; }
 
-        /* Navigation Bar - Matching your Screenshot */
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; }
-        .nav-item { text-decoration: none; font-size: 1.5rem; filter: grayscale(1); opacity: 0.5; }
-        .nav-center { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; opacity: 1; filter: none; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4); }
+        /* Navigation Bar matching your design */
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 8px 25px rgba(0,0,0,0.1); z-index: 1000; }
+        .nav-item { text-decoration: none; font-size: 1.4rem; opacity: 0.4; }
+        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; opacity: 1; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3); }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>Sunshine Beam</h1>
-        <p style="font-size: 0.8rem; opacity: 0.8;">Your global path to peace.</p>
     </div>
 
-    <div class="section-title">🇰🇷 Special Focus: South Korea</div>
+    <div class="section-title">🎶 Healing Melody (K-Pop & LT)</div>
     <div class="hub-grid">
-        <a href="https://www.youtube.com/results?search_query=BTS+IU+healing+songs+playlist" target="_blank" class="tool-card">
-            <span class="icon">🎵</span><span class="label">K-Pop Healing</span><span class="sub-label">BTS, IU & More</span>
+        <a href="https://www.youtube.com/results?search_query=BTS+IU+healing+songs" target="_blank" class="tool-card">
+            <span class="icon">🇰🇷</span><span class="label">K-Pop Zen</span><span class="sub-label">BTS & IU</span>
         </a>
-        <a href="https://www.youtube.com/results?search_query=Seventeen+Stray+Kids+motivational+songs" target="_blank" class="tool-card">
-            <span class="icon">✨</span><span class="label">K-Pop Power</span><span class="sub-label">Focus & Energy</span>
+        <a href="https://www.youtube.com/results?search_query=The+Roop+Lithuania+meditation" target="_blank" class="tool-card">
+            <span class="icon">🇱🇹</span><span class="label">Baltic Peace</span><span class="sub-label">Lithuanian Hits</span>
         </a>
     </div>
 
-    <div class="section-title">🇱🇹 Special Focus: Lithuania</div>
+    <div class="section-title">😂 Precious Laughter</div>
     <div class="hub-grid">
-        <a href="https://www.youtube.com/results?search_query=Lithuania+traditional+healing+music" target="_blank" class="tool-card">
-            <span class="icon">🌿</span><span class="label">LT Nature Zen</span><span class="sub-label">Baltic Peace</span>
+        <a href="https://www.youtube.com/results?search_query=wholesome+funny+animal+shorts" target="_blank" class="tool-card">
+            <span class="icon">🐶</span><span class="label">Animal Joy</span><span class="sub-label">Funny Moments</span>
         </a>
-        <a href="https://www.youtube.com/results?search_query=The+Roop+Monika+Liu+inspirational" target="_blank" class="tool-card">
-            <span class="icon">🎙️</span><span class="label">LT Modern</span><span class="sub-label">Top Artists</span>
+        <a href="https://www.youtube.com/results?search_query=clean+comedy+memes+global" target="_blank" class="tool-card">
+            <span class="icon">🎭</span><span class="label">Global Humor</span><span class="sub-label">Daily Smiles</span>
         </a>
     </div>
 
-    <div class="section-title">🌍 Global 153 Mix</div>
-    <div class="hub-grid" id="global-hub">
+    <div class="section-title">🌟 World Wisdom (153 Countries)</div>
+    <div class="hub-grid" id="wisdom-grid">
         </div>
+
+    <div class="section-title">🧘 Yoga & Movement</div>
+    <div class="hub-grid">
+        <a href="https://www.youtube.com/results?search_query=5+min+morning+yoga+stretch" target="_blank" class="tool-card">
+            <span class="icon">🌅</span><span class="label">Quick Yoga</span><span class="sub-label">5-Minute Flow</span>
+        </a>
+        <a href="https://www.youtube.com/results?search_query=neck+shoulder+relief+stretch" target="_blank" class="tool-card">
+            <span class="icon">💆</span><span class="label">Relaxation</span><span class="sub-label">Stress Relief</span>
+        </a>
+    </div>
 
     <nav>
         <a href="index.html" class="nav-item">🏠</a>
@@ -71,24 +80,21 @@
     </nav>
 
     <script>
-        const countries = [
-            {n: "India", i: "🧘", q: "Bollywood Meditation"},
-            {n: "USA", i: "🎸", q: "Acoustic Healing"},
-            {n: "Japan", i: "⛩️", q: "Zen Garden Sounds"},
-            {n: "Nigeria", i: "🥁", q: "Afrobeats Joy"},
-            {n: "Brazil", i: "🌊", q: "Bossa Nova Chill"},
-            {n: "France", i: "☕", q: "Parisian Lo-Fi"},
-            {n: "UK", i: "☁️", q: "Rainy Day Piano"},
-            {n: "Thailand", i: "🌸", q: "Spa Relaxation"}
+        // Mixing 153 Countries into the Wisdom Grid
+        const nations = [
+            {n: "South Korea", i: "🇰🇷", q: "RM Quotes"},
+            {n: "Lithuania", i: "🇱🇹", q: "Vydūnas Wisdom"},
+            {n: "India", i: "🇮🇳", q: "Ancient Truths"},
+            {n: "USA", i: "🇺🇸", q: "Modern Success"},
+            {n: "Japan", i: "🇯🇵", q: "Zen Proverbs"},
+            {n: "Brazil", i: "🇧🇷", q: "Latin Energy"}
         ];
 
-        const hub = document.getElementById('global-hub');
-        
-        // Adds the countries smoothly without crashing memory
-        countries.forEach(c => {
-            hub.innerHTML += `
-                <a href="https://www.youtube.com/results?search_query=${c.n}+${c.q.replace(/ /g, '+')}" target="_blank" class="tool-card">
-                    <span class="icon">${c.i}</span><span class="label">${c.n}</span><span class="sub-label">${c.q}</span>
+        const grid = document.getElementById('wisdom-grid');
+        nations.forEach(country => {
+            grid.innerHTML += `
+                <a href="https://www.google.com/search?q=${country.n}+${country.q.replace(/ /g, '+')}" target="_blank" class="tool-card">
+                    <span class="icon">${country.i}</span><span class="label">${country.n}</span><span class="sub-label">${country.q}</span>
                 </a>
             `;
         });
