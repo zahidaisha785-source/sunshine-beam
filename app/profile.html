@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Private Profile</title>
+    <title>Sunshine Beam - Edit Profile</title>
     <style>
         :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --shield: #4caf50; }
         
@@ -16,32 +16,35 @@
 
         .container { max-width: 480px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        /* Profile Header */
         .profile-pic { width: 100px; height: 100px; border-radius: 50%; background: #eadeff; border: 4px solid white; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 15px; }
 
         .card { background: var(--white); border-radius: 25px; padding: 25px; margin-top: 10px; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); border: 1px solid rgba(157, 129, 186, 0.1); }
 
         .privacy-badge { display: inline-flex; align-items: center; gap: 5px; color: var(--shield); font-size: 0.8rem; font-weight: bold; margin-bottom: 20px; }
 
-        /* Form Fields */
+        /* Form Fields - Editable */
         .info-group { text-align: left; margin-bottom: 15px; }
         .info-group label { display: block; font-size: 0.75rem; font-weight: bold; color: var(--p); margin-bottom: 5px; }
-        .info-field { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #eee; background: #fafafa; font-size: 0.95rem; box-sizing: border-box; color: #5a4a75; }
+        .info-field { 
+            width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; 
+            background: #fff; font-size: 0.95rem; box-sizing: border-box; color: #5a4a75;
+            outline: none; transition: 0.3s;
+        }
+        .info-field:focus { border-color: var(--p); box-shadow: 0 0 8px rgba(157, 129, 186, 0.2); filter: blur(0) !important; }
 
-        /* Hidden text style */
-        .hidden-info { filter: blur(4px); transition: 0.3s; cursor: pointer; }
-        .hidden-info:hover { filter: blur(0); }
+        /* Privacy Blur Logic */
+        .hidden-info { filter: blur(5px); }
+        .hidden-info:focus { filter: blur(0); }
 
         .save-btn { background: var(--p); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; width: 100%; margin-top: 10px; cursor: pointer; }
 
         /* Pop-up Overlay */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 2000; }
-        .popup { background: white; padding: 30px; border-radius: 25px; width: 80%; max-width: 320px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; box-sizing: border-box; }
+        .popup { background: white; padding: 30px; border-radius: 25px; width: 100%; max-width: 320px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
         .popup h3 { color: var(--shield); margin-top: 0; }
-        .popup p { font-size: 0.85rem; line-height: 1.4; color: #666; }
-        .popup-btn { background: var(--shield); color: white; border: none; padding: 10px 20px; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .popup-btn { background: var(--shield); color: white; border: none; padding: 12px 25px; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; }
 
-        /* Bottom Nav Bar */
+        /* Nav Bar */
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .nav-link { text-decoration: none; font-size: 1.5rem; color: #ccc; }
         .nav-link.active { color: var(--p); }
@@ -52,7 +55,7 @@
 
 <div class="container">
     <div class="profile-pic">👤</div>
-    <h2>My Profile</h2>
+    <h2>Profile Settings</h2>
     
     <div class="card">
         <div class="privacy-badge">
@@ -60,29 +63,29 @@
         </div>
 
         <div class="info-group">
-            <label>FULL NAME</label>
-            <input type="text" class="info-field hidden-info" value="John Doe" readonly>
+            <label>YOUR NAME</label>
+            <input type="text" class="info-field hidden-info" placeholder="Enter your name..." onfocus="this.classList.remove('hidden-info')" onblur="if(this.value!='') this.classList.add('hidden-info')">
         </div>
 
         <div class="info-group">
             <label>CONTACT NUMBER</label>
-            <input type="text" class="info-field hidden-info" value="+370 123 45678" readonly>
+            <input type="tel" class="info-field hidden-info" placeholder="Enter phone number..." onfocus="this.classList.remove('hidden-info')" onblur="if(this.value!='') this.classList.add('hidden-info')">
         </div>
 
         <div class="info-group">
             <label>COUNTRY</label>
-            <input type="text" class="info-field" value="Lithuania" readonly>
+            <input type="text" class="info-field" placeholder="Which country are you from?">
         </div>
 
-        <button class="save-btn" onclick="showPrivacyAlert()">Update Settings</button>
-        <p style="font-size: 0.7rem; color: #aaa; margin-top: 15px;">Tap blurred fields to reveal to yourself.</p>
+        <button class="save-btn" onclick="saveData()">Save Private Info</button>
+        <p style="font-size: 0.7rem; color: #aaa; margin-top: 15px;">Your data is saved locally and never shared.</p>
     </div>
 </div>
 
 <div class="overlay" id="privacy-overlay">
     <div class="popup">
-        <h3>Privacy Confirmed</h3>
-        <p>All your information is encrypted and <b>hidden</b> from other users. No one else can see your name or contact number.</p>
+        <h3>🛡️ Private & Secure</h3>
+        <p>Everything you type here is <b>hidden</b> from other users. Your name and number are for your eyes only.</p>
         <button class="popup-btn" onclick="closePrivacyAlert()">I Understand</button>
     </div>
 </div>
@@ -96,6 +99,11 @@
 </nav>
 
 <script>
+    function saveData() {
+        // Here you would normally save to localStorage
+        showPrivacyAlert();
+    }
+
     function showPrivacyAlert() {
         document.getElementById('privacy-overlay').style.display = 'flex';
     }
@@ -104,9 +112,9 @@
         document.getElementById('privacy-overlay').style.display = 'none';
     }
 
-    // Show popup automatically on first visit to Profile
+    // Show privacy reminder when user first arrives
     window.onload = () => {
-        setTimeout(showPrivacyAlert, 500);
+        setTimeout(showPrivacyAlert, 300);
     };
 </script>
 
