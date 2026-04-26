@@ -82,4 +82,91 @@
 </div>
 
 <div class="top-bar">
-    <div onclick="
+    <div onclick="toggleMenu()" style="font-size:1.8rem; cursor:pointer; color: var(--p);">☰</div>
+    <div class="app-title">Sunshine Beam</div>
+    <div style="font-size:1.6rem; cursor:pointer;" onclick="triggerNotif()">🔔</div>
+</div>
+
+<div class="container">
+    <div class="mood-card">
+        <b style="color: var(--p)">How is your soul today?</b>
+        <div class="mood-row">
+            <div class="mood-item" onclick="triggerNotif()"><span>🌈</span><p>Vibrant</p></div>
+            <div class="mood-item" onclick="triggerNotif()"><span>☁️</span><p>Quiet</p></div>
+            <div class="mood-item" onclick="triggerNotif()"><span>🌧️</span><p>Heavy</p></div>
+            <div class="mood-item" onclick="triggerNotif()"><span>🌪️</span><p>Stormy</p></div>
+        </div>
+    </div>
+
+    <div class="chat-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <b style="color:var(--p)">Community Share</b>
+            <span style="font-size:0.7rem; color:green; font-weight:700;">● LIVE</span>
+        </div>
+        <div class="message-area" id="chat">
+            <div class="msg">I'm feeling a bit lost tonight... Lithuania is very cold.</div>
+            <div class="msg" style="background:#fff; border:1px solid var(--lavender)">We see you! You are warm in this circle. 💜</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Speak your truth...">
+            <button class="btn-send" onclick="send()">Post</button>
+        </div>
+    </div>
+
+    <div class="aff-box" id="aff-text">"You don't have to carry it all at once. Just this breath."</div>
+    <button onclick="newAff()" style="width:100%; background:none; border:none; color:var(--p); font-weight:700; padding:15px; cursor:pointer; font-size:0.8rem;">Click for more light ✨</button>
+</div>
+
+<nav>
+    <a href="index.html" class="nav-link" style="opacity:1; color:var(--p)">🏠</a>
+    <a href="healing-hub.html" class="nav-sun">☀️</a>
+    <a href="profile.html" class="nav-link">👤</a>
+</nav>
+
+<script>
+    const affs = [
+        "Your struggle is valid, and so is your strength.",
+        "You are more than your bad days.",
+        "It is okay to be a work in progress.",
+        "Healing isn't linear, and you're still doing great.",
+        "You are loved by people you haven't even met yet."
+    ];
+
+    function newAff() {
+        document.getElementById('aff-text').innerText = `"${affs[Math.floor(Math.random()*affs.length)]}"`;
+    }
+
+    function toggleMenu() {
+        document.getElementById('sideMenu').classList.toggle('open');
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function send() {
+        const input = document.getElementById('userInput');
+        if(input.value.trim() !== "") {
+            const m = document.createElement('div');
+            m.className = "msg";
+            m.style.alignSelf = "flex-end";
+            m.style.background = "var(--p)";
+            m.style.color = "white";
+            m.innerText = input.value;
+            document.getElementById('chat').appendChild(m);
+            input.value = "";
+        }
+    }
+
+    function triggerNotif() {
+        alert("A friend in the community just sent a hug! 🫂");
+    }
+
+    // Powerful Cache Fix
+    window.onpageshow = function(event) {
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            window.location.reload();
+        }
+    };
+</script>
+
+</body>
+</html>
