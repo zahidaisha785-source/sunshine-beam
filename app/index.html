@@ -5,105 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunshine Beam - Home</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --lavender: #eadeff; }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --red: #ff4757; }
         
         body { 
-            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 110px;
-            /* Floral Side Borders */
+            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 120px;
             background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%),
                               url('https://www.transparenttextures.com/patterns/floral-paper.png');
             background-attachment: fixed;
         }
 
-        .container { max-width: 480px; margin: 0 auto; padding-top: 20px; }
+        .container { max-width: 480px; margin: 0 auto; }
 
-        .header { text-align: center; padding: 20px; }
-        .header h1 { font-family: 'Georgia', serif; font-size: 2.5rem; color: #6b4f9a; margin: 0; }
+        /* TOP NAVIGATION & NOTIFICATION BELL */
+        .top-bar { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 25px; position: sticky; top: 0; z-index: 100;
+        }
+        .menu-icon { font-size: 1.5rem; cursor: pointer; }
+        .notification-bell { position: relative; font-size: 1.6rem; cursor: pointer; }
+        .notif-badge { 
+            position: absolute; top: 0; right: 0; background: var(--red); 
+            width: 10px; height: 10px; border-radius: 50%; border: 2px solid white;
+            display: none; /* Hidden until activity happens */
+        }
 
-        /* General Card Style */
+        .header { text-align: center; padding-bottom: 20px; }
+        .header h1 { font-family: 'Georgia', serif; font-size: 2.8rem; color: #6b4f9a; margin: 0; }
+        .header p { font-size: 0.9rem; color: #7a6a95; }
+
+        /* MAIN CARDS */
         .card { 
             background: var(--white); border-radius: 25px; padding: 20px; margin: 15px; 
             box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); border: 1px solid rgba(157, 129, 186, 0.1);
             backdrop-filter: blur(5px);
         }
 
-        /* 1. MOOD EMOJIS */
-        .mood-row { display: flex; justify-content: space-around; margin-top: 10px; }
-        .mood-btn { border: none; background: none; cursor: pointer; text-align: center; transition: 0.3s; }
-        .mood-btn span { display: block; font-size: 2.5rem; }
-        .mood-btn p { font-size: 0.75rem; font-weight: bold; color: var(--p); margin-top: 5px; }
-        .mood-btn:hover { transform: scale(1.2); }
+        /* MOOD SECTION */
+        .mood-row { display: flex; justify-content: space-around; margin-top: 15px; }
+        .mood-btn { border: none; background: none; cursor: pointer; text-align: center; width: 18%; }
+        .mood-btn span { display: block; font-size: 2.2rem; }
+        .mood-btn p { font-size: 0.7rem; font-weight: bold; color: var(--p); margin-top: 5px; }
 
-        /* 2. AFFIRMATIONS */
-        .aff-display { text-align: center; font-style: italic; font-size: 1.1rem; color: #5a4a75; min-height: 60px; display: flex; align-items: center; justify-content: center; }
-        .new-aff-btn { background: var(--p); color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 10px; width: 100%; font-weight: bold; cursor: pointer; }
+        /* AFFIRMATION BOX */
+        .aff-card { text-align: center; border-left: 5px solid var(--p); }
+        .aff-text { font-style: italic; font-size: 1rem; color: #5a4a75; min-height: 40px; margin-bottom: 10px; }
 
-        /* 3. COMMUNITY */
-        .community-box { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; }
-        .comm-icon { background: var(--lavender); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .comm-text b { display: block; font-size: 1rem; color: #6b4f9a; }
-        .comm-text p { font-size: 0.75rem; margin: 2px 0; opacity: 0.8; }
+        /* COMMUNITY SECTION */
+        .community-card { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+        .comm-circle { background: #eadeff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .comm-info b { color: #6b4f9a; font-size: 1rem; display: block; }
+        .comm-info p { font-size: 0.75rem; margin: 2px 0; }
 
-        /* NAV BAR */
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .nav-item { text-decoration: none; font-size: 1.6rem; color: #ccc; }
-        .nav-center { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; box-shadow: 0 5px 15px rgba(255,215,0,0.4); text-decoration: none; }
+        /* BOTTOM NAVIGATION BAR */
+        nav { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+            width: 90%; max-width: 400px; background: white; height: 70px; 
+            border-radius: 35px; display: flex; justify-content: space-around; 
+            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+        .nav-link { text-decoration: none; font-size: 1.5rem; color: #ccc; transition: 0.3s; }
+        .nav-link.active { color: var(--p); }
+        .nav-sun { 
+            background: var(--gold); width: 65px; height: 65px; border-radius: 50%; 
+            margin-top: -45px; border: 5px solid var(--bg); display: flex; 
+            align-items: center; justify-content: center; font-size: 2rem; 
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4); text-decoration: none;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="top-bar">
+        <div class="menu-icon">☰</div>
+        <div class="notification-bell" onclick="showNotif()">
+            🔔<div class="notif-badge" id="badge"></div>
+        </div>
+    </div>
+
     <div class="header">
         <h1>Sunshine Beam</h1>
+        <p>Small steps. Brighter days. ✨</p>
     </div>
 
     <div class="card">
-        <b style="display:block; text-align:center; margin-bottom:10px;">How are you feeling today?</b>
+        <b style="display:block; text-align:center;">How are you feeling?</b>
         <div class="mood-row">
-            <div class="mood-btn"><span>😊</span><p>Happy</p></div>
-            <div class="mood-btn"><span>🙂</span><p>Okay</p></div>
-            <div class="mood-btn"><span>🙁</span><p>Low</p></div>
-            <div class="mood-btn"><span>😫</span><p>Stressed</p></div>
-            <div class="mood-btn"><span>😭</span><p>Hurting</p></div>
+            <button class="mood-btn" onclick="triggerActivity()"><span>😊</span><p>Happy</p></button>
+            <button class="mood-btn" onclick="triggerActivity()"><span>🙂</span><p>Okay</p></button>
+            <button class="mood-btn" onclick="triggerActivity()"><span>🙁</span><p>Low</p></button>
+            <button class="mood-btn" onclick="triggerActivity()"><span>😫</span><p>Tired</p></button>
+            <button class="mood-btn" onclick="triggerActivity()"><span>😭</span><p>Hurting</p></button>
         </div>
     </div>
 
-    <div class="card">
-        <div class="aff-display" id="aff-box">"Every small step I take is a victory."</div>
-        <button class="new-aff-btn" onclick="nextAff()">New Affirmation ✨</button>
+    <div class="card aff-card">
+        <div class="aff-text" id="aff-box">"I am deserving of peace and joy."</div>
+        <button onclick="newAff()" style="background:var(--p); color:white; border:none; padding:8px 20px; border-radius:15px; font-weight:bold; cursor:pointer;">New Affirmation</button>
     </div>
 
-    <div class="card" onclick="alert('Entering Community Hub...')">
-        <div class="community-box">
-            <div class="comm-icon">👥</div>
-            <div class="comm-text">
-                <b>Sunshine Community</b>
-                <p>You're not alone. Share your light with others.</p>
-            </div>
-            <div style="margin-left: auto; color: var(--p);">➔</div>
+    <div class="card community-card" onclick="location.href='community.html'">
+        <div class="comm-circle">👥</div>
+        <div class="comm-info">
+            <b>Sunshine Community</b>
+            <p>12 friends are online now</p>
         </div>
+        <div style="margin-left: auto; color: var(--p);">➔</div>
     </div>
 </div>
 
 <nav>
-    <a href="index.html" class="nav-item" style="color:var(--p)">🏠</a>
-    <a href="journal.html" class="nav-item">📝</a>
-    <a href="healing-hub.html" class="nav-center">☀️</a>
-    <a href="profile.html" class="nav-item">👤</a>
+    <a href="index.html" class="nav-link active">🏠</a>
+    <a href="journal.html" class="nav-link">📝</a>
+    <a href="healing-hub.html" class="nav-sun">☀️</a>
+    <a href="community.html" class="nav-link">👥</a>
+    <a href="profile.html" class="nav-link">👤</a>
 </nav>
 
 <script>
-    const affirmations = [
-        "I am capable of healing and growing.",
-        "My current situation is not my final destination.",
-        "I deserve peace, love, and happiness.",
-        "I am enough, exactly as I am.",
-        "I choose to be kind to myself today."
+    // AFFIRMATIONS ENGINE
+    const affs = [
+        "I am gentle with myself today.",
+        "My feelings are valid and temporary.",
+        "I have the strength to get through this.",
+        "I am loved more than I know."
     ];
 
-    function nextAff() {
-        const text = affirmations[Math.floor(Math.random() * affirmations.length)];
-        document.getElementById('aff-box').innerText = `"${text}"`;
+    function newAff() {
+        document.getElementById('aff-box').innerText = `"${affs[Math.floor(Math.random()*affs.length)]}"`;
+    }
+
+    // NOTIFICATION LOGIC
+    // This function simulates activity. When you click a mood, it "notifies" you.
+    function triggerActivity() {
+        document.getElementById('badge').style.display = 'block';
+    }
+
+    function showNotif() {
+        const badge = document.getElementById('badge');
+        if(badge.style.display === 'block') {
+            alert("New Activity: Someone in the community shared a healing melody! 🎶");
+            badge.style.display = 'none'; // Clear the notification
+        } else {
+            alert("No new notifications right now.");
+        }
     }
 </script>
 
