@@ -4,131 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <title>Sunshine Beam - Home</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; --red: #ff4757; }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; --red: #ff4757; --lavender: #eadeff; }
         
         body { 
-            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 100px;
-            background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%),
-                              url('https://www.transparenttextures.com/patterns/floral-paper.png');
-            background-attachment: fixed;
-            overflow-x: hidden;
+            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 120px;
+            background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%);
         }
 
-        /* --- TOP SIDEBAR MENU --- */
-        .top-bar { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 20px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .menu-icon { font-size: 1.8rem; cursor: pointer; color: var(--p); }
-        .notif-bell { font-size: 1.6rem; cursor: pointer; position: relative; }
-        .badge { position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: var(--red); border-radius: 50%; border: 2px solid white; display: none; }
-
-        /* Side Drawer Menu */
-        .side-menu {
-            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: var(--white); box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-            transition: 0.4s; z-index: 2000; padding: 20px; box-sizing: border-box;
-        }
+        /* SIDE MENU */
+        .side-menu { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: white; transition: 0.3s; z-index: 2000; padding: 25px; box-shadow: 5px 0 15px rgba(0,0,0,0.1); }
         .side-menu.open { left: 0; }
-        .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 1500; }
-        
-        .side-menu h2 { color: var(--p); font-family: 'Georgia', serif; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .menu-link { display: flex; align-items: center; gap: 15px; text-decoration: none; color: #5a4a75; padding: 15px 10px; border-radius: 12px; margin-bottom: 5px; font-weight: bold; }
-        .menu-link:hover { background: var(--bg); color: var(--p); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 1500; }
 
-        /* --- CONTENT --- */
+        /* TOP BAR */
+        .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
         .container { max-width: 480px; margin: 0 auto; padding: 15px; }
 
-        .emergency-btn {
-            background: var(--red); color: white; padding: 16px; border-radius: 20px;
-            text-align: center; font-weight: bold; margin-bottom: 20px; cursor: pointer;
-            border: none; width: 100%; font-size: 1rem; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.2);
-        }
+        /* EMERGENCY SOS */
+        .sos-btn { background: var(--red); color: white; padding: 15px; border-radius: 15px; text-align: center; font-weight: bold; margin-bottom: 20px; cursor: pointer; border: none; width: 100%; font-size: 1rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
 
-        .card { background: white; border-radius: 25px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        /* AFFIRMATION SECTION */
+        .aff-card { background: white; border-radius: 25px; padding: 25px; margin-bottom: 20px; text-align: center; border-left: 8px solid var(--p); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        #aff-display { font-size: 1.1rem; font-style: italic; color: #444; line-height: 1.5; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+
+        /* COMMUNITY SHARE / CHAT */
+        .community-section { background: white; border-radius: 25px; padding: 20px; margin-bottom: 20px; border: 1px solid #eee; }
+        .chat-area { height: 180px; overflow-y: auto; background: #fdfbff; border-radius: 15px; padding: 15px; margin: 15px 0; border: 1px solid #f0f0f0; }
+        .post { background: var(--lavender); padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.4; border-bottom-left-radius: 2px; }
+        .post b { display: block; font-size: 0.7rem; color: var(--p); margin-bottom: 3px; }
         
-        /* BOTTOM NAV */
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; }
-        .nav-link { text-decoration: none; font-size: 1.5rem; color: #ccc; }
+        .share-input { display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #ddd; outline: none; }
+        .btn-post { background: var(--p); color: white; border: none; padding: 0 20px; border-radius: 12px; cursor: pointer; font-weight: bold; }
+
+        /* NAV */
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .nav-link { text-decoration: none; font-size: 1.5rem; opacity: 0.3; }
         .nav-sun { background: var(--gold); width: 70px; height: 70px; border-radius: 50%; margin-top: -50px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 15px rgba(255,215,0,0.4); }
     </style>
 </head>
 <body>
 
-<div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 <div class="side-menu" id="sideMenu">
-    <h2>Sunshine Menu</h2>
-    <a href="index.html" class="menu-link">🏠 Home Page</a>
-    <a href="journal.html" class="menu-link">📝 Daily Journal</a>
-    <a href="healing-hub.html" class="menu-link">☀️ Healing Hub</a>
-    <a href="community.html" class="menu-link">👥 Community Share</a>
-    <a href="profile.html" class="menu-link">👤 My Private Profile</a>
-    <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
-    <p style="font-size:0.7rem; color:#aaa; padding:10px;">Version 2.0 - Always Updated</p>
+    <h2 style="color:var(--p); font-family: Georgia, serif;">Sunshine Menu</h2>
+    <a href="index.html" style="display:block; padding:15px; text-decoration:none; color:#333; font-weight:bold; border-bottom:1px solid #eee;">🏠 Home</a>
+    <a href="healing-hub.html" style="display:block; padding:15px; text-decoration:none; color:#333; font-weight:bold; border-bottom:1px solid #eee;">☀️ Healing Hub</a>
+    <a href="profile.html" style="display:block; padding:15px; text-decoration:none; color:#333; font-weight:bold; border-bottom:1px solid #eee;">👤 Profile Settings</a>
 </div>
 
 <div class="top-bar">
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    <div style="font-weight:bold; color:var(--p); font-size:1.2rem;">Sunshine Beam</div>
-    <div class="notif-bell" onclick="checkNotif()">🔔<div class="badge" id="badge"></div></div>
+    <div onclick="toggleMenu()" style="font-size:1.5rem; cursor:pointer;">☰</div>
+    <div style="font-family: Georgia; font-weight:bold; color:var(--p); font-size:1.3rem;">Sunshine Beam</div>
+    <div style="font-size:1.5rem; cursor:pointer;" onclick="alert('Checking for community updates...')">🔔</div>
 </div>
 
 <div class="container">
-    <button class="emergency-btn" onclick="alert('Calling International Emergency Support...')">🆘 EMERGENCY HELP</button>
+    <button class="sos-btn" onclick="location.href='healing-hub.html'">🆘 GET EMERGENCY HELP</button>
 
-    <div class="card">
-        <b style="color:var(--p); font-size:0.8rem; display:block; margin-bottom:10px;">DAILY LIGHT</b>
-        <div id="aff-text" style="font-style:italic; font-size:1.1rem;">"You are doing better than you think you are."</div>
-        <button onclick="newAff()" style="margin-top:15px; border:none; background:#f0f0f0; padding:8px 15px; border-radius:15px; cursor:pointer;">New✨</button>
+    <div class="aff-card">
+        <div id="aff-display">"Loading your daily light..."</div>
+        <button onclick="rotateAffirmation()" style="background:var(--bg); border:none; color:var(--p); padding:8px 15px; border-radius:15px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:0.75rem;">Give me another ✨</button>
     </div>
 
-    <div class="card">
-        <p style="font-weight:bold; margin-bottom:15px;">How are you feeling?</p>
-        <div style="display:flex; justify-content:space-around;">
-            <span onclick="triggerNotif()" style="font-size:2.2rem; cursor:pointer;">😊</span>
-            <span onclick="triggerNotif()" style="font-size:2.2rem; cursor:pointer;">🙂</span>
-            <span onclick="triggerNotif()" style="font-size:2.2rem; cursor:pointer;">🙁</span>
-            <span onclick="triggerNotif()" style="font-size:2.2rem; cursor:pointer;">😭</span>
+    <div class="community-section">
+        <b style="color:var(--p); font-size:0.9rem;">Community Share</b>
+        <p style="font-size:0.7rem; color:#888; margin: 2px 0 10px;">A safe space to talk about pain and healing.</p>
+        
+        <div class="chat-area" id="chatbox">
+            <div class="post"><b>Friend from Korea</b>I'm having a hard night. The silence feels heavy.</div>
+            <div class="post"><b>Friend from Lithuania</b>I hear you. Take a deep breath. We are in this together. 💜</div>
+            <div class="post"><b>Sunshine Team</b>It's okay to not be okay. Your feelings are valid here.</div>
+        </div>
+
+        <div class="share-input">
+            <input type="text" id="userInput" placeholder="Share your thoughts or pain...">
+            <button class="btn-post" onclick="postToCommunity()">Share</button>
         </div>
     </div>
 </div>
 
 <nav>
-    <a href="index.html" class="nav-link" style="color:var(--p)">🏠</a>
+    <a href="index.html" class="nav-link" style="opacity:1; color:var(--p);">🏠</a>
     <a href="healing-hub.html" class="nav-sun">☀️</a>
     <a href="profile.html" class="nav-link">👤</a>
 </nav>
 
 <script>
-    function toggleMenu() {
-        const menu = document.getElementById('sideMenu');
-        const overlay = document.getElementById('overlay');
-        menu.classList.toggle('open');
-        overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
+    // MASSIVE AFFIRMATION LIBRARY
+    const affirmations = [
+        "I am gentle with myself. I am doing my best.",
+        "This pain is real, but it is not my whole story.",
+        "I deserve peace, even on my darkest days.",
+        "I have survived 100% of my hardest moments so far.",
+        "My value is not defined by how productive I am today.",
+        "It is okay to rest. It is okay to start over.",
+        "I am breathing, and that is a victory.",
+        "I am allowed to take up space and express my pain.",
+        "Small steps still move me forward.",
+        "I am loved, even when I don't feel like I am.",
+        "Tomorrow is a fresh start, and I am worthy of it."
+    ];
+
+    function rotateAffirmation() {
+        const text = affirmations[Math.floor(Math.random() * affirmations.length)];
+        document.getElementById('aff-display').innerText = `"${text}"`;
     }
 
-    function triggerNotif() { document.getElementById('badge').style.display = 'block'; }
-
-    function checkNotif() {
-        if(document.getElementById('badge').style.display === 'block') {
-            alert("New Activity: Someone in Lithuania just shared a song! 🎵");
-            document.getElementById('badge').style.display = 'none';
-        } else {
-            alert("No new notifications.");
+    // COMMUNITY SHARING LOGIC
+    function postToCommunity() {
+        const input = document.getElementById('userInput');
+        const chat = document.getElementById('chatbox');
+        if(input.value.trim() !== "") {
+            const newPost = document.createElement('div');
+            newPost.className = "post";
+            newPost.style.background = "#fff"; // Make user posts stand out
+            newPost.style.border = "1px solid #eadeff";
+            newPost.innerHTML = `<b>Me</b>${input.value}`;
+            chat.appendChild(newPost);
+            chat.scrollTop = chat.scrollHeight;
+            input.value = "";
         }
     }
 
-    const lines = ["You are enough.", "Peace begins with a breath.", "You are brave.", "Keep going."];
-    function newAff() {
-        document.getElementById('aff-text').innerText = `"${lines[Math.floor(Math.random()*lines.length)]}"`;
+    function toggleMenu() {
+        document.getElementById('sideMenu').classList.toggle('open');
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
     }
 
-    // Cache fix for back button
+    // BACK BUTTON FIX: Forces a fresh reload every time
     window.onpageshow = function(event) {
-        if (event.persisted) { window.location.reload(); }
+        rotateAffirmation(); // Load a random one immediately
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            window.location.reload();
+        }
     };
 </script>
 
