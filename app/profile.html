@@ -2,24 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunshine Beam - Private Profile</title>
+    <style>
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --shield: #4caf50; }
+        
+        body { 
+            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 110px;
+            background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%),
+                              url('https://www.transparenttextures.com/patterns/floral-paper.png');
+            background-attachment: fixed;
+        }
+
+        .container { max-width: 480px; margin: 0 auto; padding: 20px; text-align: center; }
+
+        /* Profile Header */
+        .profile-pic { width: 100px; height: 100px; border-radius: 50%; background: #eadeff; border: 4px solid white; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 15px; }
+
+        .card { background: var(--white); border-radius: 25px; padding: 25px; margin-top: 10px; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); border: 1px solid rgba(157, 129, 186, 0.1); }
+
+        .privacy-badge { display: inline-flex; align-items: center; gap: 5px; color: var(--shield); font-size: 0.8rem; font-weight: bold; margin-bottom: 20px; }
+
+        /* Form Fields */
+        .info-group { text-align: left; margin-bottom: 15px; }
+        .info-group label { display: block; font-size: 0.75rem; font-weight: bold; color: var(--p); margin-bottom: 5px; }
+        .info-field { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #eee; background: #fafafa; font-size: 0.95rem; box-sizing: border-box; color: #5a4a75; }
+
+        /* Hidden text style */
+        .hidden-info { filter: blur(4px); transition: 0.3s; cursor: pointer; }
+        .hidden-info:hover { filter: blur(0); }
+
+        .save-btn { background: var(--p); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; width: 100%; margin-top: 10px; cursor: pointer; }
+
+        /* Pop-up Overlay */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 2000; }
+        .popup { background: white; padding: 30px; border-radius: 25px; width: 80%; max-width: 320px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .popup h3 { color: var(--shield); margin-top: 0; }
+        .popup p { font-size: 0.85rem; line-height: 1.4; color: #666; }
+        .popup-btn { background: var(--shield); color: white; border: none; padding: 10px 20px; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+
+        /* Bottom Nav Bar */
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .nav-link { text-decoration: none; font-size: 1.5rem; color: #ccc; }
+        .nav-link.active { color: var(--p); }
+        .nav-sun { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 15px rgba(255,215,0,0.4); text-decoration: none; }
+    </style>
 </head>
 <body>
-    <div class="app-wrapper">
-        <header><h1>Profile</h1></header>
-        <div class="card">
-            <h2>Private Safety Card</h2>
-            <input type="text" placeholder="Your Name" style="width:100%; padding:10px; margin-bottom:10px;">
-            <button class="btn">Save Locally</button>
+
+<div class="container">
+    <div class="profile-pic">👤</div>
+    <h2>My Profile</h2>
+    
+    <div class="card">
+        <div class="privacy-badge">
+            🛡️ Privacy Shield Active
         </div>
 
-        <nav>
-            <a href="index.html" class="nav-item">🏠</a>
-            <a href="journal.html" class="nav-item">📝</a>
-            <a href="tools.html" class="nav-center">🌞</a>
-            <a href="profile.html" class="nav-item active">👤</a>
-        </nav>
+        <div class="info-group">
+            <label>FULL NAME</label>
+            <input type="text" class="info-field hidden-info" value="John Doe" readonly>
+        </div>
+
+        <div class="info-group">
+            <label>CONTACT NUMBER</label>
+            <input type="text" class="info-field hidden-info" value="+370 123 45678" readonly>
+        </div>
+
+        <div class="info-group">
+            <label>COUNTRY</label>
+            <input type="text" class="info-field" value="Lithuania" readonly>
+        </div>
+
+        <button class="save-btn" onclick="showPrivacyAlert()">Update Settings</button>
+        <p style="font-size: 0.7rem; color: #aaa; margin-top: 15px;">Tap blurred fields to reveal to yourself.</p>
     </div>
+</div>
+
+<div class="overlay" id="privacy-overlay">
+    <div class="popup">
+        <h3>Privacy Confirmed</h3>
+        <p>All your information is encrypted and <b>hidden</b> from other users. No one else can see your name or contact number.</p>
+        <button class="popup-btn" onclick="closePrivacyAlert()">I Understand</button>
+    </div>
+</div>
+
+<nav>
+    <a href="index.html" class="nav-link">🏠</a>
+    <a href="journal.html" class="nav-link">📝</a>
+    <a href="healing-hub.html" class="nav-sun">☀️</a>
+    <a href="community.html" class="nav-link">👥</a>
+    <a href="profile.html" class="nav-link active">👤</a>
+</nav>
+
+<script>
+    function showPrivacyAlert() {
+        document.getElementById('privacy-overlay').style.display = 'flex';
+    }
+
+    function closePrivacyAlert() {
+        document.getElementById('privacy-overlay').style.display = 'none';
+    }
+
+    // Show popup automatically on first visit to Profile
+    window.onload = () => {
+        setTimeout(showPrivacyAlert, 500);
+    };
+</script>
+
 </body>
 </html>
