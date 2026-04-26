@@ -3,100 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healing Hub - High Performance</title>
+    <title>Healing Hub</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 90px; color: #333; overflow-x: hidden; }
-        .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
+        body { margin: 0; font-family: sans-serif; background: var(--bg); padding-bottom: 100px; }
+        .wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
+        h1 { text-align: center; color: var(--p); font-family: serif; }
+        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { color: var(--p); font-size: 1.1rem; border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
         
-        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.2rem; margin: 15px 0; }
-        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        /* Fixed Scroll Boxes */
+        .box { height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-top: 10px; }
+        .row { display: flex; justify-content: space-between; align-items: center; background: #fafafa; padding: 12px; border-radius: 10px; border: 1px solid #eee; }
+        .info { font-size: 0.85rem; color: #333; line-height: 1.3; }
+        .info b { color: var(--p); display: block; }
         
-        /* Optimized List Style */
-        .list-container { display: flex; flex-direction: column; gap: 10px; }
-        .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #fafafa; border-radius: 12px; border: 1px solid #eee; }
-        .info { font-size: 0.85rem; flex: 1; line-height: 1.4; }
-        .info b { color: var(--p); display: block; font-size: 0.9rem; }
-        
-        .btn { 
-            background: var(--p); color: white; border: none; padding: 8px 16px; 
-            border-radius: 18px; font-size: 0.75rem; font-weight: bold; cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: 0.2s;
-        }
-        .btn:active { transform: scale(0.95); background: var(--gold); }
+        /* Big Easy Buttons */
+        .btn { background: var(--p); color: white; border: none; padding: 10px 15px; border-radius: 15px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 0.75rem; }
+        .btn:active { background: var(--gold); }
+        .btn-red { background: #ff5e5e; }
 
-        /* Loader */
-        .loading-text { text-align: center; font-size: 0.8rem; color: #999; padding: 20px; }
-
-        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 65px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 8px 25px rgba(0,0,0,0.15); z-index: 1000; }
-        .nav-center { background: var(--gold); width: 55px; height: 55px; border-radius: 50%; margin-top: -35px; border: 4px solid white; display: flex; align-items: center; justify-content: center; }
+        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 65px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-    <div class="app-wrapper">
-        <h1>Sunshine Beam</h1>
+<div class="wrapper">
+    <h1>Sunshine Beam</h1>
 
-        <div class="card">
-            <h2>🎶 Global Healing Melody</h2>
-            <div id="melody-list" class="list-container"></div>
-            <div id="load-more-trigger" class="loading-text">Scroll for more inspiration...</div>
-        </div>
-
-        <nav>
-            <a href="index.html" style="text-decoration:none; font-size:1.4rem;">🏠</a>
-            <a href="tools.html" class="nav-center" style="text-decoration:none; font-size:1.4rem;">🌞</a>
-            <a href="profile.html" style="text-decoration:none; font-size:1.4rem;">👤</a>
-        </nav>
+    <div class="card">
+        <h2>🎶 Healing Melody (Global)</h2>
+        <div class="box" id="m-list"></div>
     </div>
 
-    <script>
-        // Data for global variety
-        const artists = ["BTS", "IU", "Seventeen", "Coldplay", "Stray Kids", "Imagine Dragons", "NewJeans", "Blackpink", "Arijit Singh", "Taylor Swift"];
-        const moods = ["Motivational Anthem", "432Hz Healing", "Self-Love Mix", "Zen Energy", "Peaceful Morning"];
-        
-        let currentIndex = 0;
-        const batchSize = 20; // Only load 20 at a time for speed
+    <div class="card">
+        <h2>🌟 Celebrity Wisdom</h2>
+        <div class="box" id="w-list"></div>
+    </div>
 
-        function forceOpen(q) {
-            const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
-            window.open(url, '_blank');
+    <div class="card">
+        <h2>😂 Precious Laughter</h2>
+        <div class="box" id="l-list"></div>
+    </div>
+</div>
+
+<nav>
+    <a href="index.html" style="text-decoration:none;">🏠</a>
+    <a href="tools.html" style="font-size:2rem; text-decoration:none;">🌞</a>
+    <a href="profile.html" style="text-decoration:none;">👤</a>
+</nav>
+
+<script>
+    const artists = ["BTS", "IU", "Seventeen", "Coldplay", "Stray Kids", "Taylor Swift", "Imagine Dragons", "NewJeans"];
+    const moods = ["Healing song", "Motivational anthem", "Zen melody", "Self love song", "Positive vibe"];
+    const celebs = [
+        {n: "RM (BTS)", q: "“Speak yourself.”"},
+        {n: "Jin (BTS)", q: "“I am the one I should love.”"},
+        {n: "Oprah", q: "“Turn wounds to wisdom.”"},
+        {n: "IU", q: "“Love poem for you.”"}
+    ];
+
+    function start() {
+        const m = document.getElementById('m-list');
+        const w = document.getElementById('w-list');
+        const l = document.getElementById('l-list');
+
+        // 500 Unique Global Songs
+        for(let i=1; i<=500; i++) {
+            let art = artists[i % artists.length];
+            let md = moods[i % moods.length];
+            let search = `${art} ${md} ${i}`;
+            m.innerHTML += `<div class="row"><div class="info"><b>${art}</b>${md}</div><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(search)}" target="_blank" class="btn">OPEN</a></div>`;
         }
 
-        function createRows() {
-            const list = document.getElementById('melody-list');
-            const target = currentIndex + batchSize;
-
-            for (let i = currentIndex; i < target && i < 2000; i++) {
-                let artist = artists[i % artists.length];
-                let mood = moods[(i + 2) % moods.length];
-                let query = `${artist} ${mood} song ${i + 1}`;
-
-                const div = document.createElement('div');
-                div.className = 'row';
-                div.innerHTML = `
-                    <div class="info"><b>${artist}</b>${mood}</div>
-                    <button class="btn" onclick="forceOpen('${query}')">OPEN</button>
-                `;
-                list.appendChild(div);
-            }
-            currentIndex = target;
+        // Wisdom
+        for(let i=1; i<=100; i++) {
+            let c = celebs[i % celebs.length];
+            w.innerHTML += `<div class="row"><div class="info"><b>${c.n}</b>${c.q}</div><a href="https://www.google.com/search?q=${encodeURIComponent(c.n + ' quotes')}" target="_blank" class="btn">READ</a></div>`;
         }
 
-        // Detect scroll to bottom to load more (Infinite Scroll)
-        window.onscroll = function() {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
-                if (currentIndex < 2000) {
-                    createRows();
-                } else {
-                    document.getElementById('load-more-trigger').innerText = "You've reached the end of the sunshine!";
-                }
-            }
-        };
+        // Laughter
+        for(let i=1; i<=300; i++) {
+            let search = `funny wholesome shorts ${i}`;
+            l.innerHTML += `<div class="row"><div class="info"><b>Video Meme</b>Joy #${i}</div><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(search)}" target="_blank" class="btn btn-red">WATCH</a></div>`;
+        }
+    }
+    window.onload = start;
+</script>
 
-        // Initial Load
-        window.onload = createRows;
-    </script>
 </body>
 </html>
