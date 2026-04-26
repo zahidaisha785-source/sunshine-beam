@@ -3,45 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Master Page</title>
+    <title>Sunshine Beam</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --gold: #ffd700; --white: rgba(255, 255, 255, 0.9); }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; }
         
         body { 
-            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; 
-            padding-bottom: 120px; overflow-x: hidden;
-            /* FLORAL SIDES - Using your requested aesthetic */
-            background-image: linear-gradient(to right, rgba(234,222,255,0.8) 0%, rgba(248,244,255,0) 20%, rgba(248,244,255,0) 80%, rgba(234,222,255,0.8) 100%),
+            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 110px;
+            /* FLORAL BORDER EFFECT */
+            background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%),
                               url('https://www.transparenttextures.com/patterns/floral-paper.png');
             background-attachment: fixed;
         }
 
-        .container { max-width: 450px; margin: 0 auto; position: relative; z-index: 10; }
+        .container { max-width: 480px; margin: 0 auto; position: relative; }
 
         /* Header Area */
         .header { text-align: center; padding: 40px 20px 10px; }
-        h1 { font-family: 'Georgia', serif; font-size: 2.4rem; color: #6b4f9a; margin: 0; }
-        
-        /* Universal Card Style */
-        .card { 
-            background: var(--white); border-radius: 25px; padding: 20px; 
-            margin: 15px; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); 
-            backdrop-filter: blur(5px); border: 1px solid rgba(157, 129, 186, 0.1);
-        }
+        .header h1 { font-family: 'Georgia', serif; font-size: 2.4rem; color: #6b4f9a; margin: 0; }
+        .header p { font-size: 0.8rem; margin: 5px 0; opacity: 0.8; }
 
-        /* 1. MOOD EMOJIS */
-        .mood-box { display: flex; justify-content: space-around; margin-top: 10px; }
-        .mood-btn { border: none; background: none; font-size: 2.2rem; cursor: pointer; transition: 0.3s; opacity: 0.5; }
-        .mood-btn.active { opacity: 1; transform: scale(1.2); }
+        /* Card Styling */
+        .card { background: var(--white); border-radius: 25px; padding: 20px; margin: 15px; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); border: 1px solid rgba(157, 129, 186, 0.1); backdrop-filter: blur(5px); }
 
-        /* 2. COMMUNITY & JOURNAL SPLIT */
+        /* Mood Selector */
+        .mood-row { display: flex; justify-content: space-around; margin-top: 15px; }
+        .mood-btn { border: none; background: none; cursor: pointer; transition: 0.3s; text-align: center; }
+        .mood-btn span { display: block; font-size: 2.2rem; }
+        .mood-btn p { font-size: 0.7rem; margin: 5px 0; font-weight: bold; }
+        .mood-btn:active { transform: scale(1.2); }
+
+        /* Journal & Affirmation Split */
         .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
-        .small-card { background: var(--white); border-radius: 20px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .small-card b { font-size: 0.8rem; color: var(--p); display: block; margin-bottom: 5px; }
-        textarea { width: 100%; height: 50px; border: 1px solid #eee; border-radius: 10px; padding: 5px; font-size: 0.7rem; resize: none; }
+        .mini-card { background: var(--white); border-radius: 20px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .mini-card b { font-size: 0.85rem; color: var(--p); display: block; margin-bottom: 5px; }
+        textarea { width: 100%; height: 60px; border: 1px solid #eee; border-radius: 10px; padding: 8px; font-size: 0.8rem; resize: none; box-sizing: border-box; background: #fafafa; }
+        .btn-sm { background: var(--p); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; margin-top: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; }
 
-        /* 3. MERGED 153-COUNTRY CATEGORIES */
-        .category-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 10px 15px; scrollbar-width: none; }
-        .cat-tab { 
-            padding: 10px 18px; border-radius: 20px; border: none; background: #e0d5f0; 
-            color: #6b4f9a; font-weight: bold; white-space: nowrap; font-size:
+        /* 153 COUNTRY CATEGORY SECTION */
+        .tabs { display: flex; overflow-x: auto; gap: 10px; padding: 15px; scrollbar-width: none; }
+        .tab { padding: 10px 20px; border-radius: 20px; border: none; background: #e0d5f0; color: #6b4f9a; font-weight: bold; white-space: nowrap; font-size: 0.85rem; cursor: pointer; }
+        .tab.active { background: var(--p); color: white; }
+
+        .list-container { max-height: 400px; overflow-y: auto; }
+        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #f0f0f0; }
+        .list-info b { display: block; font-size: 0.9rem; color: var(--p); }
+        .list-info span { font-size: 0.7rem; color: #888; }
+        .open-btn { background: var(--p); color: white; text-decoration: none; padding: 8px 14px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; }
+
+        /* Navigation */
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .nav-item { text-decoration: none; font-size: 1.6rem; color: #ccc; }
+        .nav-center { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; box-shadow: 0 5px 15px rgba(255,215,0,0.4); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Sunshine Beam</h1>
+        <p>Small steps. Brighter days. You're not alone. 💜</p>
+    </div>
+
+    <div class="card">
+        <div class="mood-row">
+            <div class="mood-btn"><span>😊</span><p>Happy</p></div>
+            <div class="mood-btn"><span>🙂</span><p>Okay</p></div>
+            <div class="mood-btn"><span>🙁</span><p>Low</p></div>
+            <div class="mood-btn"><span>😫</span><p>Stressed</p></div>
+            <div class="mood-btn"><span>😭</span><p>Overwhelmed</p></div>
+        </div>
+    </div>
+
+    <div class="split">
+        <div class="mini-card">
+            <b>📝 Journal</b>
+            <textarea placeholder="Write thoughts..."></textarea>
+            <button class="btn-sm" onclick="alert('Saved!')">Save</button>
+        </div>
+        <div class="mini-card">
+            <b>✨ Affirmation</b>
+            <p id="aff-box" style="font-size:0.75rem; font-style:italic; margin:10px 0;">"I am strong and enough."</p>
+            <button class="btn-sm" style="background:#81c784;" onclick="newAff()">New</button>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" onclick="updateHub('Laughter', this)">😂 Laughter</button>
+        <button class="tab" onclick="updateHub('Music', this)">🎶 Songs</button>
+        <button class="tab" onclick="updateHub('Wisdom', this)">🌟 Wisdom</button>
+        <button class="tab" onclick="updateHub('Yoga', this)">🧘 Yoga</button>
+    </div>
+
+    <div class="card" style="margin-top: 0;">
+        <div class="list-container" id="hub-list">
+            </div>
+    </div>
+</div>
+
+<nav>
+    <a href="index.html" class="nav-item" style="color:var(--p)">🏠</a>
+    <a href="journal.html" class="nav-item">📝</a>
+    <a href="tools.html" class="nav-center">☀️</a>
+    <a href="profile.html" class="nav-item">👤</a>
+</nav>
+
+<script>
+    const nations = ["India", "USA", "UK", "Nigeria", "Japan", "Brazil", "France", "Germany", "Mexico", "Thailand", "Canada", "Turkey", "Spain", "Italy"];
+    
+    function updateHub(cat, btn) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const list = document.getElementById('hub-list');
+        list.innerHTML = "";
+
+        // Generating 153 Countries with Priority on Lithuania and Korea
+        for(let i=1; i<=153; i++) {
+            let country, detail;
+            
+            if (i % 3 === 1) { 
+                country = "South Korea"; 
+                detail = "Special Healing Mix"; 
+            } else if (i % 3 === 2) { 
+                country = "Lithuania"; 
+                detail = "Baltic Peace Mix"; 
+            } else { 
+                country = nations[i % nations.length]; 
+                detail = "Global " + cat; 
+            }
+
+            let query = `${country} ${cat} healing`;
+            let link = (cat === 'Wisdom') ? `https://www.google.com/search?q=${encodeURIComponent(query)}` : `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+
+            list.innerHTML += `
+                <div class="list-item">
+                    <div class="list-info">
+                        <b>${country} ${cat}</b>
+                        <span>${detail} #${i}</span>
+                    </div>
+                    <a href="${link}" target="_blank" class="open-btn">OPEN</a>
+                </div>`;
+        }
+    }
+
+    function newAff() {
+        const a = ["I am healing.", "I am capable.", "I am loved.", "Today is a gift."];
+        document.getElementById('aff-box').innerText = '"' + a[Math.floor(Math.random()*a.length)] + '"';
+    }
+
+    window.onload = () => updateHub('Laughter', document.querySelector('.tab'));
+</script>
+
+</body>
+</html>
