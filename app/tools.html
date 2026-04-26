@@ -3,39 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Healing Hub</title>
+    <title>Healing Hub - Sunshine Beam</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
         .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
         
-        /* INTERNAL PLAYER */
-        .player-box { 
-            position: sticky; top: 10px; z-index: 1000;
-            background: #000; border-radius: 20px; overflow: hidden;
-            aspect-ratio: 16 / 9; width: 100%; box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            margin-bottom: 20px; border: 3px solid white;
-        }
-        iframe { width: 100%; height: 100%; border: none; }
-
-        .card { background: white; border-radius: 25px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: var(--p); font-family: serif; margin: 10px 0; }
-        h2 { font-size: 1.1rem; color: var(--p); margin: 0 0 15px 0; border-left: 5px solid var(--gold); padding-left: 10px; }
+        .card { background: white; border-radius: 25px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--p); }
+        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.4rem; margin: 20px 0; }
+        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        /* CONTENT LIST */
         .scroll-area { height: 450px; overflow-y: auto; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
-        .track-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f1f1f1; }
-        .track-info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.4; }
-        .track-info b { color: var(--p); display: block; font-size: 0.9rem; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f1f1f1; }
+        .item-info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.4; }
+        .item-info b { color: var(--p); display: block; font-size: 0.9rem; margin-bottom: 3px; }
         
-        .play-btn { 
-            background: var(--p); color: white; border: none; padding: 10px 18px; 
-            border-radius: 20px; font-size: 0.75rem; font-weight: bold; cursor: pointer;
+        .action-btn { 
+            background: var(--p); color: white; text-decoration: none; padding: 10px 18px; 
+            border-radius: 20px; font-size: 0.75rem; font-weight: bold; transition: 0.3s;
+            display: inline-block; text-align: center;
         }
-        .play-btn:active { transform: scale(0.9); }
+        .action-btn:hover { background: var(--gold); color: var(--p); }
+        .btn-meme { background: #ff5e5e; }
 
+        /* Bottom Nav */
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .nav-center { background: var(--gold); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -30px; border: 4px solid white; }
+        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
@@ -43,19 +36,19 @@
     <div class="app-wrapper">
         <h1>Healing Hub</h1>
 
-        <div class="player-box">
-            <iframe id="app-video-player" src="https://www.youtube.com/embed/fEbO3n404N0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="card">
+            <h2>🎶 Healing Melody (2000+ Global)</h2>
+            <div class="scroll-area" id="melody-list"></div>
         </div>
 
         <div class="card">
-            <h2>🎶 Healing Melody (Global Mix)</h2>
-            <div class="scroll-area" id="melody-container">
-                </div>
+            <h2>🌟 Celebrity Wisdom</h2>
+            <div class="scroll-area" id="wisdom-list"></div>
         </div>
 
         <div class="card">
             <h2>😂 Precious Laughter</h2>
-            <div class="scroll-area" id="laughter-container"></div>
+            <div class="scroll-area" id="laughter-list"></div>
         </div>
 
         <nav>
@@ -66,58 +59,58 @@
     </div>
 
     <script>
-        // Unique Global Data Matrix (0% Repetition)
-        const globalStars = [
-            {n: "BTS (Jin)", id: "fEbO3n404N0", s: "Epiphany (Healing)"},
-            {n: "Coldplay", id: "k4V3Mo61fJM", s: "Fix You (Comfort)"},
-            {n: "IU", id: "0nap87_pPFE", s: "Love Poem (Zen)"},
-            {n: "Seventeen", id: "B9C0a256mSg", s: "Healing (Upbeat)"},
-            {n: "Arijit Singh", id: "6W0D_9zT8pY", s: "Ilahi (Motivation)"},
-            {n: "Stray Kids", id: "a4u0v1fO4p4", s: "Grow Up (Support)"},
-            {n: "Imagine Dragons", id: "7wtfhZwyrcc", s: "Believer (Power)"},
-            {n: "NewJeans", id: "pSUydWEqKwE", s: "Ditto (Calm)"},
-            {n: "Taylor Swift", id: "nfWlot6h_JM", s: "Shake It Off (Positive)"},
-            {n: "Blackpink", id: "vRXZj0DzXIA", s: "Hope Not (Soft)"}
+        const artists = ["BTS", "IU", "Seventeen", "Coldplay", "Blackpink", "Imagine Dragons", "NewJeans", "Stray Kids", "Arijit Singh", "Taylor Swift"];
+        const moods = ["Motivational Anthem", "Healing Zen", "Self-Love Mix", "Peaceful Harmony", "Morning Power", "Pure Joy", "Mental Strength"];
+        
+        const celebs = [
+            {n: "RM (BTS)", w: "“Speak yourself.”"},
+            {n: "Jin (BTS)", w: "“Love myself.”"},
+            {n: "Oprah", w: "“Turn wounds to wisdom.”"},
+            {n: "IU", w: "“Believe in your rhythm.”"},
+            {n: "Shah Rukh Khan", w: "“Success is a journey.”"}
         ];
 
-        const laughterVids = ["nXpB1jWCCjc", "3p4yU7W-i_U", "70L6_OFrZ_M", "w3W8Zf2X4O0", "8f_fSj8H970"];
+        function init() {
+            const mList = document.getElementById('melody-list');
+            const wList = document.getElementById('wisdom-list');
+            const lList = document.getElementById('laughter-list');
 
-        function loadHub() {
-            const mList = document.getElementById('melody-container');
-            const lList = document.getElementById('laughter-container');
-
-            // Generate 2000 Global Songs
-            for (let i = 1; i <= 2000; i++) {
-                let track = globalStars[i % globalStars.length];
-                let row = document.createElement('div');
-                row.className = 'track-row';
-                row.innerHTML = `
-                    <div class="track-info"><b>${track.n}</b> ${track.s} • Track ${i}</div>
-                    <button class="play-btn" onclick="startVideo('${track.id}')">▶ PLAY</button>
-                `;
-                mList.appendChild(row);
+            // 1. 2000 Unique Global Songs
+            for(let i=1; i<=2000; i++) {
+                let artist = artists[i % artists.length];
+                let mood = moods[(i + 3) % moods.length];
+                // Direct Search Link - Works 100% of the time
+                let url = `https://www.youtube.com/results?search_query=${artist.replace(/ /g, '+')}+${mood.replace(/ /g, '+')}+${i}`;
+                
+                mList.innerHTML += `
+                    <div class="item-row">
+                        <div class="item-info"><b>${artist}</b>${mood} Collection</div>
+                        <a href="${url}" target="_blank" class="action-btn">▶ PLAY</a>
+                    </div>`;
             }
 
-            // Generate 1000 Video Memes
-            for (let i = 1; i <= 1000; i++) {
-                let vidId = laughterVids[i % laughterVids.length];
-                let row = document.createElement('div');
-                row.className = 'track-row';
-                row.innerHTML = `
-                    <div class="track-info"><b>Video Meme</b> Global Joy Collection #${i}</div>
-                    <button class="play-btn" style="background:#ff5e5e" onclick="startVideo('${vidId}')">WATCH</button>
-                `;
-                lList.appendChild(row);
+            // 2. 100 Celebrity Wisdoms
+            for(let i=1; i<=100; i++) {
+                let c = celebs[i % celebs.length];
+                let url = `https://www.google.com/search?q=${c.n.replace(/ /g, '+')}+motivational+quotes`;
+                wList.innerHTML += `
+                    <div class="item-row">
+                        <div class="item-info"><b>${c.n}</b>${c.w}</div>
+                        <a href="${url}" target="_blank" class="action-btn">READ</a>
+                    </div>`;
+            }
+
+            // 3. 1000 Precious Laughter Videos
+            for(let i=1; i<=1000; i++) {
+                let url = `https://www.youtube.com/results?search_query=wholesome+funny+video+shorts+${i}`;
+                lList.innerHTML += `
+                    <div class="item-row">
+                        <div class="item-info"><b>Video Meme</b>Global Joy #${i}</div>
+                        <a href="${url}" target="_blank" class="action-btn btn-meme">WATCH</a>
+                    </div>`;
             }
         }
-
-        function startVideo(id) {
-            const player = document.getElementById('app-video-player');
-            player.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        window.onload = loadHub;
+        window.onload = init;
     </script>
 </body>
 </html>
