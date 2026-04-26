@@ -3,60 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Mental Healing Hub</title>
+    <title>Sunshine Beam - Proper Build</title>
     <style>
-        :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; --accent: #4caf50; }
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
+        :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 100px; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
+        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid var(--p); }
+        h2 { font-size: 1rem; color: var(--p); border-bottom: 2px solid var(--gold); padding-bottom: 5px; margin-bottom: 12px; }
         
-        header { text-align: center; padding: 20px 0; }
-        header h1 { color: var(--p); font-family: serif; font-size: 2.4rem; margin: 0; }
-        header p { font-size: 0.9rem; color: #666; margin-top: 5px; }
-
-        .card { background: white; border-radius: 25px; padding: 18px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 6px solid var(--p); }
-        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        /* Fixed scroll areas to prevent crashing */
+        .scroll-area { height: 320px; overflow-y: auto; background: #fafafa; border-radius: 12px; border: 1px solid #eee; }
+        .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #f1f1f1; }
+        .info { font-size: 0.85rem; flex: 1; padding-right: 8px; }
+        .info b { color: var(--p); display: block; font-size: 0.9rem; }
+        .info p { margin: 3px 0; font-style: italic; color: #555; font-size: 0.8rem; }
         
-        /* Scrollable Section Control */
-        .scroll-container { height: 320px; overflow-y: auto; padding-right: 5px; scrollbar-width: thin; }
-        .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; background: #f9f9f9; border-radius: 15px; border: 1px solid #eee; transition: 0.3s; }
-        .row:hover { border-color: var(--p); background: #fff; }
-
-        .info { flex: 1; padding-right: 10px; }
-        .info b { display: block; color: var(--p); font-size: 0.95rem; }
-        .info span { font-size: 0.75rem; color: #777; font-weight: 600; }
-        .info p { margin: 3px 0 0; font-size: 0.8rem; font-style: italic; color: #555; }
-
-        /* Action Buttons */
-        .btn { text-decoration: none; padding: 10px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; color: white; text-align: center; min-width: 70px; }
-        .btn-music { background: var(--p); }
-        .btn-wisdom { background: var(--gold); color: #444; }
-        .btn-meme { background: #ff5e5e; }
-        .btn-yoga { background: var(--accent); }
-        .btn:active { transform: scale(0.9); }
-
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 420px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.2); z-index: 1000; }
-        .nav-active { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 5px solid white; display: flex; align-items: center; justify-content: center; }
+        .btn { background: var(--p); color: white; text-decoration: none; padding: 8px 14px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; white-space: nowrap; }
+        .btn:active { background: var(--gold); }
+        
+        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 65px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <header>
-        <h1>Sunshine Beam</h1>
-        <p>Your mental stability sanctuary</p>
-    </header>
+    <h1 style="text-align:center; color:var(--p); font-family:serif;">Sunshine Beam</h1>
 
     <div class="card">
         <h2>🎶 Healing Melodies (Global)</h2>
-        <div class="scroll-container" id="music-list"></div>
+        <div class="scroll-area">
+            <div class="row">
+                <div class="info"><b>BTS (Jin)</b>🇰🇷 Epiphany (Self-Love)</div>
+                <a href="https://www.youtube.com/results?search_query=BTS+Jin+Epiphany+healing" target="_blank" class="btn">PLAY</a>
+            </div>
+            <div class="row">
+                <div class="info"><b>The Roop</b>🇱🇹 On Fire (Energy)</div>
+                <a href="https://www.youtube.com/results?search_query=The+Roop+Lithuania+songs" target="_blank" class="btn">PLAY</a>
+            </div>
+            <div id="extra-music"></div> </div>
     </div>
 
     <div class="card">
         <h2>🌟 Celebrity Wisdom & Sayings</h2>
-        <div class="scroll-container" id="wisdom-list"></div>
+        <div class="scroll-area">
+            <div class="row">
+                <div class="info"><b>RM (BTS)</b>🇰🇷 "Speak Yourself"</div>
+                <a href="https://www.google.com/search?q=RM+BTS+quotes+healing" target="_blank" class="btn">READ</a>
+            </div>
+            <div class="row">
+                <div class="info"><b>Vydūnas</b>🇱🇹 "Soul is Light"</div>
+                <a href="https://www.google.com/search?q=Vydunas+Lithuanian+quotes" target="_blank" class="btn">READ</a>
+            </div>
+            <div id="extra-wisdom"></div>
+        </div>
     </div>
 
     <div class="card">
-        <h2>😂 Precious Laughter (Memes)</h2>
-        <div class="scroll-container" id="meme-list"></div>
+        <h2>🧘 Healing Flow & 😂 Joy</h2>
+        <div class="scroll-area">
+            <div class="row">
+                <div class="info"><b>Yoga Flow</b>Daily Mental Stability</div>
+                <a href="https://www.youtube.com/results?search_query=yoga+for+mental+health+stability" target="_blank" class="btn" style="background:#4caf50;">START</a>
+            </div>
+            <div class="row">
+                <div class="info"><b>Wholesome Memes</b>Instant Laughter</div>
+                <a href="https://www.youtube.com/results?search_query=wholesome+funny+shorts" target="_blank" class="btn" style="background:#ff5e5e;">WATCH</a>
+            </div>
+            <div id="extra-joy"></div>
+        </div>
     </div>
+</div>
+
+<nav>
+    <a href="index.html" style="text-decoration:none;">🏠</a>
+    <a href="tools.html" style="font-size:1.8rem; text-decoration:none;">🌞</a>
+    <a href="profile.html" style="text-decoration:none;">👤</a>
+</nav>
+
+<script>
+    window.onload = function() {
+        // We load extra countries slowly after the page is visible
+        const m = document.getElementById('extra-music');
+        const w = document.getElementById('extra-wisdom');
+        const j = document.getElementById('extra-joy');
+        const countries = ["USA", "India", "UK", "Nigeria", "Brazil", "Japan", "France", "Germany"];
+
+        let mHtml = "";
+        let wHtml = "";
+        let jHtml = "";
+
+        for(let i=1; i<=100; i++) {
+            let c = countries[i % countries.length];
+            mHtml += `<div class="row"><div class="info"><b>${c} Mix</b>Selection #${i}</div><a href="https://www.youtube.com/results?search_query=${c}+healing+music" target="_blank" class="btn">PLAY</a></div>`;
+            wHtml += `<div class="row"><div class="info"><b>${c} Wisdom</b>Saying #${i}</div><a href="https://www.google.com/search?q=${c}+motivational+quotes" target="_blank" class="btn">READ</a></div>`;
+            jHtml += `<div class="row"><div class="info"><b>Global Joy</b>Short #${i}</div><a href="https://www.youtube.com/results?search_query=funny+animals+shorts" target="_blank" class="btn" style="background:#ff5e5e;">WATCH</a></div>`;
+        }
+
+        m.innerHTML = mHtml;
+        w.innerHTML = wHtml;
+        j.innerHTML = jHtml;
+    };
+</script>
+
+</body>
+</html>
