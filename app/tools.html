@@ -3,99 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Global Hub</title>
+    <title>Sunshine Beam - Working Hub</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: sans-serif; background: var(--bg); padding-bottom: 100px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 100px; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
-        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2rem; }
-        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h2 { color: var(--p); font-size: 1rem; border-bottom: 2px solid var(--gold); padding-bottom: 5px; margin-bottom: 15px; }
+        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.2rem; }
         
-        .list-box { height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .item { display: flex; justify-content: space-between; align-items: center; background: #fafafa; padding: 12px; border-radius: 12px; border: 1px solid #eee; }
-        .info { font-size: 0.8rem; line-height: 1.4; }
-        .info b { display: block; color: var(--p); font-size: 0.9rem; }
-        .info span { color: #888; font-size: 0.7rem; font-weight: bold; }
+        /* Fixed Container to prevent black screens */
+        .card { background: white; border-radius: 25px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid var(--p); }
+        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 15px; border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
         
-        .btn { background: var(--p); color: white; text-decoration: none; padding: 10px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
-        .btn:active { background: var(--gold); }
+        .grid-box { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        /* Big Easy Buttons */
+        .action-btn { 
+            background: #fafafa; border: 2px solid #eee; padding: 15px 10px; 
+            border-radius: 15px; text-decoration: none; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
+            transition: 0.2s; cursor: pointer;
+        }
+        .action-btn:active { transform: scale(0.95); background: var(--bg); border-color: var(--p); }
+        .action-btn b { color: var(--p); font-size: 0.9rem; }
+        .action-btn span { font-size: 0.7rem; color: #777; }
+        .flag { font-size: 1.5rem; }
+
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; }
+        .nav-sun { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <h1>Sunshine Beam</h1>
+    <h1>Healing Hub</h1>
 
     <div class="card">
-        <h2>🎶 Global Healing Melody</h2>
-        <div class="list-box" id="melody-list">
-            </div>
+        <h2>🇰🇷 South Korea & 🇱🇹 Lithuania</h2>
+        <div class="grid-box">
+            <a href="https://www.youtube.com/results?search_query=BTS+IU+healing+songs" target="_blank" class="action-btn">
+                <span class="flag">🇰🇷</span><b>K-Pop Healing</b><span>BTS, IU, Seventeen</span>
+            </a>
+            <a href="https://www.youtube.com/results?search_query=The+Roop+Monika+Liu+songs" target="_blank" class="action-btn">
+                <span class="flag">🇱🇹</span><b>Lithuania Hits</b><span>The Roop, Monika</span>
+            </a>
+            <a href="https://www.youtube.com/results?search_query=Stray+Kids+motivational" target="_blank" class="action-btn">
+                <span class="flag">🇰🇷</span><b>K-Pop Power</b><span>Stray Kids, SKZ</span>
+            </a>
+            <a href="https://www.youtube.com/results?search_query=Lithuania+traditional+zen" target="_blank" class="action-btn">
+                <span class="flag">🇱🇹</span><b>LT Zen</b><span>Peaceful Vibes</span>
+            </a>
+        </div>
     </div>
 
     <div class="card">
-        <h2>🌟 World Wisdom</h2>
-        <div class="list-box" id="wisdom-list">
+        <h2>🌍 Global 153 Mix</h2>
+        <div class="grid-box" id="global-mix">
             </div>
     </div>
 </div>
 
 <nav>
-    <a href="index.html" style="text-decoration:none;">🏠</a>
-    <a href="tools.html" style="font-size:2rem; text-decoration:none;">🌞</a>
-    <a href="profile.html" style="text-decoration:none;">👤</a>
+    <a href="index.html" style="text-decoration:none; font-size:1.5rem;">🏠</a>
+    <a href="journal.html" style="text-decoration:none; font-size:1.5rem;">📝</a>
+    <a href="tools.html" class="nav-sun" style="text-decoration:none; font-size:1.5rem;">🌞</a>
+    <a href="profile.html" style="text-decoration:none; font-size:1.5rem;">👤</a>
 </nav>
 
 <script>
-    const korea = ["BTS", "IU", "Seventeen", "Stray Kids", "NewJeans", "Blackpink", "Jin", "RM"];
-    const lithuania = ["The Roop", "Monika Liu", "Donny Montell", "Vaidas Baumila", "GJan", "Jurijus"];
-    const global = ["USA", "India", "UK", "Nigeria", "Brazil", "Japan", "France", "Germany", "Spain", "Italy"];
+    const countries = ["USA", "India", "UK", "Nigeria", "Brazil", "Japan", "France", "Germany", "Mexico", "Thailand", "Egypt", "Turkey", "Canada", "Australia", "Italy", "Spain"];
+    const gList = document.getElementById('global-mix');
 
-    function populate() {
-        const mList = document.getElementById('melody-list');
-        const wList = document.getElementById('wisdom-list');
-        
-        let htmlMusic = "";
-        let htmlWisdom = "";
-
-        // Generate 500 items (enough for variety, small enough to be fast)
-        for(let i=1; i<=500; i++) {
-            let country, artist;
-            
-            if (i % 3 === 0) {
-                country = "South Korea";
-                artist = korea[i % korea.length];
-            } else if (i % 3 === 1) {
-                country = "Lithuania";
-                artist = lithuania[i % lithuania.length];
-            } else {
-                country = global[i % global.length];
-                artist = "Top Global Artist";
-            }
-
-            let searchM = `${artist} ${country} healing song ${i}`;
-            let searchW = `${artist} ${country} motivational quotes wisdom`;
-
-            htmlMusic += `
-                <div class="item">
-                    <div class="info"><span>🌏 ${country}</span><b>${artist}</b>Healing Melody #${i}</div>
-                    <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(searchM)}" target="_blank" class="btn">PLAY</a>
-                </div>`;
-
-            htmlWisdom += `
-                <div class="item">
-                    <div class="info"><span>⭐ ${country}</span><b>${artist} Wisdom</b>Inspiration #${i}</div>
-                    <a href="https://www.google.com/search?q=${encodeURIComponent(searchW)}" target="_blank" class="btn">READ</a>
-                </div>`;
-        }
-        
-        mList.innerHTML = htmlMusic;
-        wList.innerHTML = htmlWisdom;
+    // Create 153 dynamic buttons that actually work
+    for(let i=0; i<153; i++) {
+        let c = countries[i % countries.length];
+        let url = `https://www.youtube.com/results?search_query=${c}+healing+music+zen+${i}`;
+        gList.innerHTML += `
+            <a href="${url}" target="_blank" class="action-btn">
+                <b>${c} Mix</b><span>Selection #${i+1}</span>
+            </a>`;
     }
-
-    window.onload = populate;
 </script>
 
 </body>
