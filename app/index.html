@@ -4,35 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunshine Beam - Home</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; --header-grad: #eadeff; }
+        
+        body { 
+            margin: 0; font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); color: #5a4a75; padding-bottom: 120px; 
+            overflow-x: hidden;
+            /* FLORAL BORDER INTEGRATION */
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="%23eadeff"/><stop offset="20%" stop-color="%23f8f4ff"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/><circle cx="5%" cy="30%" r="20" fill="%23d8b4fe" opacity="0.3"/><circle cx="95%" cy="50%" r="25" fill="%23d8b4fe" opacity="0.4"/><circle cx="8%" cy="70%" r="15" fill="%23d8b4fe" opacity="0.2"/><circle cx="90%" cy="85%" r="30" fill="%23d8b4fe" opacity="0.3"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        /* The Content Wrapper - Ensures cards stay in the center, not hitting the side flowers */
+        .content-wrapper { max-width: 480px; margin: 0 auto; position: relative; z-index: 10; }
+
+        /* Header matching your screenshot */
+        .header { padding: 45px 20px 20px; text-align: center; position: relative; }
+        .header h1 { font-family: 'Georgia', serif; font-size: 2.6rem; color: #6b4f9a; margin: 0; }
+        .header p { font-size: 0.8rem; opacity: 0.8; margin-top: 5px; }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white card */
+            border-radius: 25px; padding: 20px; margin: 15px; 
+            box-shadow: 0 4px 20px rgba(157, 129, 186, 0.15); 
+            border: 1px solid rgba(157, 129, 186, 0.1);
+            backdrop-filter: blur(5px); /* Smooths the background flowers under the card */
+        }
+
+        /* Mood Selector */
+        .mood-options { display: flex; justify-content: space-around; margin-top: 15px; }
+        .mood-btn { border: none; background: none; cursor: pointer; text-align: center; transition: 0.3s; opacity: 0.6; }
+        .mood-btn.active { opacity: 1; transform: scale(1.1); }
+        .mood-btn span { display: block; font-size: 2.3rem; }
+        .mood-btn p { font-size: 0.7rem; margin: 5px 0; font-weight: bold; }
+
+        /* Journal & Affirmation Grid */
+        .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
+        .small-card { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        textarea { width: 100%; height: 70px; border: 1px solid #eee; border-radius: 10px; padding: 10px; font-size: 0.8rem; resize: none; box-sizing: border-box; background: #fafafa; }
+        .btn-s { background: var(--p); color: white; border: none; width: 100%; padding: 10px; border-radius: 18px; margin-top: 10px; font-weight: bold; font-size: 0.8rem; cursor: pointer; }
+
+        /* Support Links */
+        .support-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; text-decoration: none; color: inherit; }
+        .support-icon { background: #f0eaff; padding: 10px; border-radius: 50%; font-size: 1.3rem; }
+
+        /* Bottom Navigation with Gold Sun */
+        nav { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+            width: 92%; max-width: 400px; background: white; height: 75px; 
+            border-radius: 40px; display: flex; justify-content: space-around; 
+            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 1000; 
+        }
+        .nav-item { text-decoration: none; font-size: 1.6rem; color: #ccc; transition: 0.2s; }
+        .active-nav { color: var(--p); }
+        .nav-center { 
+            background: var(--gold); width: 68px; height: 68px; border-radius: 50%; 
+            margin-top: -50px; border: 5px solid var(--bg); display: flex; 
+            align-items: center; justify-content: center; text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5); font-size: 2rem;
+            opacity: 1; filter: none; color: white;
+        }
+    </style>
 </head>
 <body>
-    <div class="app-wrapper">
-        <header>
-            <h1>Sunshine Beam</h1>
-        </header>
 
-        <div class="card">
-            <h2>How are you?</h2>
-            <div class="mood-row">
-                <span onclick="alert('Stay glowing! ✨')">😊</span>
-                <span onclick="alert('Be gentle with yourself. 💜')">😔</span>
-                <span onclick="alert('Breathe deep. 🌬️')">😤</span>
+    <div class="content-wrapper">
+        <div class="header">
+            <div style="position:absolute; top:25px; left:20px; font-size:1.5rem; color:#6b4f9a;">☰</div>
+            <div style="position:absolute; top:25px; right:20px; font-size:1.5rem; color:#6b4f9a;">🔔</div>
+            <h1>Sunshine Beam</h1>
+            <p>Small steps. Brighter days. You're not alone. 💜</p>
+        </div>
+
+        <div class="card" style="display:flex; align-items:center; gap:15px; background: rgba(255, 255, 255, 0.95);">
+            <div style="font-size:3.5rem;">☀️</div>
+            <div>
+                <b style="font-size:1.15rem; color: #6b4f9a;">Good morning, sunshine! 🌸</b>
+                <p style="font-size:0.8rem; margin:5px 0;">You matter. You are enough. Let's take a gentle step together today.</p>
             </div>
         </div>
 
         <div class="card">
-            <h2>Community</h2>
-            <p>@Hopeful: You are doing great today!</p>
-        </div>
-
-        <nav>
-            <a href="index.html" class="nav-item active">🏠</a>
-            <a href="journal.html" class="nav-item">📝</a>
-            <a href="tools.html" class="nav-center">🌞</a>
-            <a href="profile.html" class="nav-item">👤</a>
-        </nav>
-    </div>
-</body>
-</html>
+            <b style="font-size:0.95rem; display:block; text-align:center;">How are you feeling today?the index page already has what I mentioned above and a home page has mood emojies , affirmation journal, etc and my tools page already has 153 countires having more from louthansia and korea and you already gave me that code, now you must merge the categories and 153 countries from louthansia and korea together, all of the categories I named should are in 153 countries have louthansia and korea, for example laughter category has categories from 153 countries but has more from louthansia and korea then comes other categories the same way
