@@ -3,134 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Edit Profile</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Sunshine Beam - Profile</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.98); --gold: #ffd700; --shield: #4caf50; }
-        
-        body { 
-            margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: var(--bg); color: #5a4a75; padding-bottom: 120px;
-            background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%);
-        }
-
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; --shield: #4caf50; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; }
         .container { max-width: 480px; margin: 0 auto; padding: 20px; text-align: center; }
-
-        .header-title { font-family: 'Georgia', serif; color: #6b4f9a; font-size: 2rem; margin-bottom: 20px; }
-
-        .profile-card { 
-            background: var(--white); border-radius: 30px; padding: 30px; 
-            box-shadow: 0 10px 25px rgba(157, 129, 186, 0.15); border: 1px solid #eee;
-        }
-
-        .privacy-alert { 
-            background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 15px; 
-            font-size: 0.8rem; font-weight: bold; margin-bottom: 25px; display: block;
-        }
-
-        /* FORM INPUTS */
-        .field-group { text-align: left; margin-bottom: 20px; }
-        .field-group label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--p); margin-bottom: 8px; margin-left: 5px; }
+        .card { background: var(--white); border-radius: 25px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .info-group { text-align: left; margin-bottom: 15px; }
+        .info-group label { display: block; font-size: 0.7rem; font-weight: bold; color: var(--p); margin-bottom: 5px; }
         
+        /* The Input: Made high-visibility and easy to click */
         input { 
-            width: 100%; 
-            padding: 16px; 
-            border-radius: 15px; 
-            border: 2px solid #e0e0e0; 
-            font-size: 1rem; 
-            color: #333; 
-            background: #ffffff !important; /* Forces background to be white */
-            box-sizing: border-box;
-            outline: none;
-            display: block;
-            -webkit-appearance: none; /* Fixes iOS issues */
+            width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #eee; 
+            font-size: 1rem; box-sizing: border-box; outline: none; background: #fff !important;
         }
+        input:focus { border-color: var(--p); background: #fff; }
 
-        input:focus { border-color: var(--p); background: #fff; box-shadow: 0 0 10px rgba(157, 129, 186, 0.2); }
-
-        .btn-save { 
-            background: var(--p); color: white; border: none; padding: 16px; 
-            border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; 
-            font-size: 1rem; margin-top: 10px; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.3);
-        }
-
-        /* POPUP */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
-        .modal-content { background: white; padding: 30px; border-radius: 25px; text-align: center; max-width: 350px; }
-
-        /* NAV */
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
-        .nav-item { text-decoration: none; font-size: 1.6rem; color: #ccc; }
-        .sun-center { background: var(--gold); width: 70px; height: 70px; border-radius: 50%; margin-top: -50px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 20px rgba(255,215,0,0.5); }
+        .save-btn { background: var(--p); color: white; border: none; padding: 15px; border-radius: 25px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        
+        /* Bottom Nav */
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .nav-link { text-decoration: none; font-size: 1.5rem; color: #ccc; }
+        .nav-sun { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 class="header-title">My Profile</h1>
-    
-    <div class="profile-card">
-        <div class="privacy-alert">
-            🛡️ Your info is 100% private and hidden.
+    <h2>Profile Settings</h2>
+    <div class="card">
+        <p style="color: var(--shield); font-size: 0.8rem; font-weight: bold;">🛡️ PRIVATE: NEVER VISIBLE TO OTHERS</p>
+        
+        <div class="info-group">
+            <label>NAME</label>
+            <input type="text" id="name" placeholder="Type name here...">
         </div>
-
-        <div class="field-group">
-            <label>FULL NAME</label>
-            <input type="text" id="p_name" placeholder="Click here to type your name">
+        <div class="info-group">
+            <label>PHONE</label>
+            <input type="tel" id="phone" placeholder="Type number here...">
         </div>
-
-        <div class="field-group">
-            <label>CONTACT NUMBER</label>
-            <input type="tel" id="p_phone" placeholder="Enter your mobile number">
-        </div>
-
-        <div class="field-group">
+        <div class="info-group">
             <label>COUNTRY</label>
-            <input type="text" id="p_country" placeholder="Lithuania, Korea, etc.">
+            <input type="text" id="country" placeholder="Type country here...">
         </div>
 
-        <button class="btn-save" onclick="saveInfo()">SAVE SETTINGS</button>
-    </div>
-</div>
-
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <h2 style="color: var(--shield); margin-top: 0;">Verified Private</h2>
-        <p>Your details have been locked! This information is **hidden** from all other community members. It is for your eyes only.</p>
-        <button onclick="closeModal()" style="background: var(--shield); color: white; border: none; padding: 12px 30px; border-radius: 15px; cursor: pointer; font-weight: bold; width: 100%;">OKAY</button>
+        <button class="save-btn" onclick="alert('Privacy Locked! Your data is hidden from others.')">SAVE SETTINGS</button>
     </div>
 </div>
 
 <nav>
-    <a href="index.html" class="nav-item">🏠</a>
-    <a href="journal.html" class="nav-item">📝</a>
-    <a href="healing-hub.html" class="sun-center">☀️</a>
-    <a href="community.html" class="nav-item">👥</a>
-    <a href="profile.html" class="nav-item" style="color: var(--p);">👤</a>
+    <a href="index.html" class="nav-link">🏠</a>
+    <a href="healing-hub.html" class="nav-sun">☀️</a>
+    <a href="profile.html" class="nav-link" style="color:var(--p)">👤</a>
 </nav>
 
 <script>
-    function saveInfo() {
-        // This validates that the user actually typed something
-        const name = document.getElementById('p_name').value;
-        if(name === "") {
-            alert("Please type your name first!");
-        } else {
-            document.getElementById('modal').style.display = 'flex';
-        }
-    }
-
-    function closeModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-
-    // Force inputs to be active
-    window.onload = function() {
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('click', function() {
-                this.focus();
-            });
-        });
+    // Fix for "Back Button" showing old pages
+    window.onpageshow = function(event) {
+        if (event.persisted) { window.location.reload(); }
     };
 </script>
 
