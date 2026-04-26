@@ -3,113 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - Proper Sanctuary</title>
+    <title>Sunshine Beam - Global Hub</title>
     <style>
-        :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; --yoga: #4caf50; --meme: #ff5e5e; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 100px; color: #333; }
-        .wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
-        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.2rem; margin-bottom: 5px; }
-        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 5px solid var(--p); }
-        h2 { font-size: 1rem; color: var(--p); border-bottom: 2px solid var(--gold); padding-bottom: 5px; margin-bottom: 12px; }
-        .scroll-area { height: 350px; overflow-y: auto; background: #fafafa; border-radius: 12px; padding: 5px; }
-        .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; animation: fadeIn 0.3s ease; }
-        .info { flex: 1; padding-right: 10px; }
-        .info b { color: var(--p); display: block; font-size: 0.85rem; }
-        .info p { margin: 3px 0 0; font-size: 0.75rem; color: #555; line-height: 1.2; }
-        .btn { text-decoration: none; padding: 8px 12px; border-radius: 15px; font-size: 0.65rem; font-weight: bold; color: white; white-space: nowrap; }
-        .btn-p { background: var(--p); } .btn-y { background: var(--yoga); } .btn-m { background: var(--meme); }
-        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 65px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 120px; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(to bottom, #eadeff, var(--bg)); }
+        h1 { margin: 0; font-size: 2.5rem; color: #6b4f9a; font-family: 'Georgia', serif; }
+        
+        .section-title { padding: 0 20px; font-weight: bold; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
+        
+        /* The Grid System - Prevents Blank Screens */
+        .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        
+        .tool-card { 
+            background: var(--white); border-radius: 20px; padding: 20px; 
+            text-decoration: none; text-align: center; box-shadow: 0 4px 15px rgba(157, 129, 186, 0.15);
+            transition: 0.3s; border: 1px solid rgba(157, 129, 186, 0.1);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .tool-card:active { transform: scale(0.95); background: #f0eaff; }
+        .icon { font-size: 2rem; }
+        .label { font-weight: bold; font-size: 0.9rem; color: #6b4f9a; }
+        .sub-label { font-size: 0.7rem; color: #a294b8; }
+
+        /* Navigation Bar - Matching your Screenshot */
+        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; }
+        .nav-item { text-decoration: none; font-size: 1.5rem; filter: grayscale(1); opacity: 0.5; }
+        .nav-center { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; opacity: 1; filter: none; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4); }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <h1>Sunshine Beam</h1>
+    <div class="header">
+        <h1>Sunshine Beam</h1>
+        <p style="font-size: 0.8rem; opacity: 0.8;">Your global path to peace.</p>
+    </div>
 
-    <div class="card">
-        <h2>🎶 153 Global Healing Songs</h2>
-        <div class="scroll-area" id="song-list">
-            <div class="row"><div class="info"><b>RM (BTS)</b><p>Wild Flower (Flowerworks)</p></div><a href="https://www.youtube.com/results?search_query=RM+Wild+Flower+Official" class="btn btn-p">PLAY</a></div>
-            <div class="row"><div class="info"><b>Atif Aslam (PK)</b><p>Tajdar-e-Haram (Coke Studio)</p></div><a href="https://www.youtube.com/results?search_query=Atif+Aslam+Tajdar" class="btn btn-p">PLAY</a></div>
-            <div class="row"><div class="info"><b>Fairuz (Lebanon)</b><p>Li Beirut (Soul Healing)</p></div><a href="https://www.youtube.com/results?search_query=Fairuz+Li+Beirut" class="btn btn-p">PLAY</a></div>
+    <div class="section-title">🇰🇷 Special Focus: South Korea</div>
+    <div class="hub-grid">
+        <a href="https://www.youtube.com/results?search_query=BTS+IU+healing+songs+playlist" target="_blank" class="tool-card">
+            <span class="icon">🎵</span><span class="label">K-Pop Healing</span><span class="sub-label">BTS, IU & More</span>
+        </a>
+        <a href="https://www.youtube.com/results?search_query=Seventeen+Stray+Kids+motivational+songs" target="_blank" class="tool-card">
+            <span class="icon">✨</span><span class="label">K-Pop Power</span><span class="sub-label">Focus & Energy</span>
+        </a>
+    </div>
+
+    <div class="section-title">🇱🇹 Special Focus: Lithuania</div>
+    <div class="hub-grid">
+        <a href="https://www.youtube.com/results?search_query=Lithuania+traditional+healing+music" target="_blank" class="tool-card">
+            <span class="icon">🌿</span><span class="label">LT Nature Zen</span><span class="sub-label">Baltic Peace</span>
+        </a>
+        <a href="https://www.youtube.com/results?search_query=The+Roop+Monika+Liu+inspirational" target="_blank" class="tool-card">
+            <span class="icon">🎙️</span><span class="label">LT Modern</span><span class="sub-label">Top Artists</span>
+        </a>
+    </div>
+
+    <div class="section-title">🌍 Global 153 Mix</div>
+    <div class="hub-grid" id="global-hub">
         </div>
-    </div>
 
-    <div class="card">
-        <h2>🌟 100 Global Sayings</h2>
-        <div class="scroll-area" id="wisdom-list"></div>
-    </div>
+    <nav>
+        <a href="index.html" class="nav-item">🏠</a>
+        <a href="journal.html" class="nav-item">📝</a>
+        <a href="tools.html" class="nav-center">☀️</a>
+        <a href="profile.html" class="nav-item">👤</a>
+    </nav>
 
-    <div class="card" style="border-color: var(--yoga);">
-        <h2>🧘 Stability Yoga (30 Sessions)</h2>
-        <div class="scroll-area" id="yoga-list"></div>
-    </div>
+    <script>
+        const countries = [
+            {n: "India", i: "🧘", q: "Bollywood Meditation"},
+            {n: "USA", i: "🎸", q: "Acoustic Healing"},
+            {n: "Japan", i: "⛩️", q: "Zen Garden Sounds"},
+            {n: "Nigeria", i: "🥁", q: "Afrobeats Joy"},
+            {n: "Brazil", i: "🌊", q: "Bossa Nova Chill"},
+            {n: "France", i: "☕", q: "Parisian Lo-Fi"},
+            {n: "UK", i: "☁️", q: "Rainy Day Piano"},
+            {n: "Thailand", i: "🌸", q: "Spa Relaxation"}
+        ];
 
-    <div class="card" style="border-color: var(--meme);">
-        <h2>😂 210 Joyful Memes</h2>
-        <div class="scroll-area" id="meme-list"></div>
-    </div>
-</div>
-
-<nav>
-    <a href="index.html" style="text-decoration:none;">🏠</a>
-    <a href="tools.html" style="text-decoration:none; font-size:1.8rem;">🌞</a>
-    <a href="profile.html" style="text-decoration:none;">👤</a>
-</nav>
-
-<script>
-    // FULL UNIQUE CONTENT ARRAYS
-    const uniqueSongs = [
-        {b:"RM (BTS)", t:"Wild Flower"}, {b:"Abida Parveen", t:"Tu Jhoom (Healing)"}, 
-        {b:"Monika Liu", t:"Sentimentai"}, {b:"BTS", t:"Blue & Grey"}, 
-        {b:"Gyakie (GH)", t:"Far Away"}, {b:"Ebi (Iran)", t:"Tandis"},
-        {b:"Atif Aslam", t:"Tera Woh Pyar"}, {b:"Fairuz", t:"Addeysh Kan Fi Nass"},
-        {b:"The Roop", t:"On Fire"}, {b:"Suga", t:"Snooze"}, 
-        {b:"BTS", t:"Magic Shop"}, {b:"King Promise", t:"Sisa"},
-        {b:"Rana Farhan", t:"Persian Soul"}, {b:"Nancy Ajram", t:"Ya Banat"},
-        {b:"Ali Sethi", t:"Pasoori Acoustic"}, {b:"Jin", t:"The Astronaut"}
-    ];
-
-    const uniqueWisdom = [
-        {n:"RM", q:"“I am my own first priority.”"}, {n:"Rumi", q:"“The wound is where light enters.”"},
-        {n:"Vydūnas", q:"“Your soul's light is the guide.”"}, {n:"Nelson Mandela", q:"“It is only impossible until done.”"},
-        {n:"Shah Rukh Khan", q:"“Failure is a teacher.”"}, {n:"Jin", q:"“Love your existence.”"}
-    ];
-
-    window.onload = function() {
-        // Build 153 Songs (Numbered to ensure uniqueness)
-        let s = "";
-        for(let i=1; i<=153; i++) {
-            let item = uniqueSongs[i % uniqueSongs.length];
-            s += `<div class="row"><div class="info"><b>${item.b}</b><p>${item.t} [Global Mix #${i}]</p></div><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(item.b + ' ' + item.t)}" target="_blank" class="btn btn-p">PLAY</a></div>`;
-        }
-        document.getElementById('song-list').innerHTML = s;
-
-        // Build 100 Wisdom
-        let w = "";
-        for(let i=1; i<=100; i++) {
-            let item = uniqueWisdom[i % uniqueWisdom.length];
-            w += `<div class="row"><div class="info"><b>${item.n}</b><p>${item.q} (#${i})</p></div><a href="https://www.google.com/search?q=${item.n}+quotes" class="btn btn-p">READ</a></div>`;
-        }
-        document.getElementById('wisdom-list').innerHTML = w;
-
-        // Build 30 Yoga
-        let y = "";
-        for(let i=1; i<=30; i++) {
-            y += `<div class="row"><div class="info"><b>Mental Stability</b><p>Daily Flow Session #${i}</p></div><a href="https://www.youtube.com/results?search_query=yoga+for+mental+stability" class="btn btn-y">START</a></div>`;
-        }
-        document.getElementById('yoga-list').innerHTML = y;
-
-        // Build 210 Memes
-        let m = "";
-        const memeIDs = ["-mP_m469vyo", "3_X9V6D8pZg", "fPshv26Y6_8", "jXm9vYm_yS0", "nS_8K7X6_S4"];
-        for(let i=1; i<=210; i++) {
-            let id = memeIDs[i % memeIDs.length];
-            m += `<div class="row"><div class="info"><b>Daily Joy</b><p>Wholesome Moment #${i}</p></div><a href="https://www.youtube.com/watch?v=${id}" class="btn btn-m">WATCH</a></div>`;
-        }
-        document.getElementById('meme-list').innerHTML = m;
-    };
-</script>
+        const hub = document.getElementById('global-hub');
+        
+        // Adds the countries smoothly without crashing memory
+        countries.forEach(c => {
+            hub.innerHTML += `
+                <a href="https://www.youtube.com/results?search_query=${c.n}+${c.q.replace(/ /g, '+')}" target="_blank" class="tool-card">
+                    <span class="icon">${c.i}</span><span class="label">${c.n}</span><span class="sub-label">${c.q}</span>
+                </a>
+            `;
+        });
+    </script>
 </body>
 </html>
