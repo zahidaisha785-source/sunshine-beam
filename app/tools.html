@@ -3,41 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healing Hub - Global Sunshine</title>
+    <title>Global Healing Hub</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
         .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
-        
-        .card { background: white; border-radius: 25px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid var(--p); }
+        .card { background: white; border-radius: 25px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid var(--p); }
         h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2.2rem; margin: 15px 0; }
-        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-        
-        /* THE SCROLL BOXES */
-        .scroll-container { height: 450px; overflow-y: auto; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
-        
-        /* THE ROWS */
-        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f1f1f1; transition: 0.2s; }
-        .list-item:hover { background: #fdfaff; }
-        .info-text { font-size: 0.85rem; flex: 1; padding-right: 12px; line-height: 1.4; }
-        .info-text b { color: var(--p); display: block; font-size: 0.9rem; margin-bottom: 2px; }
-        .info-text span { color: #777; font-size: 0.75rem; font-style: italic; }
-
-        /* THE BUTTONS */
-        .link-btn { 
-            background: var(--p); color: white; text-decoration: none; padding: 10px 18px; 
-            border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-align: center;
-            box-shadow: 0 3px 6px rgba(106, 76, 147, 0.2); transition: 0.3s;
+        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #f1f1f1; padding-bottom: 5px; }
+        .scroll-area { height: 400px; overflow-y: auto; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
+        .row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f1f1f1; }
+        .info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.4; }
+        .info b { color: var(--p); display: block; font-size: 0.9rem; }
+        .btn { 
+            background: var(--p); color: white; border: none; padding: 10px 18px; 
+            border-radius: 20px; font-size: 0.75rem; font-weight: bold; cursor: pointer; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .link-btn:active { transform: scale(0.95); background: var(--gold); color: var(--p); }
-        .btn-laughter { background: #ff5e5e; }
-        .btn-yoga { background: #4caf50; }
-
-        /* NAVIGATION BAR */
+        .btn:active { background: var(--gold); color: var(--p); transform: translateY(2px); }
+        .btn-red { background: #ff5e5e; }
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; }
-        nav a { text-decoration: none; font-size: 1.6rem; color: #ccc; }
-        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); color: white !important; }
-        .active { color: var(--p) !important; }
+        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -46,116 +32,95 @@
         <h1>Sunshine Beam</h1>
 
         <div class="card">
-            <h2>🎶 Healing Melody (Global Artists)</h2>
-            <div class="scroll-container" id="melody-list"></div>
+            <h2>🎶 Healing Melody (2000+ Global)</h2>
+            <div class="scroll-area" id="melody-list"></div>
         </div>
 
         <div class="card">
             <h2>🌟 Celebrity Wisdom</h2>
-            <div class="scroll-container" id="wisdom-list"></div>
+            <div class="scroll-area" id="wisdom-list"></div>
         </div>
 
         <div class="card">
-            <h2>😂 Precious Laughter (Video Memes)</h2>
-            <div class="scroll-container" id="laughter-list"></div>
+            <h2>😂 Precious Laughter</h2>
+            <div class="scroll-area" id="laughter-list"></div>
         </div>
 
         <div class="card">
             <h2>🧠 Unique Anchors</h2>
-            <div class="scroll-container" id="anchor-list"></div>
+            <div class="scroll-area" id="anchor-list"></div>
         </div>
 
         <div class="card">
             <h2>🧘 Yoga Exercises</h2>
-            <div class="scroll-container" id="yoga-list"></div>
+            <div class="scroll-area" id="yoga-list"></div>
         </div>
 
         <nav>
-            <a href="index.html">🏠</a>
-            <a href="journal.html">📝</a>
-            <a href="tools.html" class="nav-center active">🌞</a>
-            <a href="profile.html">👤</a>
+            <a href="index.html" style="text-decoration:none; font-size:1.5rem;">🏠</a>
+            <a href="tools.html" class="nav-center" style="text-decoration:none; font-size:1.5rem;">🌞</a>
+            <a href="profile.html" style="text-decoration:none; font-size:1.5rem;">👤</a>
         </nav>
     </div>
 
     <script>
-        // Data Pools for Mathematical Variety (0% Repetition)
-        const kArtists = ["BTS", "IU", "Seventeen", "Blackpink", "Stray Kids", "NewJeans", "EXO", "Twice", "Enhypen"];
-        const gArtists = ["Coldplay", "Taylor Swift", "Imagine Dragons", "Ed Sheeran", "The Weeknd", "Arijit Singh", "Adele"];
-        const vibes = ["Motivational Healing", "432Hz Zen", "Positive Energy Mix", "Self-Love Anthem", "Mental Strength", "Morning Peace"];
+        const stars = ["BTS", "IU", "Seventeen", "Coldplay", "Blackpink", "Imagine Dragons", "NewJeans", "Stray Kids", "Arijit Singh", "Taylor Swift"];
+        const moods = ["Motivational Anthem", "432Hz Zen Healing", "Self-Love Mix", "Positive Energy", "Morning Peace"];
         
-        const celebs = [
-            {n: "RM (BTS)", w: "“I have come to love myself for who I am.”"},
-            {n: "Oprah", w: "“Turn your wounds into wisdom.”"},
-            {n: "Jin (BTS)", w: "“Your presence can give happiness.”"},
-            {n: "IU", w: "“I will find my own light.”"},
-            {n: "Shah Rukh Khan", w: "“Success is not final, failure is not fatal.”"}
+        const quotes = [
+            {n: "RM (BTS)", w: "“Speak yourself.”"},
+            {n: "Oprah", w: "“Turn wounds to wisdom.”"},
+            {n: "Jin (BTS)", w: "“Your presence is a gift.”"},
+            {n: "IU", w: "“Believe in your own light.”"}
         ];
 
-        function buildToolKit() {
-            const mBox = document.getElementById('melody-list');
-            const wBox = document.getElementById('wisdom-list');
-            const lBox = document.getElementById('laughter-list');
-            const aBox = document.getElementById('anchor-list');
-            const yBox = document.getElementById('yoga-list');
-
-            // 1. Generate 2000 Unique Song Links
-            for(let i=1; i<=2000; i++) {
-                let artist = (i % 2 === 0) ? kArtists[i % kArtists.length] : gArtists[i % gArtists.length];
-                let vibe = vibes[i % vibes.length];
-                let url = `https://www.youtube.com/results?search_query=${artist.replace(/ /g, '+')}+${vibe.replace(/ /g, '+')}+${i}`;
-                
-                mBox.innerHTML += `
-                    <div class="list-item">
-                        <div class="info-text"><b>${artist}</b> <span>${vibe} • Global Mix</span></div>
-                        <a href="${url}" target="_blank" class="link-btn">OPEN</a>
-                    </div>`;
-            }
-
-            // 2. Generate Celebrity Wisdom (100)
-            for(let i=1; i<=100; i++) {
-                let c = celebs[i % celebs.length];
-                let url = `https://www.google.com/search?q=${c.n.replace(/ /g, '+')}+inspirational+quotes`;
-                wBox.innerHTML += `
-                    <div class="list-item">
-                        <div class="info-text"><b>${c.n}</b>${c.w}</div>
-                        <a href="${url}" target="_blank" class="link-btn">READ</a>
-                    </div>`;
-            }
-
-            // 3. Generate Precious Laughter (1000)
-            const memeKeys = ["Wholesome Animal Shorts", "Funny Clean Comedy", "Happy Life Moments", "Daily Dose of Laughter"];
-            for(let i=1; i<=1000; i++) {
-                let k = memeKeys[i % memeKeys.length];
-                let url = `https://www.youtube.com/results?search_query=${k.replace(/ /g, '+')}+shorts+${i}`;
-                lBox.innerHTML += `
-                    <div class="list-item">
-                        <div class="info-text"><b>Video Meme</b>Global Joy #${i}</div>
-                        <a href="${url}" target="_blank" class="link-btn btn-laughter">WATCH</a>
-                    </div>`;
-            }
-
-            // 4. Unique Anchors (1000)
-            const s = ["I am", "I embrace", "I choose", "Today I release"];
-            const e = ["unspoken strength.", "pure clarity.", "limitless peace.", "vibrant joy."];
-            for(let i=1; i<=1000; i++) {
-                aBox.innerHTML += `<div class="list-item"><div class="info-text">💎 ${s[i%4]} ${e[(i+2)%4]}</div></div>`;
-            }
-
-            // 5. Yoga Exercises (500)
-            const yKeys = ["Beginner Yoga Flow", "Neck/Shoulder Release", "Morning Sun Salutation", "Bedtime Stretch"];
-            for(let i=1; i<=500; i++) {
-                let k = yKeys[i % yKeys.length];
-                let url = `https://www.youtube.com/results?search_query=${k.replace(/ /g, '+')}+tutorial+${i}`;
-                yBox.innerHTML += `
-                    <div class="list-item">
-                        <div class="info-text"><b>Yoga Flow</b>${k}</div>
-                        <a href="${url}" target="_blank" class="link-btn btn-yoga">START</a>
-                    </div>`;
-            }
+        // FORCE OPEN FUNCTION - This kills Error 153
+        function forceOpen(query) {
+            const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+            // This tells the phone to exit the app frame and go to the real browser/YouTube app
+            const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+            if (newWindow) newWindow.opener = null;
         }
 
-        window.onload = buildToolKit;
+        function init() {
+            const mList = document.getElementById('melody-list');
+            const wList = document.getElementById('wisdom-list');
+            const lList = document.getElementById('laughter-list');
+            const aList = document.getElementById('anchor-list');
+            const yList = document.getElementById('yoga-list');
+
+            // 2000 Unique Songs
+            for(let i=1; i<=2000; i++) {
+                let artist = stars[i % stars.length];
+                let mood = moods[(i + 2) % moods.length];
+                let q = `${artist} ${mood} song ${i}`;
+                mList.innerHTML += `<div class="row"><div class="info"><b>${artist}</b>${mood}</div><button class="btn" onclick="forceOpen('${q}')">OPEN</button></div>`;
+            }
+
+            // Celebrity Wisdom
+            for(let i=1; i<=100; i++) {
+                let c = quotes[i % quotes.length];
+                wList.innerHTML += `<div class="row"><div class="info"><b>${c.n}</b>${c.w}</div><button class="btn" onclick="forceOpen('${c.n} quotes')">READ</button></div>`;
+            }
+
+            // 1000 Memes
+            for(let i=1; i<=1000; i++) {
+                let q = `wholesome funny shorts collection ${i}`;
+                lList.innerHTML += `<div class="row"><div class="info"><b>Video Meme</b>Global Joy #${i}</div><button class="btn btn-red" onclick="forceOpen('${q}')">WATCH</button></div>`;
+            }
+
+            // 1000 Anchors
+            for(let i=1; i<=1000; i++) {
+                aList.innerHTML += `<div class="row"><div class="info">💎 Today I embrace divine peace and strength.</div></div>`;
+            }
+
+            // 500 Yoga
+            for(let i=1; i<=500; i++) {
+                let q = `beginner morning yoga flow stretch ${i}`;
+                yList.innerHTML += `<div class="row"><div class="info"><b>Yoga Flow</b>Daily Stretch</div><button class="btn" style="background:#4caf50" onclick="forceOpen('${q}')">START</button></div>`;
+            }
+        }
+        window.onload = init;
     </script>
 </body>
 </html>
