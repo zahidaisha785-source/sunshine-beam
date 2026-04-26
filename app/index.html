@@ -3,79 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healing Hub - Sunshine Beam</title>
+    <title>Sunshine Beam - Home</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --red: #ff4757; }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --lavender: #eadeff; }
         
         body { 
-            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 120px;
-            background-image: linear-gradient(to right, rgba(234,222,255,0.6) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.6) 100%),
+            margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 110px;
+            /* Floral Side Borders */
+            background-image: linear-gradient(to right, rgba(234,222,255,0.7) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.7) 100%),
                               url('https://www.transparenttextures.com/patterns/floral-paper.png');
             background-attachment: fixed;
         }
 
-        .container { max-width: 480px; margin: 0 auto; position: relative; }
+        .container { max-width: 480px; margin: 0 auto; padding-top: 20px; }
 
-        /* HEADER */
-        .header { text-align: center; padding: 30px 20px 10px; }
-        .header h1 { font-family: 'Georgia', serif; font-size: 2.2rem; color: #6b4f9a; margin: 0; }
+        .header { text-align: center; padding: 20px; }
+        .header h1 { font-family: 'Georgia', serif; font-size: 2.5rem; color: #6b4f9a; margin: 0; }
 
-        /* 1. EMERGENCY NUMBERS BUTTONS */
-        .emergency-section { background: white; border-radius: 25px; margin: 15px; padding: 20px; border: 2px solid var(--red); box-shadow: 0 8px 20px rgba(255,71,87,0.1); }
-        .emergency-title { color: var(--red); font-weight: bold; margin-bottom: 15px; display: block; text-align: center; }
-        
-        .num-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .call-btn { 
-            background: #fff5f5; color: #333; text-decoration: none; padding: 12px 10px; 
-            border-radius: 15px; border: 1px solid #ffebeb; font-size: 0.75rem; text-align: center;
-            transition: 0.2s;
+        /* General Card Style */
+        .card { 
+            background: var(--white); border-radius: 25px; padding: 20px; margin: 15px; 
+            box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); border: 1px solid rgba(157, 129, 186, 0.1);
+            backdrop-filter: blur(5px);
         }
-        .call-btn b { color: var(--red); display: block; font-size: 0.85rem; }
-        .call-btn:active { background: #ffe0e0; transform: scale(0.98); }
 
-        /* 2. DYNAMIC AFFIRMATIONS */
-        .aff-card { 
-            background: var(--white); border-radius: 20px; padding: 25px; margin: 15px; 
-            border-left: 6px solid var(--p); text-align: center; 
-            box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1);
-        }
-        #hub-aff { font-size: 1rem; font-style: italic; color: #5a4a75; line-height: 1.5; }
+        /* 1. MOOD EMOJIS */
+        .mood-row { display: flex; justify-content: space-around; margin-top: 10px; }
+        .mood-btn { border: none; background: none; cursor: pointer; text-align: center; transition: 0.3s; }
+        .mood-btn span { display: block; font-size: 2.5rem; }
+        .mood-btn p { font-size: 0.75rem; font-weight: bold; color: var(--p); margin-top: 5px; }
+        .mood-btn:hover { transform: scale(1.2); }
 
-        /* 3. CATEGORIES & 153 COUNTRIES */
-        .hub-tabs { display: flex; overflow-x: auto; gap: 10px; padding: 10px 15px; scrollbar-width: none; }
-        .tab { 
-            padding: 10px 20px; border-radius: 20px; border: none; background: #e0d5f0; 
-            color: #6b4f9a; font-weight: bold; white-space: nowrap; cursor: pointer;
-        }
-        .tab.active { background: var(--p); color: white; }
+        /* 2. AFFIRMATIONS */
+        .aff-display { text-align: center; font-style: italic; font-size: 1.1rem; color: #5a4a75; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .new-aff-btn { background: var(--p); color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
-        .list-card { background: var(--white); border-radius: 25px; margin: 0 15px; overflow: hidden; }
-        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; }
-        .open-link { background: var(--p); color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; }
+        /* 3. COMMUNITY */
+        .community-box { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; }
+        .comm-icon { background: var(--lavender); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .comm-text b { display: block; font-size: 1rem; color: #6b4f9a; }
+        .comm-text p { font-size: 0.75rem; margin: 2px 0; opacity: 0.8; }
 
-        /* BOTTOM NAV */
+        /* NAV BAR */
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 400px; background: white; height: 75px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .sun-btn { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; box-shadow: 0 5px 15px rgba(255,215,0,0.4); }
+        .nav-item { text-decoration: none; font-size: 1.6rem; color: #ccc; }
+        .nav-center { background: var(--gold); width: 65px; height: 65px; border-radius: 50%; margin-top: -45px; border: 5px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; box-shadow: 0 5px 15px rgba(255,215,0,0.4); text-decoration: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h1>Healing Hub</h1>
+        <h1>Sunshine Beam</h1>
     </div>
 
-    <div class="emergency-section">
-        <span class="emergency-title">🆘 Get Help Immediately</span>
-        <div class="num-grid">
-            <a href="tel:1393" class="call-btn"><b>South Korea</b>1393</a>
-            <a href="tel:112" class="call-btn"><b>Lithuania</b>112 / 8 800</a>
-            <a href="tel:988" class="call-btn"><b>USA/Canada</b>988</a>
-            <a href="tel:111" class="call-btn"><b>UK</b>111</a>
-            <a href="tel:188" class="call-btn"><b>Brazil</b>188</a>
-            <a href="tel:9152987821" class="call-btn"><b>India</b>9152987821</a>
+    <div class="card">
+        <b style="display:block; text-align:center; margin-bottom:10px;">How are you feeling today?</b>
+        <div class="mood-row">
+            <div class="mood-btn"><span>😊</span><p>Happy</p></div>
+            <div class="mood-btn"><span>🙂</span><p>Okay</p></div>
+            <div class="mood-btn"><span>🙁</span><p>Low</p></div>
+            <div class="mood-btn"><span>😫</span><p>Stressed</p></div>
+            <div class="mood-btn"><span>😭</span><p>Hurting</p></div>
         </div>
     </div>
 
-    <div class="aff-card">
-        <div id="hub-aff">
+    <div class="card">
+        <div class="aff-display" id="aff-box">"Every small step I take is a victory."</div>
+        <button class="new-aff-btn" onclick="nextAff()">New Affirmation ✨</button>
+    </div>
+
+    <div class="card" onclick="alert('Entering Community Hub...')">
+        <div class="community-box">
+            <div class="comm-icon">👥</div>
+            <div class="comm-text">
+                <b>Sunshine Community</b>
+                <p>You're not alone. Share your light with others.</p>
+            </div>
+            <div style="margin-left: auto; color: var(--p);">➔</div>
+        </div>
+    </div>
+</div>
+
+<nav>
+    <a href="index.html" class="nav-item" style="color:var(--p)">🏠</a>
+    <a href="journal.html" class="nav-item">📝</a>
+    <a href="healing-hub.html" class="nav-center">☀️</a>
+    <a href="profile.html" class="nav-item">👤</a>
+</nav>
+
+<script>
+    const affirmations = [
+        "I am capable of healing and growing.",
+        "My current situation is not my final destination.",
+        "I deserve peace, love, and happiness.",
+        "I am enough, exactly as I am.",
+        "I choose to be kind to myself today."
+    ];
+
+    function nextAff() {
+        const text = affirmations[Math.floor(Math.random() * affirmations.length)];
+        document.getElementById('aff-box').innerText = `"${text}"`;
+    }
+</script>
+
+</body>
+</html>
