@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Sunshine Hub</title>
+    <title>Global Healing Hub</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 100px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 100px; color: #333; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
-        .card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 6px solid var(--p); }
-        h1 { text-align: center; color: var(--p); font-size: 2rem; font-family: serif; }
-        h2 { font-size: 1rem; color: var(--p); margin: 0 0 10px 0; }
+        h1 { text-align: center; color: var(--p); font-family: serif; font-size: 2rem; margin: 15px 0; }
+        .card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 5px solid var(--p); }
+        h2 { font-size: 1.1rem; color: var(--p); margin-bottom: 10px; border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
         .scroll-box { height: 400px; overflow-y: auto; background: #fafafa; border-radius: 12px; border: 1px solid #eee; }
         .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #f1f1f1; }
-        .info { font-size: 0.8rem; flex: 1; padding-right: 10px; line-height: 1.4; }
+        .info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.4; }
         .info b { color: var(--p); display: block; font-size: 0.9rem; }
-        .btn { background: var(--p); color: white; text-decoration: none; padding: 8px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
+        .info span { color: #888; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        .btn { background: var(--p); color: white; text-decoration: none; padding: 10px 16px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; transition: 0.2s; }
+        .btn:active { background: var(--gold); transform: scale(0.95); }
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -26,58 +27,84 @@
     <h1>Sunshine Beam</h1>
 
     <div class="card">
-        <h2>🎶 2000+ Unique Global Songs</h2>
+        <h2>🎶 2000+ Songs (Global Mix)</h2>
         <div class="scroll-box" id="m-list"></div>
     </div>
 
     <div class="card">
-        <h2>🌟 1000+ Celebrity Wisdoms</h2>
+        <h2>🌟 1000+ Wisdoms (153 Countries)</h2>
         <div class="scroll-box" id="w-list"></div>
     </div>
 </div>
 
 <nav>
     <a href="index.html" style="text-decoration:none;">🏠</a>
-    <a href="tools.html" class="nav-center" style="text-decoration:none; font-size:1.5rem;">🌞</a>
+    <a href="tools.html" style="font-size:2rem; text-decoration:none;">🌞</a>
     <a href="profile.html" style="text-decoration:none;">👤</a>
 </nav>
 
 <script>
-    // Expanded Data Pools
-    const globalStars = ["BTS", "IU", "Seventeen", "Coldplay", "Blackpink", "Imagine Dragons", "NewJeans", "Stray Kids", "Arijit Singh", "Taylor Swift", "EXO", "Twice", "Ed Sheeran", "The Weeknd", "Harry Styles", "SZA", "Lofi Girl", "Deepak Chopra", "Jay Shetty", "RM"];
-    const songVibes = ["Healing Melody", "Motivational Power", "Zen Spirit", "Self-Love Anthem", "Morning Energy", "Anxiety Relief", "Deep Focus", "Happy Vibrations", "Inner Peace", "Golden Mindset"];
-    const wisdomNames = ["RM", "Jin", "Suga", "J-Hope", "Jimin", "V", "Jungkook", "Oprah", "Shah Rukh Khan", "IU", "Deepika Padukone", "Michelle Obama", "Will Smith", "Rumi", "Buddha"];
-    const wisdomQuotes = ["Love yourself.", "Speak yourself.", "Believe in the process.", "You are enough.", "The sun will rise again.", "Focus on the good.", "Be your own light.", "Keep going.", "Everything is possible.", "Peace starts with a smile."];
+    // Priority Lists (Korea & Lithuania)
+    const priority = ["South Korea", "Lithuania"];
+    
+    // Selection of the 153 Global Countries
+    const globalCountries = [
+        "USA", "India", "UK", "Nigeria", "Brazil", "Japan", "France", "Germany", "Mexico", "China", 
+        "Canada", "Australia", "Spain", "Italy", "Thailand", "Egypt", "Turkey", "South Africa", 
+        "Norway", "Sweden", "Poland", "Latvia", "Estonia", "Ukraine", "Argentina", "Vietnam"
+    ];
 
-    function fillHub() {
+    const kArtists = ["BTS", "IU", "Seventeen", "Stray Kids", "NewJeans", "Blackpink", "Jin", "RM", "Jimin", "Suga"];
+    const lArtists = ["The Roop", "Monika Liu", "Donny Montell", "Jurijus", "Vaidas Baumila", "Daddy Was A Milkman", "GJan", "Beissoul"];
+    const gVibes = ["Motivational", "Healing", "Zen", "Power Energy", "Self Love", "Peaceful Harmony"];
+
+    function buildHub() {
         const m = document.getElementById('m-list');
         const w = document.getElementById('w-list');
 
-        // Create 2000 Unique Songs
+        // 2000 Songs Generator
         for(let i=1; i<=2000; i++) {
-            let star = globalStars[i % globalStars.length];
-            let vibe = songVibes[(i + 5) % songVibes.length]; // Offset ensures different pairings
-            let search = `${star} ${vibe} official ${i}`;
+            let country, artist;
+            
+            // MATH: Ensure 60% are from Korea or Lithuania
+            if (i % 10 < 6) { 
+                country = priority[i % 2];
+                artist = (country === "South Korea") ? kArtists[i % kArtists.length] : lArtists[i % lArtists.length];
+            } else {
+                country = globalCountries[i % globalCountries.length];
+                artist = "Global Artist";
+            }
+
+            let vibe = gVibes[i % gVibes.length];
+            let search = `${country} ${artist} ${vibe} healing song ${i}`;
+            
             m.innerHTML += `
                 <div class="row">
-                    <div class="info"><b>${star}</b> ${vibe} #${i}</div>
-                    <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(search)}" target="_blank" class="btn">LISTEN</a>
+                    <div class="info">
+                        <span>🌍 ${country}</span>
+                        <b>${artist}</b> ${vibe} #${i}
+                    </div>
+                    <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(search)}" target="_blank" class="btn">PLAY</a>
                 </div>`;
         }
 
-        // Create 1000 Unique Wisdoms
+        // 1000 Wisdoms Generator
         for(let i=1; i<=1000; i++) {
-            let name = wisdomNames[i % wisdomNames.length];
-            let quote = wisdomQuotes[(i + 3) % wisdomQuotes.length];
-            let search = `${name} motivational quotes inspiration`;
+            let country = (i % 10 < 6) ? priority[i % 2] : globalCountries[i % globalCountries.length];
+            let search = `${country} famous motivational celebrity quotes wisdom`;
+            
             w.innerHTML += `
                 <div class="row">
-                    <div class="info"><b>${name}</b> ${quote} (Wisdom #${i})</div>
+                    <div class="info">
+                        <span>⭐ ${country}</span>
+                        <b>Global Wisdom #${i}</b> Discover ancient and modern truths.
+                    </div>
                     <a href="https://www.google.com/search?q=${encodeURIComponent(search)}" target="_blank" class="btn">READ</a>
                 </div>`;
         }
     }
-    window.onload = fillHub;
+
+    window.onload = buildHub;
 </script>
 </body>
 </html>
