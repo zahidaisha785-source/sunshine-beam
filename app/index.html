@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunshine Beam - Healing Hub</title>
     <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; }
+        :root { --p: #9d81ba; --bg: #f8f4ff; --white: rgba(255, 255, 255, 0.95); --gold: #ffd700; --red: #ff4757; }
         
         body { 
             margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 120px;
-            /* FLORAL BORDERS matching your design */
             background-image: linear-gradient(to right, rgba(234,222,255,0.6) 0%, rgba(248,244,255,0) 15%, rgba(248,244,255,0) 85%, rgba(234,222,255,0.6) 100%),
                               url('https://www.transparenttextures.com/patterns/floral-paper.png');
             background-attachment: fixed;
@@ -17,124 +16,36 @@
 
         .container { max-width: 480px; margin: 0 auto; position: relative; }
 
-        /* Header */
-        .header { text-align: center; padding: 40px 20px 10px; }
-        .header h1 { font-family: 'Georgia', serif; font-size: 2.4rem; color: #6b4f9a; margin: 0; }
-        .header p { font-size: 0.9rem; margin: 5px 0; opacity: 0.8; font-weight: bold; }
+        /* URGENT EMERGENCY SECTION */
+        .emergency-header {
+            background: white; border-radius: 25px; margin: 15px; padding: 20px;
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.15); border: 2px solid var(--red);
+        }
+        .emergency-header h2 { color: var(--red); margin: 0 0 10px 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        
+        /* Pulse Animation for the main help button */
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .peak-help-btn {
+            display: block; background: var(--red); color: white; text-align: center; 
+            text-decoration: none; padding: 15px; border-radius: 15px; font-weight: bold;
+            animation: pulse 2s infinite; margin-bottom: 15px;
+        }
 
-        /* Category Selector */
+        /* Scrollable International Numbers */
+        .number-grid { max-height: 150px; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .num-card { 
+            background: #fff5f5; padding: 10px; border-radius: 12px; border: 1px solid #ffebeb;
+            text-decoration: none; color: #333; font-size: 0.75rem; display: flex; flex-direction: column;
+        }
+        .num-card b { color: var(--red); font-size: 0.85rem; }
+
+        /* Affirmation Card */
+        .aff-card {
+            background: var(--white); border-radius: 25px; padding: 20px; margin: 15px;
+            border-left: 5px solid var(--p); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Tabs & List */
         .hub-tabs { display: flex; overflow-x: auto; gap: 10px; padding: 15px; scrollbar-width: none; }
-        .tab { 
-            padding: 12px 22px; border-radius: 25px; border: none; background: #e0d5f0; 
-            color: #6b4f9a; font-weight: bold; white-space: nowrap; font-size: 0.85rem; 
-            cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .tab.active { background: var(--p); color: white; box-shadow: 0 4px 12px rgba(157,129,186,0.4); }
-
-        /* 153 Country List Area */
-        .list-card { 
-            background: var(--white); border-radius: 25px; margin: 0 15px; 
-            box-shadow: 0 4px 15px rgba(157, 129, 186, 0.1); border: 1px solid rgba(157, 129, 186, 0.1); 
-            backdrop-filter: blur(5px); overflow: hidden;
-        }
-        .list-container { max-height: 500px; overflow-y: auto; }
-        .item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 20px; border-bottom: 1px solid #f0f0f0; 
-        }
-        .item-info span { font-size: 0.7rem; color: var(--p); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .item-info b { display: block; font-size: 1rem; color: #5a4a75; margin-top: 2px; }
-        
-        .open-btn { 
-            background: var(--p); color: white; text-decoration: none; 
-            padding: 10px 18px; border-radius: 20px; font-size: 0.75rem; 
-            font-weight: bold; box-shadow: 0 3px 6px rgba(157,129,186,0.2); 
-        }
-
-        /* Bottom Navigation with Gold Sun */
-        nav { 
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-            width: 92%; max-width: 400px; background: white; height: 75px; 
-            border-radius: 40px; display: flex; justify-content: space-around; 
-            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; 
-        }
-        .nav-item { text-decoration: none; font-size: 1.6rem; color: #ccc; }
-        .nav-center { 
-            background: var(--gold); width: 70px; height: 70px; border-radius: 50%; 
-            margin-top: -55px; border: 5px solid var(--bg); display: flex; 
-            align-items: center; justify-content: center; font-size: 2rem; color: white; 
-            box-shadow: 0 5px 15px rgba(255,215,0,0.4); text-decoration: none; 
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="header">
-        <h1>Healing Hub</h1>
-        <p>153 Countries • One Voice 💜</p>
-    </div>
-
-    <div class="hub-tabs">
-        <button class="tab active" onclick="loadContent('Healing Melody', this)">🎶 Melody</button>
-        <button class="tab" onclick="loadContent('Laughter', this)">😂 Laughter</button>
-        <button class="tab" onclick="loadContent('Wisdom', this)">🌟 Wisdom</button>
-        <button class="tab" onclick="loadContent('Yoga', this)">🧘 Yoga</button>
-        <button class="tab" onclick="loadContent('Anchors', this)">💎 Anchors</button>
-    </div>
-
-    <div class="list-card">
-        <div class="list-container" id="hub-list">
-            </div>
-    </div>
-</div>
-
-<nav>
-    <a href="index.html" class="nav-item">🏠</a>
-    <a href="journal.html" class="nav-item">📝</a>
-    <a href="healing-hub.html" class="nav-center">☀️</a>
-    <a href="profile.html" class="nav-item">👤</a>
-</nav>
-
-<script>
-    const others = ["India", "USA", "UK", "Japan", "Brazil", "France", "Germany", "Mexico", "Thailand", "Canada", "Turkey", "Norway"];
-    
-    function loadContent(category, btn) {
-        // Active Tab UI
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        
-        const list = document.getElementById('hub-list');
-        list.innerHTML = "";
-
-        // The 153-Country Engine
-        for(let i=1; i<=153; i++) {
-            let country;
-            
-            // PRIORITY: Lithuania & Korea appear every 2nd and 3rd row
-            if (i % 3 === 1) { country = "South Korea"; }
-            else if (i % 3 === 2) { country = "Lithuania"; }
-            else { country = others[i % others.length]; }
-
-            let query = `${country} ${category} healing`;
-            let link = (category === 'Wisdom') 
-                ? `https://www.google.com/search?q=${encodeURIComponent(query)}` 
-                : `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-
-            list.innerHTML += `
-                <div class="item">
-                    <div class="item-info">
-                        <span>${country}</span>
-                        <b>${category} #${i}</b>
-                    </div>
-                    <a href="${link}" target="_blank" class="open-btn">OPEN</a>
-                </div>`;
-        }
-    }
-
-    // Default Load
-    window.onload = () => loadContent('Healing Melody', document.querySelector('.tab'));
-</script>
-
-</body>
-</html>
+        .tab { padding: 12px 22px; border-radius: 25px; border: none; background: #e0d5f0; color: #6b4f9a; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        .tab.active { background: var(--p); color: white; }
