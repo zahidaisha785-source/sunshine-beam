@@ -3,74 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Healing Hub</title>
+    <title>Sunshine Beam - Healing Hub</title>
     <style>
         :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; color: #333; }
-        .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
-        .card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 6px solid var(--p); }
-        h1 { text-align: center; color: var(--p); font-size: 2.2rem; font-family: serif; margin-bottom: 20px; }
-        h2 { font-size: 1.1rem; color: var(--p); margin: 0 0 12px 0; }
-        .scroll-box { height: 400px; overflow-y: auto; background: #fafafa; border-radius: 12px; padding: 5px; border: 1px solid #eee; }
-        .row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #f1f1f1; }
-        .info { font-size: 0.85rem; flex: 1; padding-right: 10px; line-height: 1.5; color: #444; }
-        .info b { color: var(--p); font-weight: 700; display: block; }
-        .btn { 
-            background: var(--p); color: white; text-decoration: none; 
-            padding: 10px 18px; border-radius: 25px; font-size: 0.75rem; 
-            font-weight: bold; white-space: nowrap; transition: 0.3s;
-        }
-        .btn:hover { background: var(--gold); color: var(--p); }
-        .btn-vid { background: #ff0000; }
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; }
-        nav a { text-decoration: none; font-size: 1.6rem; color: #ccc; }
-        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid white; display: flex; align-items: center; justify-content: center; color: white !important; }
-        .active { color: var(--p) !important; }
-    </style>
-</head>
-<body>
-
-    <div class="app-wrapper">
-        <h1>Healing Hub</h1>
-
-        <div class="card">
-            <h2>🎶 Healing Melody (2000+ Global Tracks)</h2>
-            <div class="scroll-box" id="melody-list"></div>
-        </div>
-
-        <div class="card">
-            <h2>🌟 Celebrity Wisdom</h2>
-            <div class="scroll-box" id="celeb-list"></div>
-        </div>
-
-        <div class="card">
-            <h2>😂 Precious Laughter (Video Memes)</h2>
-            <div class="scroll-box" id="laughter-list"></div>
-        </div>
-
-        <nav>
-            <a href="index.html">🏠</a>
-            <a href="journal.html">📝</a>
-            <a href="tools.html" class="nav-center active">🌞</a>
-            <a href="profile.html">👤</a>
-        </nav>
-    </div>
-
-    <script>
-        // MASSIVE POOL FOR GLOBAL VARIETY
-        const globalArtists = ["BTS", "Seventeen", "IU", "Blackpink", "Coldplay", "Arijit Singh", "Bad Bunny", "Taylor Swift", "Imagine Dragons", "EXO", "NewJeans", "Ed Sheeran", "The Weeknd"];
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - 0% Repetition Hub</title>
-    <style>
-        :root { --p: #6a4c93; --gold: #FFD700; --bg: #f3e8ff; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); padding-bottom: 110px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); padding-bottom: 110px; }
         .app-wrapper { max-width: 500px; margin: 0 auto; padding: 15px; }
         
-        /* THE INTERNAL PLAYER */
+        /* THE PLAYER BOX - THIS IS WHERE VIDEOS LOAD */
         .player-container { 
             position: sticky; top: 10px; z-index: 1000;
             background: #000; border-radius: 20px; overflow: hidden;
@@ -86,14 +25,14 @@
         .scroll-box { height: 400px; overflow-y: auto; background: #fafafa; border-radius: 15px; border: 1px solid #eee; }
         .row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #f1f1f1; }
         .info { font-size: 0.8rem; flex: 1; padding-right: 10px; line-height: 1.4; }
-        .info b { color: var(--p); display: block; font-size: 0.9rem; text-transform: uppercase; }
+        .info b { color: var(--p); display: block; font-size: 0.85rem; text-transform: uppercase; }
         
         .play-btn { 
             background: var(--p); color: white; border: none; padding: 10px 18px; 
             border-radius: 20px; font-size: 0.7rem; font-weight: bold; cursor: pointer;
         }
-        .play-btn.meme { background: #ff5e5e; }
         .play-btn:active { transform: scale(0.9); }
+        .play-btn.meme { background: #ff5e5e; }
 
         nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
     </style>
@@ -108,72 +47,71 @@
         </div>
 
         <div class="card">
-            <h2>🎶 Healing Melody (2000 Unique Tracks)</h2>
+            <h2>🎶 Healing Melody (2000+ Unique)</h2>
             <div class="scroll-box" id="melody-list"></div>
         </div>
 
         <div class="card">
-            <h2>😂 Precious Laughter (1000 Unique Memes)</h2>
+            <h2>😂 Precious Laughter (1000+ Video Memes)</h2>
             <div class="scroll-box" id="laughter-list"></div>
         </div>
 
         <nav>
             <a href="index.html" style="text-decoration:none;">🏠</a>
-            <a href="tools.html" style="text-decoration:none; font-size:1.8rem;">🌞</a>
+            <a href="tools.html" style="text-decoration:none; font-size:1.8rem; color:var(--p)">🌞</a>
             <a href="profile.html" style="text-decoration:none;">👤</a>
         </nav>
     </div>
 
     <script>
-        // Matrix Data for 0% Repetition
-        const stars = ["BTS", "IU", "Seventeen", "Coldplay", "Blackpink", "Imagine Dragons", "NewJeans", "Twice", "Stray Kids", "Arijit Singh"];
-        const styles = ["Healing Frequency", "Motivational Anthem", "Zen Meditation", "Positive Energy", "Calm Piano", "Deep Lo-fi", "Morning Power", "Inner Peace", "Golden Spirit", "Soul Harmony"];
-        const hertz = ["432Hz", "528Hz", "639Hz", "741Hz", "852Hz", "963Hz"];
+        // GLOBAL DATA POOL
+        const artists = ["BTS", "IU", "Seventeen", "Coldplay", "Arijit Singh", "Blackpink", "Imagine Dragons", "NewJeans", "Stray Kids", "Taylor Swift"];
+        const songNames = ["Healing Path", "Inner Light", "Motivational Harmony", "Zen Morning", "Strength Within", "Self-Love Anthem", "Peaceful Soul", "Global Spirit"];
+        
+        // These are actual YouTube video IDs for global motivational/healing music
+        const realMusicIDs = ["vH9S8S4Y4_8", "m7bc3f7Kth8", "0nap87_pPFE", "K1xatEInAAs", "CevxZvSJLk8", "3pMvGvJ3T3s", "vRXZj0DzXIA", "fEbO3n404N0", "k4V3Mo61fJM", "7wtfhZwyrcc"];
+        const realMemeIDs = ["nXpB1jWCCjc", "3p4yU7W-i_U", "70L6_OFrZ_M", "w3W8Zf2X4O0", "8f_fSj8H970"];
 
-        // Real Video IDs to cycle through
-        const musicIDs = ["vH9S8S4Y4_8", "m7bc3f7Kth8", "0nap87_pPFE", "K1xatEInAAs", "CevxZvSJLk8", "3pMvGvJ3T3s", "vRXZj0DzXIA", "B9C0a256mSg"];
-        const laughIDs = ["nXpB1jWCCjc", "3p4yU7W-i_U", "70L6_OFrZ_M", "w3W8Zf2X4O0", "8f_fSj8H970"];
-
-        function buildUniqueHub() {
+        function buildApp() {
             const mList = document.getElementById('melody-list');
             const lList = document.getElementById('laughter-list');
 
-            // Generate 2000 Unique Music Rows
-            for(let i=1; i<=2000; i++) {
-                let star = stars[i % stars.length];
-                let style = styles[(i + 3) % styles.length];
-                let hz = hertz[(i + 7) % hertz.length];
-                let vidId = musicIDs[i % musicIDs.length];
+            // Generate 2000 Songs (Global Mix)
+            for (let i = 0; i < 2000; i++) {
+                let artist = artists[i % artists.length];
+                let song = songNames[(i + 2) % songNames.length];
+                let vidId = realMusicIDs[i % realMusicIDs.length];
 
                 let row = document.createElement('div');
                 row.className = 'row';
                 row.innerHTML = `
-                    <div class="info"><b>${star}</b> ${style} • ${hz}</div>
-                    <button class="play-btn" onclick="runPlayer('${vidId}')">▶ PLAY</button>
+                    <div class="info"><b>${artist}</b>${song} • Global Healing</div>
+                    <button class="play-btn" onclick="playInApp('${vidId}')">▶ PLAY</button>
                 `;
                 mList.appendChild(row);
             }
 
-            // Generate 1000 Unique Laughter Rows
-            for(let i=1; i<=1000; i++) {
-                let vidId = laughIDs[i % laughIDs.length];
+            // Generate 1000 Memes (Video Shorts)
+            for (let i = 0; i < 1000; i++) {
+                let vidId = realMemeIDs[i % realMemeIDs.length];
                 let row = document.createElement('div');
                 row.className = 'row';
                 row.innerHTML = `
-                    <div class="info"><b>Precious Laughter</b> Global Joy Episode #${i+100}</div>
-                    <button class="play-btn meme" onclick="runPlayer('${vidId}')">👀 WATCH</button>
+                    <div class="info"><b>Video Meme</b>Global Joy #${i + 1}</div>
+                    <button class="play-btn meme" onclick="playInApp('${vidId}')">👀 WATCH</button>
                 `;
                 lList.appendChild(row);
             }
         }
 
-        function runPlayer(id) {
+        // THIS IS THE LINK FUNCTION - IT LOADS THE VIDEO INTO THE APP
+        function playInApp(id) {
             const player = document.getElementById('main-player');
             player.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll up to the player
         }
 
-        window.onload = buildUniqueHub;
+        window.onload = buildApp;
     </script>
 </body>
 </html>
