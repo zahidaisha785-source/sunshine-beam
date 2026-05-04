@@ -3,52 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Beam - All Tools</title>
-    <style>
-        :root { --p: #9d81ba; --bg: #f8f4ff; --white: #ffffff; --gold: #ffd700; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #5a4a75; padding-bottom: 100px; }
-        
-        /* Category Tabs at the Top */
-        .tabs { 
-            display: flex; overflow-x: auto; padding: 15px; gap: 10px; 
-            background: white; sticky: top; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        } 
-        .tab { 
-            padding: 10px 20px; border-radius: 20px; background: #eee; 
-            white-space: nowrap; cursor: pointer; font-size: 0.85rem; font-weight: bold; border: none;
-        }
-        .tab.active { background: var(--p); color: white; }
-
-        .wrapper { padding: 15px; }
-        .section-title { font-size: 1.2rem; margin: 10px 0; color: var(--p); font-family: serif; }
-
-        /* Content Area */
-        .list-container { display: flex; flex-direction: column; gap: 10px; }
-        .row { 
-            background: white; padding: 15px; border-radius: 15px; 
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .info b { display: block; color: var(--p); font-size: 0.95rem; }
-        .info span { font-size: 0.75rem; color: #888; }
-        
-        .btn { 
-            background: var(--p); color: white; text-decoration: none; 
-            padding: 10px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
-        }
-
-        nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: white; height: 70px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .nav-center { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; margin-top: -40px; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; }
-    </style>
+    <title>Sunshine Beam - Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body class="sb-app page-healing-hub" data-sb-nav="tools">
+
+    <div class="app-wrapper sb-hub-header-wrap">
+        <header class="sb-top">
+            <button type="button" id="sb-menu-btn" class="sb-icon-btn" aria-label="Open menu">☰</button>
+            <button type="button" class="sb-icon-btn" aria-label="Notifications">🔔</button>
+        </header>
+    </div>
 
     <div class="tabs">
-        <button class="tab active" onclick="showCategory('songs')">🎶 Songs</button>
-        <button class="tab" onclick="showCategory('laughter')">😂 Laughter</button>
-        <button class="tab" onclick="showCategory('wisdom')">🌟 Wisdom</button>
-        <button class="tab" onclick="showCategory('yoga')">🧘 Yoga</button>
-        <button class="tab" onclick="showCategory('anchors')">💎 Anchors</button>
+        <button type="button" class="tab active" onclick="showCategory('songs', this)">🎶 Songs</button>
+        <button type="button" class="tab" onclick="showCategory('laughter', this)">😂 Laughter</button>
+        <button type="button" class="tab" onclick="showCategory('wisdom', this)">🌟 Wisdom</button>
+        <button type="button" class="tab" onclick="showCategory('yoga', this)">🧘 Yoga</button>
+        <button type="button" class="tab" onclick="showCategory('anchors', this)">💎 Anchors</button>
     </div>
 
     <div class="wrapper">
@@ -57,10 +32,14 @@
             </div>
     </div>
 
-    <nav>
-        <a href="home-new.html" style="text-decoration:none; font-size:1.5rem;">🏠</a>
-        <a href="healing-hub.html" class="nav-center" style="text-decoration:none; font-size:1.5rem;">☀️</a>
-        <a href="profile.html" style="text-decoration:none; font-size:1.5rem;">👤</a>
+    <nav class="sb-nav" aria-label="Main">
+        <a href="home-new.html"><span class="sb-nav-ico" aria-hidden="true">🏠</span>Home</a>
+        <a href="journal.html"><span class="sb-nav-ico" aria-hidden="true">📝</span>Journal</a>
+        <div class="sb-nav-center-wrap">
+            <a href="home-new.html" class="sb-nav-center" aria-label="Sunshine Beam home"><span class="sb-nav-sunshine-badge" aria-hidden="true"><span class="sb-nav-sunshine-disc"><svg class="sb-nav-sunshine-heart" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span><span class="sb-nav-sunshine-text">Sunshine</span></span></a>
+        </div>
+        <a href="healing-hub.html" class="active"><span class="sb-nav-ico" aria-hidden="true">🌿</span>Tools</a>
+        <a href="profile.html"><span class="sb-nav-ico" aria-hidden="true">👤</span>Profile</a>
     </nav>
 
     <script>
@@ -608,10 +587,9 @@
             }
         };
 
-        function showCategory(cat) {
-            // Update Active Tab
+        function showCategory(cat, el) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            if (el) el.classList.add('active');
 
             const container = document.getElementById('content-list');
             const title = document.getElementById('content-title');
@@ -629,8 +607,8 @@
             });
         }
 
-        // Initial Load
-        window.onload = () => showCategory('songs');
+        window.onload = () => showCategory('songs', document.querySelector('.tab.active'));
     </script>
+    <script src="../nav-drawer.js"></script>
 </body>
 </html>
